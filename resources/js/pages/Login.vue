@@ -24,7 +24,7 @@
                 </v-form>
             </v-card-text>
             <v-card-actions>
-                <v-btn text color="grey">Terug</v-btn>
+                <v-btn text color="grey" @click="$router.push({name: 'home'})">Terug</v-btn>
                 <v-spacer/>
                 <v-btn color="primary">Inloggen</v-btn>
             </v-card-actions>
