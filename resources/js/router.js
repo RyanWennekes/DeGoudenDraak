@@ -11,6 +11,7 @@ Vue.component('vue-app', require('./App.vue').default);
 /* Components like below can only be used in components */
 import Page404 from './pages/Page404.vue';
 import Home from './pages/Home.vue';
+import Login from './pages/Login.vue';
 
 /* The VueRouter uses a RouterView for navigation through pages without reloading the website */
 /* With the VueRouter you can create a single-load-page */
@@ -21,6 +22,11 @@ const router = new VueRouter({
             path: '/',
             name: 'home',
             component: Home,
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login,
         },
         {
             path: '/*',
