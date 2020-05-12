@@ -1,4 +1,6 @@
+<!-- we use vue-components and html inside the <template> tag -->
 <template>
+
     <!-- v-app allows you to use all vuetify classes  -->
     <v-app data-app>
 
@@ -7,12 +9,15 @@
     </v-app>
 </template>
 
+<!-- we user javascript inside the <script> tag -->
 <script>
     export default {
         name: 'App',
     };
 </script>
 
-<style scoped>
+<!-- we user css inside the <script> tag -->
+<!-- always try using lang=scss -->
+<style lang="scss">
 
 </style>

@@ -5,12 +5,12 @@ Vue.use(VueRouter);
 
 /* Container: In here we will create our beautifull Vue application */
 /* Components like below can be used inside blades */
-Vue.component('vue-app', require('../App.vue').default);
+Vue.component('vue-app', require('./App.vue').default);
 
 /* TODO: Add all pages */
 /* Components like below can only be used in components */
-import Page404 from '../pages/Page404.vue';
-import Home from '../pages/Home.vue';
+import Page404 from './pages/Page404.vue';
+import Home from './pages/Home.vue';
 
 /* The VueRouter uses a RouterView for navigation through pages without reloading the website */
 /* With the VueRouter you can create a single-load-page */
