@@ -16,30 +16,30 @@ class UsersTableSeeder extends Seeder
         // Create dummy-data
         $accounts = [
             0 => [
-                'email' => 'employer@degoudendraak.nl',
-                'role'  => UserRoles::Employer(),
+                'email' => 'admin@degoudendraak.nl',
+                'role'  => UserRoles::Admin,
             ],
             1 => [
-                'email' => 'admin@degoudendraak.nl',
-                'role'  => UserRoles::Admin(),
+                'email' => 'employer@degoudendraak.nl',
+                'role'  => UserRoles::Employer,
             ],
         ];
 
         // Loop through all the accounts
         foreach ($accounts as $key => $value) {
-            $this->generateUser($value);
+            $this->generateUser($value['email'], $value['role']);
         }
     }
 
     // Generating a single user
-    public function generateUser(String $user): void
+    public function generateUser(String $email, int $role): void
     {
         //Checking if user exists
-        if (User::where('email', '=', $user['email'])->first() === null) {
+        if (User::where('email', '=', $email)->first() === null) {
             // Using the factory for creating a user with name
             factory(App\User::class, 1)->create([
-                'role'     => $user['role'],
-                'email'    => $user['email'],
+                'role'     => $role,
+                'email'    => $email,
                 'password' => bcrypt('password'),
             ]);
         }
