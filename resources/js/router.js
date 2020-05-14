@@ -7,8 +7,7 @@ Vue.use(VueRouter);
 /* Components like below can be used inside blades */
 Vue.component('vue-app', require('./App.vue').default);
 
-/* TODO: Add all pages */
-/* Components like below can only be used in components */
+/* Here will all pages being placed */
 import Page404 from './pages/Page404.vue';
 import Home from './pages/Home.vue';
 import Login from './pages/Login.vue';
@@ -27,6 +26,10 @@ const router = new VueRouter({
             path: '/login',
             name: 'login',
             component: Login,
+        },
+        {
+            path: '/home',
+            redirect: {name: 'home'},
         },
         {
             path: '/*',
