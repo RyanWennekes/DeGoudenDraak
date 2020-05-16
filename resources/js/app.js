@@ -2,9 +2,9 @@ window.Vue = require('vue');
 import Vue from 'vue';
 
 import '@babel/polyfill';
+import store from './store';
 import {router} from './router.js';
 import {vuetify} from './plugin';
-import store from './store';
 
 import api from './plugin/api';
 import Lodash from 'lodash';

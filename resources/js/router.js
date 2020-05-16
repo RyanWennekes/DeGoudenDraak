@@ -11,6 +11,8 @@ Vue.component('vue-app', require('./App.vue').default);
 import Page404 from './pages/Page404.vue';
 import Home from './pages/Home.vue';
 import Login from './pages/Login.vue';
+import Test from './pages/Test.vue';
+import AdminLayout from './layouts/admin.vue';
 
 import store from './store';
 
@@ -34,17 +36,35 @@ const router = new VueRouter({
             component: Login,
         },
         {
-            path: '',
-            beforeEnter: store.getters['Authorization/isLoggedIn'],
+            path: '/beheer',
+            meta: {loginRequired: true},
+            component: AdminLayout,
             children: [
                 // every route when loggedIn
-            ]
+                {
+                    path: 'test',
+                    name: 'admin.test',
+                    component: Test,
+                },
+            ],
         },
         {
             path: '/*',
             component: Page404,
         },
     ],
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.loginRequired) && !store.getters['Authorization/isLoggedIn']) {
+        next({
+            name: 'login', params: {
+                afterLoggedIn: to.name,
+            },
+        });
+    } else {
+        next();
+    }
 });
 
 export {router};
