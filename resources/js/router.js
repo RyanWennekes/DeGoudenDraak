@@ -12,6 +12,8 @@ import Page404 from './pages/Page404.vue';
 import Home from './pages/Home.vue';
 import Login from './pages/Login.vue';
 
+import store from './store';
+
 /* The VueRouter uses a RouterView for navigation through pages without reloading the website */
 /* With the VueRouter you can create a single-load-page */
 const router = new VueRouter({
@@ -23,13 +25,20 @@ const router = new VueRouter({
             component: Home,
         },
         {
+            path: '/home',
+            redirect: {name: 'home'},
+        },
+        {
             path: '/login',
             name: 'login',
             component: Login,
         },
         {
-            path: '/home',
-            redirect: {name: 'home'},
+            path: '',
+            beforeEnter: store.getters['Authorization/isLoggedIn'],
+            children: [
+                // every route when loggedIn
+            ]
         },
         {
             path: '/*',
