@@ -23,3 +23,5 @@ Route::namespace('Auth')->group(function (Router $router) {
     $router->post('login', 'LoginController@login');
     $router->post('logout', 'LoginController@logout');
 });
+
+Route::get('user', 'UserController@getLoggedInUser');
