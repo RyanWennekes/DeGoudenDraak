@@ -21,6 +21,11 @@ class ConfirmPasswordController extends Controller
 
     use ConfirmsPasswords;
 
+    public function showConfirmForm()
+    {
+        return view('default');
+    }
+
     /**
      * Where to redirect users when the intended url fails.
      *

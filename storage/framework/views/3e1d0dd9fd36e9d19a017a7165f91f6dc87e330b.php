@@ -6,6 +6,10 @@
 
     <title>De Gouden Draak</title>
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <meta name="access_token" content="<?php echo e(csrf_token()); ?>">
+
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet" type="text/css">
 
