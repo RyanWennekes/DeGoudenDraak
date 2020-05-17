@@ -1,26 +1,7 @@
-<!DOCTYPE html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
 
-    <!-- Fonts TODO: remove fonts.googleapis and use font-awesome -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+<?php $__env->startSection('content'); ?>
+    <vue-app></vue-app>
+<?php $__env->stopSection(); ?>
 
-    <!-- Styles -->
-    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet" type="text/css">
-
-    <!-- Javascript -->
-    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
-</head>
-<body>
-<div id="app">
-    <vue-app>
-        
-    </vue-app>
-</div>
-</body>
-</html>
-<?php /**PATH C:\Users\Martijn\Documents\Avans hogeschool\Blok8\WEBFS\DeGoudenDraak\resources\views/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('default', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Martijn\Documents\Avans hogeschool\Blok8\WEBFS\DeGoudenDraak\resources\views/index.blade.php ENDPATH**/ ?>
