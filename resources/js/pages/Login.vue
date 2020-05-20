@@ -9,7 +9,7 @@
                     <v-text-field
                         label="Gebruikersnaam"
                         append-icon="fa-user"
-                        :rules="[(v) => !!v || 'Gebruikersnaam is verplicht']"
+                        :rules="[(v) => !!v || 'Gebruikersnaam is verplicht', rules('email')]"
                         outlined
                         v-model="email"
                     ></v-text-field>
@@ -17,7 +17,7 @@
                         label="Wachtwoord"
                         append-icon="fa-key"
                         type="password"
-                        :rules="[(v) => !!v || 'Wachtwoord is verplicht']"
+                        :rules="[(v) => !!v || 'Wachtwoord is verplicht', rules('password')]"
                         outlined
                         v-model="password"
                     ></v-text-field>
@@ -25,23 +25,25 @@
                     <v-btn text color="primary">Wachtwoord vergeten</v-btn>
                 </v-form>
             </v-card-text>
-            <v-card-actions>
+            <v-card-actions class="px-3 pb-4">
                 <v-btn text color="grey" @click="$router.push({name: 'home'})">Terug</v-btn>
                 <v-spacer/>
-                <v-btn color="primary" @click="onLogin">Inloggen</v-btn>
+                <v-btn color="primary" @click="beforeLogin" :loading="loading">Inloggen</v-btn>
             </v-card-actions>
         </v-card>
     </v-row>
 </template>
 
 <script>
-    import {login, logout} from '../api/authorization.js';
+    import {login} from '../api/authorization.js';
     import {createNamespacedHelpers} from 'vuex';
+    import MapRequestErrors from '../mixins/mapRequestErrors.js';
 
-    const {mapState, mapGetters} = createNamespacedHelpers('Authorization/');
+    const {mapActions, mapGetters} = createNamespacedHelpers('Authorization/');
 
     export default {
         name: 'Login',
+        mixins: [MapRequestErrors],
         data() {
             return {
                 valid: false,
@@ -52,20 +54,25 @@
         computed: {
             ...mapGetters(['isLoggedIn']),
         },
-        created() {
-            this.onLogout();
-        },
         methods: {
+            beforeLogin() {
+                this.$refs.form.validate();
+
+                if (this.valid) {
+                    this.onLogin();
+                }
+            },
             onLogin() {
+                this.loading = true;
+
                 login(this.email, this.password).then(() => {
-                    console.log('loggedIn!');
-                }).catch(() => {
-                    console.log('oh no!');
+                    this.setAccessToken('token');
+                    this.$router.push({name: 'admin.test'});
+                }).catch(e => this.failedRequestResult = e).finally(() => {
+                    this.loading = false;
                 });
             },
-            onLogout() {
-                logout();
-            }
+            ...mapActions(['setAccessToken']),
         },
     };
 </script>
