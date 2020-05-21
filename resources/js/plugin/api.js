@@ -1,12 +1,38 @@
 import axios from 'axios';
+import qs from 'qs';
+import * as Cookies from 'js-cookie';
 
 /* Every Request will start with the baseUrl and has inside the header 'Accept' */
 let instance = axios.create({
-    baseURL: 'http://127.0.0.1:8000/',
+    baseURL: window.location.hostname,
     headers: {
         Accept: 'application/json',
-        'Access-Control-Allow-Origin': true,
     },
+    validateStatus: function (status) {
+        return status >= 200 && status < 300; // default
+    }, paramsSerializer: function (params) {
+        return qs.stringify(params, {arrayFormat: 'repeat', encode: false});
+    },
+});
+
+/**
+ * Request interceptor that catches the request and injects the token into the Authorization header.
+ */
+instance.interceptors.request.use((request) => {
+    let token = Cookies.get('access_token');
+    if (typeof token === 'undefined') {
+        let hash = {};
+        window.location.hash.substring(1).split('&').map((parameter) => hash[parameter.split('=')[0]] = parameter.split('=')[1]);
+        if (typeof hash.access_token !== 'undefined') {
+            Cookies.set('access_token', hash.access_token);
+            token = hash.access_token;
+        }
+    }
+    if (typeof token === 'string') {
+        request.headers.Authorization = 'Bearer ' + token;
+    }
+
+    return request;
 });
 
 instance.interceptors.request.use((request) => {

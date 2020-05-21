@@ -2,6 +2,7 @@ window.Vue = require('vue');
 import Vue from 'vue';
 
 import '@babel/polyfill';
+import store from './store';
 import {router} from './router.js';
 import {vuetify} from './plugin';
 
@@ -19,5 +20,6 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 new Vue({
     router,
     vuetify,
+    store,
     el: '#app',
 });

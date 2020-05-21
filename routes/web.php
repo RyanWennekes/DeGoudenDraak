@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+// We only have to load one blade
 Route::get('/{any?}', function () {
-    return view('index');
+    return view('default', ['user' => Auth::user()]);
 })->where('any', '[\/\w\.-]*');
