@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductSeeder extends Seeder
 {
+    const SPICINESS_RANGE = array(null, 1, 2, 3);
     /**
      * Run the database seeds.
      *
@@ -19,13 +20,12 @@ class ProductSeeder extends Seeder
             DB::table('products')->insert([
                 'code' => ($product->menunummer ?? '') . ($product->menu_toevoeging ?? ''),
                 'product_type_id' => $this->determineType($product->soortgerecht),
-                'name' => $product->naam,
+                'name' => html_entity_decode($product->naam),
                 'price' => $product->price,
-                'spiciness' => random_int(1, 3),
+                'spiciness' => self::SPICINESS_RANGE[random_int(0, 3)],
                 'description_nl' => $product->beschrijving,
                 'description_en' => '',
-                'minimum_amount' => null,
-                'withRice' => 1
+                'minimum_amount' => null
             ]);
         }
     }

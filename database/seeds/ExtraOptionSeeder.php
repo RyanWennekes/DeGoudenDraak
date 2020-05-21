@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ExtraOptionSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class ExtraOptionSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }

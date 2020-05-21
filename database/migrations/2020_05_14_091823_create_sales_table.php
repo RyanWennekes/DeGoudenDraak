@@ -18,8 +18,6 @@ class CreateSalesTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->decimal('price', 10, 2);
             $table->smallInteger('amount');
-            $table->string('allergene_nl', 255);
-            $table->string('allergene_en', 255);
             $table->timestamps();
 
             $table->primary(array('product_id', 'order_id'));
