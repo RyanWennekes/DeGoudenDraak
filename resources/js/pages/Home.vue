@@ -5,10 +5,18 @@
 </template>
 
 <script>
+    import {createNamespacedHelpers} from 'vuex';
+
+    const {mapActions} = createNamespacedHelpers('Authorization/');
+
     export default {
         name: 'Home',
         created() {
+            //this.logout();
         },
+        methods: {
+            ...mapActions(['logout']),
+        }
     };
 </script>
 
