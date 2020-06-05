@@ -24,11 +24,14 @@
                 </v-card-text>
             </v-card>
         </v-col>
+        <LogoutButton/>
     </v-row>
 </template>
 
 <script>
+import LogoutButton from '../components/admin/LogoutButton.vue';
 export default {
     name: 'AdminLayout',
+    components: {LogoutButton},
 };
 </script>
