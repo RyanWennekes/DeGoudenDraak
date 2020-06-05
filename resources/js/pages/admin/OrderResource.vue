@@ -26,6 +26,6 @@ export default {
 .overflow {
     overflow-y: scroll;
     position: absolute;
-    max-height: 97%;
+    max-height: 90%;
 }
 </style>
