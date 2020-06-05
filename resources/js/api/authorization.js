@@ -1,7 +1,8 @@
-import {post, get} from '../api/index.js';
+import axios from 'axios';
 
+// These're WEB-requests
 function login(email, password) {
-    return post('login', {
+    return axios.post('login', {
         'email': email,
         'password': password,
         'remember': true,
@@ -9,15 +10,11 @@ function login(email, password) {
 }
 
 function logout() {
-    return post('logout');
-}
-
-function user() {
-    return get('user');
+    return axios.post('logout');
 }
 
 function passwordForgotten(email) {
-    return post('password/forgotten', {
+    return axios.post('password/forgotten', {
         email: email,
     });
 }
@@ -26,5 +23,4 @@ export {
     passwordForgotten,
     login,
     logout,
-    user,
 };

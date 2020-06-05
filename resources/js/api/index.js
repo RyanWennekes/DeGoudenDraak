@@ -1,7 +1,7 @@
-import axios from 'axios';
+import api from '../plugin/api.js';
 
 async function get(url, params = {}) {
-    const result = await axios.get(url, {
+    const result = await api.get(url, {
         params: params,
     }).catch(err => err);
 
@@ -11,7 +11,7 @@ async function get(url, params = {}) {
 }
 
 async function post(url, data = {}, params = {}) {
-    const result = await axios.post(url, data, {
+    const result = await api.post(url, data, {
         params: params,
     });
 
@@ -21,7 +21,7 @@ async function post(url, data = {}, params = {}) {
 }
 
 async function put(url, data = {}, params = {}) {
-    const result = await axios.put(url, data, {
+    const result = await api.put(url, data, {
         params: params,
     });
 
@@ -32,7 +32,7 @@ async function put(url, data = {}, params = {}) {
 }
 
 function destroy(url, params = {}) {
-    return axios.delete(url, {
+    return api.delete(url, {
         params: params,
     });
 }
