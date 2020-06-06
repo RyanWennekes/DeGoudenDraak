@@ -12,7 +12,7 @@ export default {
     },
     getters: {
         isLoggedIn: state => {
-            return state.accessToken === 'token' || localStorage.getItem('token') === 'token';
+            return state.accessToken && state.accessToken.length || localStorage.getItem('token') && localStorage.getItem('token') !== 'null';
         },
     },
     actions: {
@@ -23,7 +23,7 @@ export default {
         logout: async state => {
             await logout();
 
-            localStorage.removeItem('token');
+            localStorage.clear();
             state.state.accessToken = '';
         },
     },

@@ -17,6 +17,10 @@ function logout() {
     return axiosInstance.post('logout');
 }
 
+function fetchApiToken() {
+    return axiosInstance.get('oath/token');
+}
+
 function passwordForgotten(email) {
     return axiosInstance.post('password/forgotten', {
         email: email,
@@ -25,6 +29,7 @@ function passwordForgotten(email) {
 
 export {
     passwordForgotten,
+    fetchApiToken,
     login,
     logout,
 };

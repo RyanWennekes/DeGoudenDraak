@@ -22,6 +22,7 @@ let instance = axios.create({
 
 instance.interceptors.request.use((request) => {
     request.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    request.headers.common['api_token'] = localStorage.getItem('token');
     request.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
     if (request.method === 'put' && request.data instanceof FormData) {

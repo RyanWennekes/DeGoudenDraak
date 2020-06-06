@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::middleware('auth')->group(function (Router $router) {
+    $router->get('/oath/token', 'ApiTokenController@show')->name('oath.token');
+});
+
 // We only have to load one blade
 Route::get('/{any?}', function () {
     return view('default', ['user' => Auth::user()]);

@@ -7,8 +7,7 @@
     <title>De Gouden Draak</title>
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
-    <meta name="access_token" content="<?php echo e(csrf_token()); ?>">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>"/>
 
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet" type="text/css">
@@ -18,7 +17,12 @@
 </head>
 <body>
 <div id="app">
-    <!-- Here we placed our Vue Component with the router-view -->
+    <?php if(auth()->check()): ?>
+        User id logged in!
+    <?php echo e(auth()->user()); ?>
+
+<?php endif; ?>
+<!-- Here we placed our Vue Component with the router-view -->
     <vue-app></vue-app>
 </div>
 </body>
