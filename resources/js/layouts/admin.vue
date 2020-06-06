@@ -3,7 +3,7 @@
         <v-col cols="12" md="10" class="full-height">
             <v-card height="100%">
                 <v-card-title>
-                    <v-tabs fixed-tabs>
+                    <v-tabs grow show-arrows>
                         <v-tab :to="{name: 'admin.create.order'}">
                             Bestelling aanmaken
                         </v-tab>
