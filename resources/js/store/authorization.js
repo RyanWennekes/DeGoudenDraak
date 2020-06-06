@@ -12,7 +12,7 @@ export default {
     },
     getters: {
         isLoggedIn: state => {
-            return state.accessToken && state.accessToken.length || localStorage.getItem('token') && localStorage.getItem('token') !== 'null';
+            return state.accessToken && state.accessToken.length || localStorage.getItem('token') && localStorage.getItem('token').length;
         },
     },
     actions: {

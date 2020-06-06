@@ -1,5 +1,5 @@
 <template>
-    <v-btn color="transparant" x-large dark icon absolute right bottom @click="onLogout">
+    <v-btn color="white" x-large dark icon absolute right bottom @click="onLogout">
         <v-icon large>fa-sign-out-alt</v-icon>
     </v-btn>
 </template>
@@ -11,12 +11,16 @@ const {mapActions, mapGetters} = createNamespacedHelpers('Authorization/');
 
 export default {
     name: 'LogoutButton',
+    computed: {
+        hasSmallerScreen() {
+            return this.$vuetify.breakpoint.smAndDown;
+        },
+    },
     methods: {
         ...mapActions(['setAccessToken']),
         async onLogout() {
-            await logout(); //TODO: something goes wrong over here
-
-            this.setAccessToken(null);
+            await logout();
+            this.setAccessToken('');
             await this.$router.push({name: 'home'});
             console.log("Has been logged out");
         },
