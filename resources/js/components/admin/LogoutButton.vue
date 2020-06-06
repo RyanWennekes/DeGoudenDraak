@@ -33,6 +33,6 @@ export default {
 
 <style lang="scss">
 .logout-button {
-    bottom: 0px;
+    bottom: 0;
 }
 </style>

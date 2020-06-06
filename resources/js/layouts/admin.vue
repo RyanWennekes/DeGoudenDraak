@@ -13,9 +13,6 @@
                         <v-tab>
                             Items
                         </v-tab>
-                        <v-tab>
-                            Another Screen
-                        </v-tab>
                     </v-tabs>
                 </v-card-title>
 
