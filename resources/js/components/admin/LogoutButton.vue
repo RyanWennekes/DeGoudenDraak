@@ -17,7 +17,7 @@ export default {
             return this.$vuetify.breakpoint.smAndDown;
         },
         color() {
-            return this.hasSmallerScreen ? 'indigo' : 'white';
+            return this.hasSmallerScreen ? 'blue-grey darken-3' : 'white';
         },
     },
     methods: {
