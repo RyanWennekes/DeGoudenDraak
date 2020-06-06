@@ -1,12 +1,13 @@
 <template>
-    <v-btn color="white" x-large dark icon absolute right bottom @click="onLogout">
-        <v-icon large>fa-sign-out-alt</v-icon>
+    <v-btn :color="color" :outlined="!hasSmallerScreen" class="mb-5 logout-button" fab right absolute @click="onLogout">
+        <v-icon color="white">fa-sign-out-alt</v-icon>
     </v-btn>
 </template>
 
 <script>
 import {logout} from '../../api/authorization.js';
 import {createNamespacedHelpers} from 'vuex';
+
 const {mapActions, mapGetters} = createNamespacedHelpers('Authorization/');
 
 export default {
@@ -15,6 +16,9 @@ export default {
         hasSmallerScreen() {
             return this.$vuetify.breakpoint.smAndDown;
         },
+        color() {
+            return this.hasSmallerScreen ? 'indigo' : 'white';
+        },
     },
     methods: {
         ...mapActions(['setAccessToken']),
@@ -22,12 +26,13 @@ export default {
             await logout();
             this.setAccessToken('');
             await this.$router.push({name: 'home'});
-            console.log("Has been logged out");
         },
     },
 };
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.logout-button {
+    bottom: 0px;
+}
 </style>
