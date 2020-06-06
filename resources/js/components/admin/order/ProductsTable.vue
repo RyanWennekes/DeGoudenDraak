@@ -29,6 +29,7 @@
 
 <script>
 import {fetchAllProducts} from '../../../api/products.js';
+import {fetchAllCategories} from '../../../api/category.js';
 
 export default {
     name: 'ProductsTable',
@@ -41,14 +42,23 @@ export default {
     data() {
         return {
             products: null,
+            categories: null,
         };
     },
     created() {
+        this.getCategories();
         this.getProducts();
     },
     methods: {
         addProduct() {
             //
+        },
+        async getCategories() {
+            this.categories = await fetchAllCategories();
+            this.categories = [
+                {id: 1, name: 'Soep'},
+                {id: 2, name: 'Voorgerecht'},
+            ];
         },
         async getProducts() {
             this.products = await fetchAllProducts();
@@ -58,84 +68,79 @@ export default {
                     id: 1,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 1,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
                     id: 1,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 1,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
                     id: 1,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 1,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
                     id: 1,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 1,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
                     id: 1,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 1,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 2,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 2,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 2,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 2,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 2,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 2,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 2,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 2,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 2,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 2,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 2,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 2,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 2,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
+                    category: 2,
+                }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 2,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                },
-                {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
+                    category: 2,
                 },
             ];
         },

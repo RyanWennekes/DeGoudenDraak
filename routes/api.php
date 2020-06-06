@@ -25,10 +25,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['api']], function (Router $router) {
     // TODO: Requests without authentication
 
+
     // TODO: Requests with authentication
     $router->middleware('authorized')->group(function (Router $router) {
-        $router->get('products', function () {
-            dd('producten');
+        $router->resource('categories', 'ProductTypesController');
+        $router->resource('products', 'ProductsController');
+
+        // TODO: Requests with admin authentication
+        $router->middleware('isAdmin')->group(function (Router $router) {
         });
     });
 });
