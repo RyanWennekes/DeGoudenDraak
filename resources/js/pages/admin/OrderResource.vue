@@ -1,7 +1,7 @@
 <template>
     <v-row align="stretch">
         <!-- Overview products -->
-        <v-col cols="12" md="7" lg="8" class="full-height overflow">
+        <v-col cols="12" md="7" lg="8" class="full-height overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
             <ProductsTable v-model="order"/>
         </v-col>
 
@@ -40,5 +40,9 @@ export default {
     overflow-y: scroll;
     position: absolute;
     max-height: 90%;
+
+    &.small {
+        max-height: 45%;
+    }
 }
 </style>

@@ -2,7 +2,7 @@
     <!-- TODO : Loading and placing products here -->
     <div>
         <v-list two-line subheader v-for="category in categories" :key="category.id">
-            <v-subheader class="justify-center">{{category.name}}</v-subheader>
+            <v-subheader class="justify-center">{{category.typeNl}}</v-subheader>
 
             <template v-for="(product, index) in products" v-if="product.categoryId === category.id">
                 <v-list-item :key="`product-${index}`" class="product">
@@ -62,8 +62,8 @@ export default {
         async getCategories() {
             this.categories = await fetchAllCategories();
             this.categories = [
-                {id: 1, name: 'Soep'},
-                {id: 2, name: 'Voorgerecht'},
+                {id: 1, typeNl: 'Soep', typeEn: 'Soup'},
+                {id: 2, typeNl: 'Voorgerecht', typeEn: 'Appetizer'},
             ];
         },
         async getProducts() {
@@ -160,6 +160,7 @@ export default {
         max-width: 30px;
         text-align: center;
     }
+
     .price-label {
         max-width: 50px;
         text-align: center;
