@@ -68,7 +68,6 @@ export default {
             login(this.email, this.password).then(async () => {
                 // Set access token
                 const tokenRequest = await fetchApiToken();
-                console.log(tokenRequest);
                 this.setAccessToken(tokenRequest.data);
                 await this.$router.push({name: 'admin.test'});
             }).catch(e => this.failedRequestResult = e).finally(() => {

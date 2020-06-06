@@ -17,12 +17,7 @@
 </head>
 <body>
 <div id="app">
-    <?php if(auth()->check()): ?>
-        User id logged in!
-    <?php echo e(auth()->user()); ?>
-
-<?php endif; ?>
-<!-- Here we placed our Vue Component with the router-view -->
+    <!-- Here we placed our Vue Component with the router-view -->
     <vue-app></vue-app>
 </div>
 </body>
