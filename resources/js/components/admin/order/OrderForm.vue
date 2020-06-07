@@ -11,8 +11,8 @@
                         <th class="text-left">Naam</th>
                         <th class="text-center">Aantal</th>
                         <th class="actions"></th>
-                        <th class="text-left"></th>
-                        <th class="center">Prijs</th>
+                        <th></th>
+                        <th class="text-center">Prijs</th>
                     </tr>
                 </thead>
                 <tbody>
