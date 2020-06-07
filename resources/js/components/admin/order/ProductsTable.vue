@@ -14,12 +14,12 @@
                         </v-list-item-content>
 
                         <v-list-item-content>
-                            <v-list-item-title v-html="product.name"></v-list-item-title>
+                            <v-list-item-title><span v-html="product.name"></span> <span class="red--text font-weight-bold ml-1" v-if="product.price !== product.discountPrice">Korting</span></v-list-item-title>
                             <v-list-item-action-text class="pr-2" v-html="product.description_nl"></v-list-item-action-text>
                         </v-list-item-content>
 
                         <v-list-item-content class="price-label">
-                            {{product.price | currency}}
+                            {{product.discountPrice | currency}}
                         </v-list-item-content>
 
                         <v-list-item-action>

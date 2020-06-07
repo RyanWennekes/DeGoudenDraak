@@ -48,7 +48,7 @@ class OrdersController extends Controller
                 Sale::create([
                     'product_id' => $product['id'],
                     'order_id'   => $order->id,
-                    'price'      => $product['price'],
+                    'price'      => $product['discountPrice'],
                     'amount'     => $product['total'],
                 ])->save();
             }

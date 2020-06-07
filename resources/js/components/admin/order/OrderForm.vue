@@ -40,8 +40,8 @@
                                 <v-icon>fa-minus</v-icon>
                             </v-btn>
                         </td>
-                        <td class="text-center">{{ item.price | currency}}</td>
-                        <td class="text-center">{{ (item.price * item.total) | currency}}</td>
+                        <td class="text-center">{{ item.discountPrice | currency}}</td>
+                        <td class="text-center">{{ (item.discountPrice * item.total) | currency}}</td>
                     </tr>
                 </tbody>
             </template>
@@ -76,7 +76,7 @@ export default {
 
             let summary = 0;
             for (const product in this.value) {
-                summary += (this.value[product].total * this.value[product].price);
+                summary += (this.value[product].total * this.value[product].discountPrice);
             }
             return summary;
         },
