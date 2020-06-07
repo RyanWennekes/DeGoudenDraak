@@ -10,15 +10,11 @@ class TablesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
     public function index()
     {
-        return [
-            new Table(['table_number' => '001', 'menu_id' => 1, 'check_in_time' => '12:00:00', 'waitress_id' => 2]),
-            new Table(['table_number' => '002', 'menu_id' => 1, 'check_in_time' => '12:00:00', 'waitress_id' => 2]),
-            new Table(['table_number' => '003', 'menu_id' => 1, 'check_in_time' => '12:00:00', 'waitress_id' => 2]),
-        ];
+        return Table::openTables();
     }
 
     /**
