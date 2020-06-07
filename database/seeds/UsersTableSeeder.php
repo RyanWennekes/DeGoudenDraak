@@ -21,15 +21,21 @@ class UsersTableSeeder extends Seeder
                 'role'  => UserRoles::Admin,
             ],
             1 => [
-                'email' => 'employer@degoudendraak.nl',
-                'role'  => UserRoles::Employer,
+                'email' => 'cashier@degoudendraak.nl',
+                'role'  => UserRoles::Cashier,
             ],
+            2 => [
+                'email' => 'waitress@degoudendraak.nl',
+                'role' => UserRoles::Waitress,
+            ]
         ];
 
         // Loop through all the accounts
         foreach ($accounts as $key => $value) {
             $this->generateUser($value['email'], $value['role']);
         }
+
+        factory(\App\User::class, 10)->create();
     }
 
     // Generating a single user

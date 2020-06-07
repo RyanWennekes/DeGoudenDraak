@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductTypesTable extends Migration
+class UpdateTablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateProductTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('type_nl', 45);
-            $table->string('type_en', 45);
-            $table->boolean('has_rice');
+        Schema::table('tables', function (Blueprint $table) {
+            $table->dropColumn('check_in_time');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateProductTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_types');
+        Schema::table('tables', function (Blueprint $table) {
+            $table->dateTime('check_in_time')->nullable();
+        });
     }
 }

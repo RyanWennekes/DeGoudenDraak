@@ -10,8 +10,13 @@ use Illuminate\Support\Collection;
 class Table extends Model
 {
     protected $fillable = [
-        'menu_id', 'table_number', 'check_in_time', 'waitress_id',
+        'menu_id', 'table_number', 'waitress_id',
     ];
+
+    public static function allTables()
+    {
+        return Table::all();
+    }
 
     public static function openTables(): Collection
     {

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductTypesTable extends Migration
+class CreateReservationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateProductTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_types', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('type_nl', 45);
-            $table->string('type_en', 45);
-            $table->boolean('has_rice');
+            $table->dateTime('check_in');
+            $table->unsignedBigInteger('table_id');
+            $table->timestamps();
+
+            $table->foreign('table_id')->references('id')->on('tables');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateProductTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_types');
+        Schema::dropIfExists('reservations');
     }
 }
