@@ -15,6 +15,7 @@
 <script>
 import OrderForm from '../../components/admin/order/OrderForm.vue';
 import ProductsTable from '../../components/admin/order/ProductsTable.vue';
+import {createOrder} from '../../api/orders.js';
 
 export default {
     name: 'OrderResource',
@@ -39,9 +40,9 @@ export default {
                 Vue.set(this.order[product.id], 'total', this.order[product.id].total - 1);
             }
         },
-        payOrder(total) {
-            console.log(`Persons payed: ${total}`);
-            // this.order
+        async payOrder() {
+            await createOrder(this.order);
+            // TODO: handle errors
         },
     },
 };
@@ -49,11 +50,11 @@ export default {
 
 <style lang="scss">
 .overflow {
-    max-height: 750px;
+    max-height: 730px;
     overflow-y: scroll;
 
     &.small {
-        max-height: 375px;
+        max-height: 360px;
     }
 }
 </style>

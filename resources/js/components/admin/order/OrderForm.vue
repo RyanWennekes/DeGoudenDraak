@@ -45,7 +45,7 @@
             </v-btn>
 
             <!-- Pay order -->
-            <v-btn color="success" @click="$emit('payOrder', summaryOrder)" width="150">
+            <v-btn color="success" @click="$emit('payOrder')" width="150">
                 Betalen
             </v-btn>
         </v-row>
