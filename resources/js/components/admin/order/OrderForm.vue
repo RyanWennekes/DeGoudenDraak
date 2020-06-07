@@ -2,15 +2,14 @@
     <div>
         <h2 class="text-center">Bestelling</h2>
         <v-select
-            v-model="selectedTable"
+            v-model="selectedTableId"
             label="Tafelnummer"
             :loading="loading"
             :items="tables"
-            item-value="table_number"
-            item-key="id"
+            item-value="id"
+            item-key="table_number"
             menu-props="auto"
-            hide-details
-        >
+            hide-details>
             <template #selection="{item}">{{item.table_number}}</template>
             <template #item="{item}">{{item.table_number}}</template>
         </v-select>
@@ -58,7 +57,7 @@
             </v-btn>
 
             <!-- Pay order -->
-            <v-btn color="success" @click="$emit('payOrder', selectedTable)" width="150">
+            <v-btn color="success" @click="$emit('payOrder', selectedTableId)" width="150">
                 Betalen
             </v-btn>
         </v-row>
@@ -89,7 +88,7 @@ export default {
         return {
             tables: [],
             loading: false,
-            selectedTable: '',
+            selectedTableId: null,
         };
     },
     created() {

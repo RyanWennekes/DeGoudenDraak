@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
 use App\Order;
+use App\Sale;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -36,11 +37,24 @@ class OrdersController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        $order = Order::create([
-            '' => '',
-        ])->save();
-        // create order
-        // create sales
+        try {
+            $order = Order::create([
+                'table_id' => $request->get('table_id'),
+            ])->save();
+
+            foreach ($request->get('order') as $product) {
+                Sale::create([
+                    'product_id' => $product['id'],
+                    'order_id'   => $order->id,
+                    'price'      => $product['price'],
+                    'amount'     => $product['total'],
+                ])->save();
+            }
+        } catch (\Exception $exception) {
+            return response($exception, 500);
+        }
+
+        return response('', 200);
     }
 
     /**

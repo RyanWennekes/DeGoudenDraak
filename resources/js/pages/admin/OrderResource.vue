@@ -41,7 +41,7 @@ export default {
             }
         },
         async payOrder(tableNumber) {
-            await createOrder({order: this.order, tableNumber: tableNumber});
+            await createOrder({products: this.order, table_id: tableNumber});
             // TODO: handle errors
         },
     },
