@@ -34,9 +34,7 @@ class UsersTableSeeder extends Seeder
             $this->generateUser($value['email'], $value['role']);
         }
 
-        for($i= 0; $i < 10; $i++) {
-            factory(\App\User::class, 10)->create();
-        }
+        factory(\App\User::class, 10)->create();
     }
 
     // Generating a single user
