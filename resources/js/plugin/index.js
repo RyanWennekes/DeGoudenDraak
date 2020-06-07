@@ -5,7 +5,7 @@ import Vue from 'vue';
 cssVars();
 
 Vue.filter('currency', function (value) {
-    if (typeof value !== 'number') {
+    if (typeof value !== 'number' && Number.isNaN(parseFloat(value))) {
         return value;
     }
 
@@ -15,7 +15,7 @@ Vue.filter('currency', function (value) {
         minimumFractionDigits: 2,
     });
 
-    return formatter.format(value);
+    return formatter.format(parseFloat(value));
 });
 
 export {vuetify};

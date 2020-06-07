@@ -5,9 +5,9 @@
 
         <div class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
             <v-list two-line subheader v-for="category in categories" :key="category.id">
-                <v-subheader class="justify-center">{{category.typeNl}}</v-subheader>
+                <v-subheader class="justify-center">{{category.type_nl}} <span class="font-weight-bold ml-1" v-if="category.has_rice">(met rijst)</span></v-subheader>
 
-                <template v-for="(product, index) in products" v-if="product.categoryId === category.id">
+                <template v-for="(product, index) in products" v-if="product.product_type_id === category.id">
                     <v-list-item :key="`product-${index}`" class="product">
                         <v-list-item-content class="id-label">
                             {{product.id}}.
@@ -59,94 +59,9 @@ export default {
         },
         async getCategories() {
             this.categories = await fetchAllCategories();
-            this.categories = [
-                {id: 1, typeNl: 'Soep', typeEn: 'Soup'},
-                {id: 2, typeNl: 'Voorgerecht', typeEn: 'Appetizer'},
-            ];
         },
         async getProducts() {
             this.products = await fetchAllProducts();
-            this.products = [
-                {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 1,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 2,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 1,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 3,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 1,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 4,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 1,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 5,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 1,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 6,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 2,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 7,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 2,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 7,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 2,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 8,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 2,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 9,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 2,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 10,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 2,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 11,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 2,
-                }, {
-                    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 12,
-                    price: 5.00,
-                    description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
-                    categoryId: 2,
-                },
-            ];
         },
     },
 };
