@@ -1,13 +1,13 @@
 <template>
     <v-row align="stretch">
         <!-- Overview products -->
-        <v-col cols="12" md="7" lg="8" class="full-height overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
-            <ProductsTable v-model="order"/>
+        <v-col cols="12" md="7" lg="8" class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
+            <ProductsTable @addProduct="addProduct"/>
         </v-col>
 
         <!-- Creating order -->
-        <v-col cols="12" md="5" lg="4" class="full-height">
-            <OrderForm v-model="order"/>
+        <v-col cols="12" md="5" lg="4" class="order-form">
+            <OrderForm v-model="order" ref="orderForm"/>
         </v-col>
     </v-row>
 </template>
@@ -24,12 +24,13 @@ export default {
             order: {},
         };
     },
-    created() {
-        this.clearOrder();
-    },
     methods: {
-        clearOrder() {
-            this.order = {};
+        addProduct(product) {
+            if (this.order && !this.order[product.id]) {
+                Vue.set(this.order, product.id, product);
+            }
+
+            Vue.set(this.order[product.id], 'total', this.order[product.id].total ? this.order[product.id].total + 1 : 1);
         },
     },
 };
@@ -44,5 +45,9 @@ export default {
     &.small {
         max-height: 45%;
     }
+}
+
+.order-form {
+    margin-left: auto;
 }
 </style>

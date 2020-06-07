@@ -1,5 +1,4 @@
 <template>
-    <!-- TODO : Loading and placing products here -->
     <div>
         <v-list two-line subheader v-for="category in categories" :key="category.id">
             <v-subheader class="justify-center">{{category.typeNl}}</v-subheader>
@@ -20,7 +19,7 @@
                     </v-list-item-content>
 
                     <v-list-item-action>
-                        <v-btn fab dark small color="blue">
+                        <v-btn fab dark small color="blue" @click="addProduct(product)">
                             <v-icon small>fa-plus</v-icon>
                         </v-btn>
                     </v-list-item-action>
@@ -39,12 +38,6 @@ import {fetchAllCategories} from '../../../api/category.js';
 
 export default {
     name: 'ProductsTable',
-    props: {
-        value: {
-            type: Object,
-            required: true,
-        },
-    },
     data() {
         return {
             products: null,
@@ -56,8 +49,8 @@ export default {
         this.getProducts();
     },
     methods: {
-        addProduct() {
-            //
+        addProduct(product) {
+            this.$emit('addProduct', product);
         },
         async getCategories() {
             this.categories = await fetchAllCategories();
@@ -77,73 +70,73 @@ export default {
                     categoryId: 1,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 2,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 1,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 3,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 1,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 4,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 1,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 1,
+                    id: 5,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 1,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 2,
+                    id: 6,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 2,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 2,
+                    id: 7,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 2,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 2,
+                    id: 7,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 2,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 2,
+                    id: 8,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 2,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 2,
+                    id: 9,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 2,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 2,
+                    id: 10,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 2,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 2,
+                    id: 11,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 2,
                 }, {
                     name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                    id: 2,
+                    id: 12,
                     price: 5.00,
                     description: 'Aliquam a rutrum tortor. Nullam porta orci molestie, volutpat sapien nec, malesuada nibh. Cras ipsum tellus, fermentum at luctus vitae, mattis eget ante. Donec sit amet nulla a nisi molestie vulputate. Donec ornare, nisl at bibendum venenatis, turpis ipsum interdum metus, finibus dapibus dui ligula et orci.',
                     categoryId: 2,
