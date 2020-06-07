@@ -17,6 +17,7 @@ class CreateProductTypesTable extends Migration
             $table->id();
             $table->string('type_nl', 45);
             $table->string('type_en', 45);
+            $table->boolean('has_rice');
         });
     }
 
