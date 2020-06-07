@@ -616,3 +616,128 @@
 #40 C:\\xampp\\htdocs\\College\\Year 2\\WEBFS\\DeGoudenDraak_Development\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #41 {main}
 "}
+[2020-06-07 12:41:08] local.ERROR: A CreateReservationsTable class already exists. {"exception":"[object] (InvalidArgumentException(code: 0): A CreateReservationsTable class already exists. at C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\MigrationCreator.php:99)
+[stacktrace]
+#0 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\MigrationCreator.php(59): Illuminate\\Database\\Migrations\\MigrationCreator->ensureMigrationDoesntAlreadyExist('create_reservat...', 'C:\\\\Users\\\\Martij...')
+#1 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand.php(110): Illuminate\\Database\\Migrations\\MigrationCreator->create('create_reservat...', 'C:\\\\Users\\\\Martij...', 'reservations', true)
+#2 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand.php(94): Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand->writeMigration('create_reservat...', 'reservations', true)
+#3 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand->handle()
+#4 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(33): call_user_func_array(Array, Array)
+#5 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(36): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#6 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(91): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#7 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#8 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(592): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#9 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(134): Illuminate\\Container\\Container->call(Array)
+#10 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#11 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(121): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#12 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(912): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(264): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 {main}
+"} 
+[2020-06-07 12:41:24] local.ERROR: A CreateReservationTable class already exists. {"exception":"[object] (InvalidArgumentException(code: 0): A CreateReservationTable class already exists. at C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\MigrationCreator.php:99)
+[stacktrace]
+#0 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\MigrationCreator.php(59): Illuminate\\Database\\Migrations\\MigrationCreator->ensureMigrationDoesntAlreadyExist('create_reservat...', 'C:\\\\Users\\\\Martij...')
+#1 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand.php(110): Illuminate\\Database\\Migrations\\MigrationCreator->create('create_reservat...', 'C:\\\\Users\\\\Martij...', 'reservation', true)
+#2 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand.php(94): Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand->writeMigration('create_reservat...', 'reservation', true)
+#3 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand->handle()
+#4 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(33): call_user_func_array(Array, Array)
+#5 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(36): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#6 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(91): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#7 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#8 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(592): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#9 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(134): Illuminate\\Container\\Container->call(Array)
+#10 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#11 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(121): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#12 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(912): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(264): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 {main}
+"} 
+[2020-06-07 12:41:50] local.ERROR: include(C:\Users\Martijn\Documents\Avans hogeschool\Blok8\WEBFS\DeGoudenDraak\vendor\composer/../../app/Reservation.php): failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): include(C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer/../../app/Reservation.php): failed to open stream: No such file or directory at C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer\\ClassLoader.php:444)
+[stacktrace]
+#0 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer\\ClassLoader.php(444): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'include(C:\\\\User...', 'C:\\\\Users\\\\Martij...', 444, Array)
+#1 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer\\ClassLoader.php(444): include()
+#2 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer\\ClassLoader.php(322): Composer\\Autoload\\includeFile('C:\\\\Users\\\\Martij...')
+#3 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Reservation')
+#4 [internal function]: spl_autoload_call('App\\\\Reservation')
+#5 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Console\\ControllerMakeCommand.php(154): class_exists('App\\\\Reservation')
+#6 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Console\\ControllerMakeCommand.php(106): Illuminate\\Routing\\Console\\ControllerMakeCommand->buildModelReplacements(Array)
+#7 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\GeneratorCommand.php(74): Illuminate\\Routing\\Console\\ControllerMakeCommand->buildClass('App\\\\Http\\\\Contro...')
+#8 [internal function]: Illuminate\\Console\\GeneratorCommand->handle()
+#9 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(33): call_user_func_array(Array, Array)
+#10 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(36): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#11 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(91): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#12 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#13 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(592): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#14 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(134): Illuminate\\Container\\Container->call(Array)
+#15 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(121): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#17 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(912): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(264): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Routing\\Console\\ControllerMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 {main}
+"} 
+[2020-06-07 12:42:34] local.ERROR: include(C:\Users\Martijn\Documents\Avans hogeschool\Blok8\WEBFS\DeGoudenDraak\vendor\composer/../../app/Reservation.php): failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): include(C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer/../../app/Reservation.php): failed to open stream: No such file or directory at C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer\\ClassLoader.php:444)
+[stacktrace]
+#0 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer\\ClassLoader.php(444): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'include(C:\\\\User...', 'C:\\\\Users\\\\Martij...', 444, Array)
+#1 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer\\ClassLoader.php(444): include()
+#2 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\composer\\ClassLoader.php(322): Composer\\Autoload\\includeFile('C:\\\\Users\\\\Martij...')
+#3 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Reservation')
+#4 [internal function]: spl_autoload_call('App\\\\Reservation')
+#5 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Console\\ControllerMakeCommand.php(154): class_exists('App\\\\Reservation')
+#6 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Console\\ControllerMakeCommand.php(106): Illuminate\\Routing\\Console\\ControllerMakeCommand->buildModelReplacements(Array)
+#7 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\GeneratorCommand.php(74): Illuminate\\Routing\\Console\\ControllerMakeCommand->buildClass('App\\\\Http\\\\Contro...')
+#8 [internal function]: Illuminate\\Console\\GeneratorCommand->handle()
+#9 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(33): call_user_func_array(Array, Array)
+#10 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(36): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#11 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(91): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#12 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#13 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(592): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#14 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(134): Illuminate\\Container\\Container->call(Array)
+#15 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(121): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#17 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(912): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(264): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Routing\\Console\\ControllerMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 {main}
+"} 
+[2020-06-07 12:53:33] local.ERROR: Command "migrate:frehs" is not defined.
+
+Did you mean one of these?
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"migrate:frehs\" is not defined.
+
+Did you mean one of these?
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status at C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php:644)
+[stacktrace]
+#0 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(228): Symfony\\Component\\Console\\Application->find('migrate:frehs')
+#1 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\symfony\\console\\Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Users\\Martijn\\Documents\\Avans hogeschool\\Blok8\\WEBFS\\DeGoudenDraak\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
