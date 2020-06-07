@@ -49,11 +49,11 @@ export default {
 
 <style lang="scss">
 .overflow {
-    max-height: 775px;
+    max-height: 750px;
     overflow-y: scroll;
 
     &.small {
-        max-height: 400px;
+        max-height: 375px;
     }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 class="text-center">Bestelling</h2>
-        <VDivider class="my-3"/>
+        <v-divider class="my-3"/>
 
         <v-simple-table :height="$vuetify.breakpoint.smAndDown ? '200px' : '600px'">
             <template #default>
@@ -35,7 +35,7 @@
             </template>
         </v-simple-table>
 
-        <VDivider class="my-3"/>
+        <v-divider class="my-3"/>
         <h2 class="text-right px-4 mb-4">Totaal: {{summaryOrder | currency}}</h2>
 
         <v-row justify="center" class="ma-0" v-show="hasProducts">
@@ -67,7 +67,7 @@ export default {
             return summary;
         },
         hasProducts() {
-            return this.value && Object.keys(this.value) >= 1;
+            return this.value && Object.keys(this.value).length > 0;
         },
     },
     methods: {

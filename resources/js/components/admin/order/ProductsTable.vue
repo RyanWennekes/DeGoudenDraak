@@ -1,34 +1,39 @@
 <template>
-    <div class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
-        <v-list two-line subheader v-for="category in categories" :key="category.id">
-            <v-subheader class="justify-center">{{category.typeNl}}</v-subheader>
+    <div>
+        <h2 class="text-center">Producten</h2>
+        <v-divider class="my-3"/>
 
-            <template v-for="(product, index) in products" v-if="product.categoryId === category.id">
-                <v-list-item :key="`product-${index}`" class="product">
-                    <v-list-item-content class="id-label">
-                        {{product.id}}.
-                    </v-list-item-content>
+        <div class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
+            <v-list two-line subheader v-for="category in categories" :key="category.id">
+                <v-subheader class="justify-center">{{category.typeNl}}</v-subheader>
 
-                    <v-list-item-content>
-                        <v-list-item-title>{{product.name}}</v-list-item-title>
-                        <v-list-item-action-text class="pr-2">{{product.description}}</v-list-item-action-text>
-                    </v-list-item-content>
+                <template v-for="(product, index) in products" v-if="product.categoryId === category.id">
+                    <v-list-item :key="`product-${index}`" class="product">
+                        <v-list-item-content class="id-label">
+                            {{product.id}}.
+                        </v-list-item-content>
 
-                    <v-list-item-content class="price-label">
-                        {{product.price | currency}}
-                    </v-list-item-content>
+                        <v-list-item-content>
+                            <v-list-item-title>{{product.name}}</v-list-item-title>
+                            <v-list-item-action-text class="pr-2">{{product.description}}</v-list-item-action-text>
+                        </v-list-item-content>
 
-                    <v-list-item-action>
-                        <v-btn fab dark small color="blue" @click="addProduct(product)">
-                            <v-icon small>fa-plus</v-icon>
-                        </v-btn>
-                    </v-list-item-action>
-                </v-list-item>
+                        <v-list-item-content class="price-label">
+                            {{product.price | currency}}
+                        </v-list-item-content>
 
-                <!-- This divide items from each other-->
-                <v-divider :key="`divider-${index}`"></v-divider>
-            </template>
-        </v-list>
+                        <v-list-item-action>
+                            <v-btn fab dark small color="blue" @click="addProduct(product)">
+                                <v-icon small>fa-plus</v-icon>
+                            </v-btn>
+                        </v-list-item-action>
+                    </v-list-item>
+
+                    <!-- This divide items from each other-->
+                    <v-divider :key="`divider-${index}`"></v-divider>
+                </template>
+            </v-list>
+        </div>
     </div>
 </template>
 
