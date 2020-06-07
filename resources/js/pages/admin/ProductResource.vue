@@ -5,51 +5,40 @@
             :items="products"
             :itemsPerPage="itemsPerPage"
             :footer-props="pagination"
-            v-show="!loading"
-        >
-            <template #footer></template>
-            <template #item.name="props">
-                <v-edit-dialog
-                    :return-value.sync="props.item.name"
-                    @save="save"
-                    @cancel="cancel"
-                    @open="open"
-                    @close="close"
-                > {{ props.item.name }}
-                    <template #input>
-                        <v-text-field
-                            v-model="props.item.name"
-                            label="Edit"
-                            single-line
-                            counter
-                        ></v-text-field>
-                    </template>
-                </v-edit-dialog>
-            </template>
-            <template #item.minium_amount="props">
-                <v-edit-dialog
-                    :return-value.sync="props.item.iron"
-                    large
-                    persistent
-                    @save="save"
-                    @cancel="cancel"
-                    @open="open"
-                    @close="close"
-                >
-                    <div>{{ props.item.iron }}</div>
-                    <template #input>
-                        <div class="mt-4 title">Minimun aanpassen</div>
-                    </template>
-                    <template #input>
-                        <v-text-field
-                            v-model="props.item.iron"
-                            label="Aanpassen"
-                            single-line
-                            counter
-                            autofocus
-                        ></v-text-field>
-                    </template>
-                </v-edit-dialog>
+            v-show="!loading">
+            <template #item="props">
+                <tr>
+                    <td>{{props.item.id}}.</td>
+                    <td>
+                        <v-edit-dialog
+                            :return-value.sync="props.item.name"
+                            @save="save(props.item)"
+                            @cancel="cancel"
+                            @open="open"
+                            @close="close"
+                        > {{ props.item.name }} <span class="red--text font-weight-bold ml-1"
+                                                      v-if="props.item.price !== props.item.discountPrice">Korting</span>
+                            <template #input>
+                                <v-text-field
+                                    v-model="props.item.name"
+                                    label="Edit"
+                                    single-line
+                                    counter
+                                ></v-text-field>
+                            </template>
+                        </v-edit-dialog>
+                    </td>
+                    <td class="text-center">{{props.item.code}}</td>
+                    <td class="text-center" v-if="props.item.price !== props.item.discountPrice">
+                        <span class="old-price">{{props.item.price | currency}}</span>
+                        <span class="red--text font-weight-bold ml-1">{{props.item.discountPrice | currency}}</span>
+                    </td>
+                    <td v-else class="text-center">{{props.item.price | currency}}</td>
+                    <td class="text-center">
+                        <ChipSpiciness :spiciness="props.item.spiciness"/>
+                    </td>
+                    <td class="text-center">{{props.item.minimum_amount || 'geen'}}</td>
+                </tr>
             </template>
         </v-data-table>
         <v-skeleton-loader v-show="loading"
@@ -63,26 +52,24 @@
 </template>
 
 <script>
-import {fetchAllProducts} from '../../api/products.js';
+import {fetchAllProducts, updateProduct} from '../../api/products.js';
+import ChipSpiciness from '../../components/admin/ChipSpiciness.vue';
 
 export default {
     name: 'ProductResource',
+    components: {ChipSpiciness},
     data() {
         return {
             snack: false,
             snackColor: '',
             snackText: '',
             headers: [
-                {
-                    text: 'Naam',
-                    align: 'start',
-                    sortable: true,
-                    value: 'name',
-                },
-                {text: 'Code', value: 'code'},
-                {text: 'Prijs', value: 'priceDiscount'},
-                {text: 'Pittigheid', value: 'spiciness'},
-                {text: 'Mininum aantal', value: 'minimum_amount'},
+                {text: 'Nummer', align: 'start', sortable: true, value: 'id'},
+                {text: 'Naam', align: 'start', sortable: true, value: 'name'},
+                {text: 'Code', value: 'code', align: 'center'},
+                {text: 'Prijs', value: 'priceDiscount', align: 'center'},
+                {text: 'Pittigheid', value: 'spiciness', sortable: true, align: 'center'},
+                {text: 'Mininum aantal', value: 'minimum_amount', align: 'center'},
             ],
             products: [],
             loading: false,
@@ -107,7 +94,9 @@ export default {
             this.products = await fetchAllProducts();
             this.loading = false;
         },
-        save() {
+        save(product) {
+            this.updateProduct(product);
+
             this.snack = true;
             this.snackColor = 'success';
             this.snackText = 'Veld is succesvol aangepast';
@@ -124,10 +113,15 @@ export default {
         },
         close() {
         },
+        async updateProduct(product) {
+            await updateProduct(product);
+        },
     },
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.old-price {
+    text-decoration: line-through;
+}
 </style>

@@ -69,7 +69,11 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->timestamps = false;
+
+        return $product->update([
+            'name' => $request->get('name'),
+        ]) ? response("Couldn't update product", 500) : response('', 200);
     }
 
     /**
