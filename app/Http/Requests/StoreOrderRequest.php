@@ -25,7 +25,7 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'table_id' => 'required|exists:App\Table,id',
-            'order'       => 'required',
+            'products' => 'required',
         ];
     }
 }

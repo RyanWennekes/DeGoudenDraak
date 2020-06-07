@@ -40,9 +40,11 @@ class OrdersController extends Controller
         try {
             $order = Order::create([
                 'table_id' => $request->get('table_id'),
-            ])->save();
+            ]);
 
-            foreach ($request->get('order') as $product) {
+            $order->save();
+
+            foreach ($request->get('products') as $product) {
                 Sale::create([
                     'product_id' => $product['id'],
                     'order_id'   => $order->id,

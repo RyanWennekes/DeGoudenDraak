@@ -18,19 +18,6 @@ class Table extends Model
         return Table::all();
     }
 
-    public static function openTables(): Collection
-    {
-        return Table::all();
-    }
-
-    public static function takenTables(): Collection
-    {
-        return Table::query()
-            ->where('', '=', NOW())
-            ->where('check_in_time', '>=', '')
-            ->all();
-    }
-
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
@@ -39,5 +26,10 @@ class Table extends Model
     public function waitress(): BelongsTo
     {
         return $this->belongsTo(User::class, 'waitress_id');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }
