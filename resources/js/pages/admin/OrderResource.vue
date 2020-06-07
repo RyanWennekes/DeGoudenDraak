@@ -1,13 +1,13 @@
 <template>
     <v-row align="stretch">
         <!-- Overview products -->
-        <v-col cols="12" md="7" lg="8" class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
+        <v-col cols="12" md="7" class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
             <ProductsTable @addProduct="addProduct"/>
         </v-col>
 
         <!-- Creating order -->
-        <v-col cols="12" md="5" lg="4" class="order-form">
-            <OrderForm v-model="order" ref="orderForm"/>
+        <v-col cols="12" md="5" class="order-form">
+            <OrderForm v-model="order" @addProduct="addProduct" @removeProduct="removeProduct"/>
         </v-col>
     </v-row>
 </template>
@@ -31,6 +31,13 @@ export default {
             }
 
             Vue.set(this.order[product.id], 'total', this.order[product.id].total ? this.order[product.id].total + 1 : 1);
+        },
+        removeProduct(product) {
+            if (this.order[product.id].total <= 1) {
+                Vue.delete(this.order, product.id);
+            }
+
+            Vue.set(this.order[product.id], 'total', this.order[product.id].total - 1);
         },
     },
 };
