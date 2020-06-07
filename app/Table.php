@@ -5,12 +5,18 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ramsey\Collection\Collection;
 
 class Table extends Model
 {
     protected $fillable = [
-        'menu_id', 'table_number', 'check_in_time', 'waitress_id',
+        'menu_id', 'table_number', 'waitress_id',
     ];
+
+    public static function allTables(): Collection
+    {
+        return Table::all();
+    }
 
     public function orders(): HasMany
     {
