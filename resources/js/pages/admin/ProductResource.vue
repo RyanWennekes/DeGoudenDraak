@@ -4,7 +4,10 @@
             :headers="headers"
             :items="products"
             :itemsPerPage="itemsPerPage"
+            :footer-props="pagination"
+            v-show="!loading"
         >
+            <template #footer></template>
             <template #item.name="props">
                 <v-edit-dialog
                     :return-value.sync="props.item.name"
@@ -16,7 +19,6 @@
                     <template #input>
                         <v-text-field
                             v-model="props.item.name"
-                            :rules="[max25chars]"
                             label="Edit"
                             single-line
                             counter
@@ -24,7 +26,7 @@
                     </template>
                 </v-edit-dialog>
             </template>
-            <template #item.iron="props">
+            <template #item.minium_amount="props">
                 <v-edit-dialog
                     :return-value.sync="props.item.iron"
                     large
@@ -36,13 +38,12 @@
                 >
                     <div>{{ props.item.iron }}</div>
                     <template #input>
-                        <div class="mt-4 title">Update Iron</div>
+                        <div class="mt-4 title">Minimun aanpassen</div>
                     </template>
                     <template #input>
                         <v-text-field
                             v-model="props.item.iron"
-                            :rules="[max25chars]"
-                            label="Edit"
+                            label="Aanpassen"
                             single-line
                             counter
                             autofocus
@@ -51,10 +52,12 @@
                 </v-edit-dialog>
             </template>
         </v-data-table>
+        <v-skeleton-loader v-show="loading"
+                           type="table-heading,table-thead,table-tbody@2,table-tfoot"></v-skeleton-loader>
 
         <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
             {{ snackText }}
-            <v-btn text @click="snack = false">Close</v-btn>
+            <v-btn text @click="snack = false">Sluiten</v-btn>
         </v-snackbar>
     </div>
 </template>
@@ -69,8 +72,6 @@ export default {
             snack: false,
             snackColor: '',
             snackText: '',
-            max25chars: v => v.length <= 25 || 'Input too long!',
-            pagination: {},
             headers: [
                 {
                     text: 'Naam',
@@ -84,11 +85,17 @@ export default {
                 {text: 'Mininum aantal', value: 'minimum_amount'},
             ],
             products: [],
+            loading: false,
         };
     },
     computed: {
         itemsPerPage() {
-            return 12;
+            return 14;
+        },
+        pagination() {
+            return {
+                itemsPerPageOptions: [5, 14, 20, 50, -1],
+            };
         },
     },
     created() {
@@ -96,25 +103,26 @@ export default {
     },
     methods: {
         async getProducts() {
+            this.loading = true;
             this.products = await fetchAllProducts();
+            this.loading = false;
         },
         save() {
             this.snack = true;
             this.snackColor = 'success';
-            this.snackText = 'Data saved';
+            this.snackText = 'Veld is succesvol aangepast';
         },
         cancel() {
             this.snack = true;
             this.snackColor = 'error';
-            this.snackText = 'Canceled';
+            this.snackText = 'Stopgezet';
         },
         open() {
             this.snack = true;
             this.snackColor = 'info';
-            this.snackText = 'Dialog opened';
+            this.snackText = 'Veld is geopend';
         },
         close() {
-            console.log('Dialog closed');
         },
     },
 };
