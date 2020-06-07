@@ -14,7 +14,8 @@ class CreateProductAllergenesTable extends Migration
     public function up()
     {
         Schema::create('product_allergenes', function (Blueprint $table) {
-            $table->string('product_id')->nullable();
+//            $table->id();
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->unsignedBigInteger('allergene_id')->nullable();
 
             $table->foreign('product_id')->references('id')->on('products');

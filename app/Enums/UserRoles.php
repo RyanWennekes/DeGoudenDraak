@@ -15,5 +15,6 @@ use BenSampo\Enum\Enum;
 final class UserRoles extends Enum
 {
     const Admin = 1;
-    const Employer = 2;
+    const Cashier = 2;
+    const Waitress = 3;
 }
