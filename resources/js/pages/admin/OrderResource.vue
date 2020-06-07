@@ -40,8 +40,8 @@ export default {
                 Vue.set(this.order[product.id], 'total', this.order[product.id].total - 1);
             }
         },
-        async payOrder() {
-            await createOrder(this.order);
+        async payOrder(tableNumber) {
+            await createOrder({order: this.order, tableNumber: tableNumber});
             // TODO: handle errors
         },
     },

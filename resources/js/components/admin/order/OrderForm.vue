@@ -1,9 +1,22 @@
 <template>
     <div>
         <h2 class="text-center">Bestelling</h2>
+        <v-select
+            v-model="selectedTable"
+            label="Tafelnummer"
+            :loading="loading"
+            :items="tables"
+            item-value="table_number"
+            item-key="id"
+            menu-props="auto"
+            hide-details
+        >
+            <template #selection="{item}">{{item.table_number}}</template>
+            <template #item="{item}">{{item.table_number}}</template>
+        </v-select>
         <v-divider class="my-3"/>
 
-        <v-simple-table :height="$vuetify.breakpoint.smAndDown ? '200px' : '600px'">
+        <v-simple-table :height="$vuetify.breakpoint.smAndDown ? '200px' : '550px'">
             <template #default>
                 <thead>
                     <tr>
@@ -45,7 +58,7 @@
             </v-btn>
 
             <!-- Pay order -->
-            <v-btn color="success" @click="$emit('payOrder')" width="150">
+            <v-btn color="success" @click="$emit('payOrder', selectedTable)" width="150">
                 Betalen
             </v-btn>
         </v-row>
@@ -53,6 +66,8 @@
 </template>
 
 <script>
+import {fetchAllTables} from '../../../api/tables.js';
+
 export default {
     name: 'OrderForm',
     props: ['value'],
@@ -70,9 +85,24 @@ export default {
             return this.value && Object.keys(this.value).length > 0;
         },
     },
+    data() {
+        return {
+            tables: [],
+            loading: false,
+            selectedTable: '',
+        };
+    },
+    created() {
+        this.getTables();
+    },
     methods: {
         deniedOrder() {
             this.$emit('input', {});
+        },
+        async getTables() {
+            this.loading = true;
+            this.tables = await fetchAllTables();
+            this.loading = false;
         },
     },
 };

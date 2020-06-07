@@ -31,6 +31,7 @@ Route::group(['middleware' => ['api']], function (Router $router) {
         $router->resource('categories', 'ProductTypesController');
         $router->resource('products', 'ProductsController');
         $router->resource('orders', 'OrdersController');
+        $router->resource('tables', 'TablesController');
 
         // TODO: Requests with admin authentication
         $router->middleware('isAdmin')->group(function (Router $router) {
