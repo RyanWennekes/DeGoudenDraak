@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
         <v-list two-line subheader v-for="category in categories" :key="category.id">
             <v-subheader class="justify-center">{{category.typeNl}}</v-subheader>
 

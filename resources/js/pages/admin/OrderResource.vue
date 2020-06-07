@@ -1,13 +1,13 @@
 <template>
     <v-row align="stretch">
         <!-- Overview products -->
-        <v-col cols="12" md="7" class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
+        <v-col cols="12" md="7">
             <ProductsTable @addProduct="addProduct"/>
         </v-col>
 
         <!-- Creating order -->
-        <v-col cols="12" md="5" class="order-form">
-            <OrderForm v-model="order" @addProduct="addProduct" @removeProduct="removeProduct"/>
+        <v-col cols="12" md="5">
+            <OrderForm v-model="order" @addProduct="addProduct" @removeProduct="removeProduct" @payOrder="payOrder"/>
         </v-col>
     </v-row>
 </template>
@@ -35,9 +35,13 @@ export default {
         removeProduct(product) {
             if (this.order[product.id].total <= 1) {
                 Vue.delete(this.order, product.id);
+            } else {
+                Vue.set(this.order[product.id], 'total', this.order[product.id].total - 1);
             }
-
-            Vue.set(this.order[product.id], 'total', this.order[product.id].total - 1);
+        },
+        payOrder(total) {
+            console.log(`Persons payed: ${total}`);
+            // this.order
         },
     },
 };
@@ -45,16 +49,11 @@ export default {
 
 <style lang="scss">
 .overflow {
+    max-height: 775px;
     overflow-y: scroll;
-    position: absolute;
-    max-height: 90%;
 
     &.small {
-        max-height: 45%;
+        max-height: 400px;
     }
-}
-
-.order-form {
-    margin-left: auto;
 }
 </style>

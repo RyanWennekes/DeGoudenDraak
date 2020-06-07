@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h2 class="mb-3 text-center">Bestelling</h2>
-        <VDivider/>
+        <h2 class="text-center">Bestelling</h2>
+        <VDivider class="my-3"/>
 
-        <v-simple-table height="500px">
+        <v-simple-table :height="$vuetify.breakpoint.smAndDown ? '200px' : '600px'">
             <template #default>
                 <thead>
                     <tr>
@@ -34,6 +34,21 @@
                 </tbody>
             </template>
         </v-simple-table>
+
+        <VDivider class="my-3"/>
+        <h2 class="text-right px-4 mb-4">Totaal: {{summaryOrder | currency}}</h2>
+
+        <v-row justify="center" class="ma-0" v-show="hasProducts">
+            <!-- Remove order -->
+            <v-btn color="error" text @click="deniedOrder" width="150">
+                Verwijderen
+            </v-btn>
+
+            <!-- Pay order -->
+            <v-btn color="success" @click="$emit('payOrder', summaryOrder)" width="150">
+                Betalen
+            </v-btn>
+        </v-row>
     </div>
 </template>
 
@@ -41,6 +56,25 @@
 export default {
     name: 'OrderForm',
     props: ['value'],
+    computed: {
+        summaryOrder() {
+            if (!this.hasProducts) return 0;
+
+            let summary = 0;
+            for (const product in this.value) {
+                summary += (this.value[product].total * this.value[product].price);
+            }
+            return summary;
+        },
+        hasProducts() {
+            return this.value && Object.keys(this.value) >= 1;
+        },
+    },
+    methods: {
+        deniedOrder() {
+            this.$emit('input', {});
+        },
+    },
 };
 </script>
 
