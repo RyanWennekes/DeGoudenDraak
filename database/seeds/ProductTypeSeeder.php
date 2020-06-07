@@ -15,7 +15,7 @@ class ProductTypeSeeder extends Seeder
         DB::table('product_types')->insert([
             'type_nl' => 'Soep',
             'type_en' => 'Soup',
-            'hasRice' => 0,
+            'has_rice' => 0,
         ]);
 
         DB::table('product_types')->insert([
