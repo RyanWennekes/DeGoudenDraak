@@ -7,11 +7,11 @@
                         <v-tab :to="{name: 'admin.create.order'}">
                             Bestelling aanmaken
                         </v-tab>
+                        <v-tab :to="{name: 'admin.products'}">
+                            Producten
+                        </v-tab>
                         <v-tab :to="{name: 'admin.test'}">
                             Another Selection
-                        </v-tab>
-                        <v-tab>
-                            Items
                         </v-tab>
                     </v-tabs>
                 </v-card-title>
