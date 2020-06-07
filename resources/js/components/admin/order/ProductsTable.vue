@@ -4,7 +4,7 @@
         <v-divider class="my-3"/>
 
         <div class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
-            <v-list two-line subheader v-for="category in categories" :key="category.id">
+            <v-list two-line subheader v-for="category in categories" :key="category.id" v-show="!loading">
                 <v-subheader class="justify-center">{{category.type_nl}} <span class="font-weight-bold ml-1" v-if="category.has_rice">(met rijst)</span></v-subheader>
 
                 <template v-for="(product, index) in products" v-if="product.product_type_id === category.id">
@@ -33,6 +33,10 @@
                     <v-divider :key="`divider-${index}`"></v-divider>
                 </template>
             </v-list>
+            <v-skeleton-loader
+                v-if="loading"
+                type="table-thead,table-tbody@3"
+            ></v-skeleton-loader>
         </div>
     </div>
 </template>
@@ -47,6 +51,7 @@ export default {
         return {
             products: null,
             categories: null,
+            loading: false,
         };
     },
     created() {
@@ -61,7 +66,9 @@ export default {
             this.categories = await fetchAllCategories();
         },
         async getProducts() {
+            this.loading = true;
             this.products = await fetchAllProducts();
+            this.loading = false;
         },
     },
 };
