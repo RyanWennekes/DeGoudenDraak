@@ -13,7 +13,7 @@ class Table extends Model
         'menu_id', 'table_number', 'waitress_id',
     ];
 
-    public static function allTables(): Collection
+    public static function allTables()
     {
         return Table::all();
     }
