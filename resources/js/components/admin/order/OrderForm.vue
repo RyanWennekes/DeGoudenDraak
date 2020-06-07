@@ -29,8 +29,8 @@
                 </thead>
                 <tbody>
                     <tr v-for="item in value" :key="item.id">
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.name }}</td>
+                        <td>{{ item.id }}.</td>
+                        <td v-html="item.name"></td>
                         <td class="text-center">{{ item.total }}x</td>
                         <td class="pa-0">
                             <v-btn icon color="blue" @click="$emit('addProduct', item)">

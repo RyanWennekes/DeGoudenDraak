@@ -14,8 +14,8 @@
                         </v-list-item-content>
 
                         <v-list-item-content>
-                            <v-list-item-title>{{product.name}}</v-list-item-title>
-                            <v-list-item-action-text class="pr-2">{{product.description}}</v-list-item-action-text>
+                            <v-list-item-title v-html="product.name"></v-list-item-title>
+                            <v-list-item-action-text class="pr-2" v-html="product.description_nl"></v-list-item-action-text>
                         </v-list-item-content>
 
                         <v-list-item-content class="price-label">

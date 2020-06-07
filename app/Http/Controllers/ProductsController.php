@@ -10,11 +10,11 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \App\Product[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Support\Collection
      */
     public function index()
     {
-        return Product::all();
+        return Product::productWithSales();
     }
 
     /**

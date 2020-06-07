@@ -52,14 +52,7 @@ export default {
         },
         payOrder(tableNumber) {
             createOrder({products: this.order, table_id: tableNumber})
-                .catch(() => {
-                    this.message = {
-                        show: true,
-                        text: 'Er is een fout ontstaan.. ',
-                        color: 'error',
-                    };
-                })
-                .finally(() => {
+                .then(() => {
                     this.message = {
                         show: true,
                         text: 'De bestelling is geplaatst! ',
@@ -67,6 +60,13 @@ export default {
                     };
 
                     Vue.set(this, 'order', {});
+                })
+                .catch(() => {
+                    this.message = {
+                        show: true,
+                        text: 'Er is iets misgegaan',
+                        color: 'error',
+                    };
                 });
         },
     },
