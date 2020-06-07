@@ -9,6 +9,13 @@
         <v-col cols="12" md="5">
             <OrderForm v-model="order" @addProduct="addProduct" @removeProduct="removeProduct" @payOrder="payOrder"/>
         </v-col>
+
+        <v-snackbar v-model="message.show" :color="message.color" :timeout="3000">
+            {{ message.text }}
+            <v-btn color="white" text @click="message.show = false">
+                Sluiten
+            </v-btn>
+        </v-snackbar>
     </v-row>
 </template>
 
@@ -23,6 +30,9 @@ export default {
     data() {
         return {
             order: {},
+            message: {
+                show: false,
+            },
         };
     },
     methods: {
@@ -40,9 +50,24 @@ export default {
                 Vue.set(this.order[product.id], 'total', this.order[product.id].total - 1);
             }
         },
-        async payOrder(tableNumber) {
-            await createOrder({products: this.order, table_id: tableNumber});
-            // TODO: handle errors
+        payOrder(tableNumber) {
+            createOrder({products: this.order, table_id: tableNumber})
+                .catch(() => {
+                    this.message = {
+                        show: true,
+                        text: 'Er is een fout ontstaan.. ',
+                        color: 'error',
+                    };
+                })
+                .finally(() => {
+                    this.message = {
+                        show: true,
+                        text: 'De bestelling is geplaatst! ',
+                        color: 'success',
+                    };
+
+                    Vue.set(this, 'order', {});
+                });
         },
     },
 };
