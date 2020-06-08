@@ -44,6 +44,8 @@
         <v-skeleton-loader v-show="loading"
                            type="table-heading,table-thead,table-tbody@2,table-tfoot"></v-skeleton-loader>
 
+        <ProductForm @error="snackbarMessage" @successfulCreated="afterProductCreated"/>
+
         <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
             {{ snackText }}
             <v-btn text @click="snack = false">Sluiten</v-btn>
@@ -54,10 +56,11 @@
 <script>
 import {fetchAllProducts, updateProduct} from '../../api/products.js';
 import ChipSpiciness from '../../components/admin/ChipSpiciness.vue';
+import ProductForm from '../../components/admin/forms/ProductForm.vue';
 
 export default {
     name: 'ProductResource',
-    components: {ChipSpiciness},
+    components: {ProductForm, ChipSpiciness},
     data() {
         return {
             snack: false,
@@ -96,25 +99,27 @@ export default {
         },
         save(product) {
             this.updateProduct(product);
-
-            this.snack = true;
-            this.snackColor = 'success';
-            this.snackText = 'Veld is succesvol aangepast';
+            this.snackbarMessage('Veld is succesvol aangepast', 'success');
         },
         cancel() {
-            this.snack = true;
-            this.snackColor = 'error';
-            this.snackText = 'Stopgezet';
+            this.snackbarMessage('Gestopt', 'error');
         },
         open() {
-            this.snack = true;
-            this.snackColor = 'info';
-            this.snackText = 'Veld is geopend';
+            this.snackbarMessage('Veld is geopend', 'info');
         },
         close() {
         },
         async updateProduct(product) {
             await updateProduct(product);
+        },
+        snackbarMessage(text, color) {
+            this.snack = true;
+            this.snackColor = text.color ? text.color : color;
+            this.snackText = text.text ? text.text : text;
+        },
+        afterProductCreated(text, color) {
+            this.snackbarMessage(text, color);
+            this.getProducts();
         },
     },
 };

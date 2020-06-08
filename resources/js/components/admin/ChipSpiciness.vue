@@ -1,8 +1,10 @@
 <template>
-    <v-chip :color="color" class="white--text" v-show="spiciness != null">{{text}}</v-chip>
+    <v-chip :color="color" class="white--text" v-show="hasSpiciness">{{text}}</v-chip>
 </template>
 
 <script>
+import {ProductSpicinessText, ProductSpicinessColor, ProductSpiciness} from '../../enums/Product.js';
+
 export default {
     name: 'ChipSpiciness',
     props: {
@@ -13,28 +15,13 @@ export default {
     },
     computed: {
         color() {
-            switch (this.spiciness) {
-                case 1:
-                    return 'yellow darken-2';
-                case 2:
-                    return 'orange';
-                case 3:
-                    return 'red';
-                default:
-                    return 'grey';
-            }
+            return ProductSpicinessColor[this.spiciness];
         },
         text() {
-            switch (this.spiciness) {
-                case 1:
-                    return 'Warm';
-                case 2:
-                    return 'Heet';
-                case 3:
-                    return 'Extra heet';
-                default:
-                    return 'geen';
-            }
+            return ProductSpicinessText[this.spiciness];
+        },
+        hasSpiciness() {
+            return this.spiciness != null && this.spiciness !== ProductSpiciness.NONE;
         },
     },
 };

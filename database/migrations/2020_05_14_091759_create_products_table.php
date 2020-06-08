@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->mediumText('description_nl')->nullable();
             $table->mediumText('description_en', 200)->nullable();
             $table->integer('minimum_amount')->nullable();
+            $table->timestamps();
 
             $table->foreign('product_type_id')->references('id')->on('product_types');
         });
