@@ -8,22 +8,7 @@
             v-show="!loading">
             <template #item="props">
                 <tr>
-                    <td>
-                        <v-edit-dialog
-                            :return-value.sync="props.item.name"
-                            @save="save(props.item)"
-                            @cancel="cancel"
-                        > {{ props.item.name }}
-                            <template #input>
-                                <v-text-field
-                                    v-model="props.item.name"
-                                    label="Edit"
-                                    single-line
-                                    counter
-                                ></v-text-field>
-                            </template>
-                        </v-edit-dialog>
-                    </td>
+                    <td>{{ props.item.name }}</td>
                     <td class="text-center">{{props.item.discount}}%</td>
                     <td>?verlopen</td>
                     <td class="text-center">{{props.item.date_start}}</td>
@@ -45,7 +30,7 @@
 </template>
 
 <script>
-import {fetchAllOffers, updateOffer} from '../../api/offers.js';
+import {fetchAllOffers} from '../../api/offers.js';
 import OfferForm from '../../components/admin/forms/OfferForm.vue';
 import dayjs from '../../plugin/dayJs.js';
 
@@ -94,16 +79,6 @@ export default {
                 };
             });
             this.loading = false;
-        },
-        save(offer) {
-            this.updateOffer(offer);
-            this.snackbarMessage('Veld is succesvol aangepast', 'success');
-        },
-        cancel() {
-            this.snackbarMessage('Veld afgesloten zonder te opslaan', 'warning');
-        },
-        async updateOffer(offer) {
-            await updateOffer(offer);
         },
         snackbarMessage(text, color) {
             this.snack = true;

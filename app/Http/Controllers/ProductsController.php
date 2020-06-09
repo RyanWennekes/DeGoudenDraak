@@ -19,6 +19,14 @@ class ProductsController extends Controller
     }
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function minimized()
+    {
+        return Product::products();
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -37,6 +45,7 @@ class ProductsController extends Controller
     public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
+
         return $product->save() ? response('', 200) : response('Something went wrong', 500);
     }
 

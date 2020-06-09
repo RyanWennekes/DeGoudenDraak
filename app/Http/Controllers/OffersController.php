@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOfferRequest;
+use App\Http\Requests\UpdateOfferRequest;
 use App\Offer;
 use Illuminate\Http\Request;
 
@@ -10,11 +12,11 @@ class OffersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Support\Collection
      */
     public function index()
     {
-        //
+        return Offer::offers();
     }
 
     /**
@@ -30,18 +32,21 @@ class OffersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOfferRequest $request)
     {
-        //
+        $offer = Offer::create($request->all());
+        $offer->timestamps = false;
+
+        return $offer->save() ? response('', 200) : response('Something went wrong', 500);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Offer  $offer
+     * @param  \App\Offer $offer
      * @return \Illuminate\Http\Response
      */
     public function show(Offer $offer)
@@ -52,7 +57,7 @@ class OffersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Offer  $offer
+     * @param  \App\Offer $offer
      * @return \Illuminate\Http\Response
      */
     public function edit(Offer $offer)
@@ -63,19 +68,23 @@ class OffersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Offer  $offer
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Offer               $offer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Offer $offer)
+    public function update(UpdateOfferRequest $request, Offer $offer)
     {
-        //
+        $offer->timestamps = false;
+
+        return $offer->update([
+            'discount' => $request->get('discount'),
+        ]) ? response('', 200) : response("Couldn't update offer", 500);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Offer  $offer
+     * @param  \App\Offer $offer
      * @return \Illuminate\Http\Response
      */
     public function destroy(Offer $offer)
