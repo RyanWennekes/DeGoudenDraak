@@ -75,11 +75,11 @@ export default {
 
 <style lang="scss">
 .overflow {
-    max-height: 730px;
+    max-height: 650px;
     overflow-y: scroll;
 
     &.small {
-        max-height: 360px;
+        max-height: 350px;
     }
 }
 </style>

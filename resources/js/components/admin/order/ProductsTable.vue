@@ -3,9 +3,22 @@
         <h2 class="text-center">Producten</h2>
         <v-divider class="my-3"/>
 
+        <v-text-field
+            v-model="search"
+            label="Zoeken"
+            class="searchbar mb-2"
+            hide-details
+            filled>
+            <template #prepend-inner>
+                <v-icon color="primary" class="mr-2">fa-search</v-icon>
+            </template>
+        </v-text-field>
+
         <div class="overflow" :class="{'small' : $vuetify.breakpoint.smAndDown}">
             <v-list two-line subheader v-for="category in categories" :key="category.id" v-show="!loading">
-                <v-subheader class="justify-center">{{category.type_nl}} <span class="font-weight-bold ml-1" v-if="category.has_rice">(met rijst)</span></v-subheader>
+                <v-subheader class="justify-center">{{category.type_nl}} <span class="font-weight-bold ml-1"
+                                                                               v-if="category.has_rice">(met rijst)</span>
+                </v-subheader>
 
                 <template v-for="(product, index) in products" v-if="product.product_type_id === category.id">
                     <v-list-item :key="`product-${index}`" class="product">
@@ -14,8 +27,11 @@
                         </v-list-item-content>
 
                         <v-list-item-content>
-                            <v-list-item-title><span v-html="product.name"></span> <span class="red--text font-weight-bold ml-1" v-if="product.price !== product.discountPrice">Korting</span></v-list-item-title>
-                            <v-list-item-action-text class="pr-2" v-html="product.description_nl"></v-list-item-action-text>
+                            <v-list-item-title><span v-html="product.name"></span>
+                                <span class="red--text font-weight-bold ml-1"
+                                      v-if="product.price !== product.discountPrice">Korting</span></v-list-item-title>
+                            <v-list-item-action-text class="pr-2"
+                                                     v-html="product.description_nl"></v-list-item-action-text>
                         </v-list-item-content>
 
                         <v-list-item-content class="price-label">
@@ -52,6 +68,7 @@ export default {
             products: null,
             categories: null,
             loading: false,
+            search: '',
         };
     },
     created() {
@@ -85,5 +102,9 @@ export default {
         max-width: 50px;
         text-align: center;
     }
+}
+
+.searchbar {
+    max-width: 250px;
 }
 </style>

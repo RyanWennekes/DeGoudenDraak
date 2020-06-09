@@ -11,9 +11,13 @@
             item-value="id"
             item-key="table_number"
             menu-props="auto"
-            hide-details>
+            hide-details
+            filled>
             <template #selection="{item}">{{item.table_number}}</template>
             <template #item="{item}">{{item.table_number}}</template>
+            <template #prepend-inner>
+                <v-icon color="primary" class="mr-2">fa-mobile-alt</v-icon>
+            </template>
         </v-select>
 
         <v-simple-table :height="$vuetify.breakpoint.smAndDown ? '200px' : '550px'">
