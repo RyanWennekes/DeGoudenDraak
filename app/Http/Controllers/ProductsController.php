@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -30,12 +31,13 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\StoreProductRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        //
+        $product = Product::create($request->all());
+        return $product->save() ? response('', 200) : response('Something went wrong', 500);
     }
 
     /**
@@ -69,7 +71,11 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->timestamps = false;
+
+        return $product->update([
+            'name' => $request->get('name'),
+        ]) ? response('', 200) : response("Couldn't update product", 500);
     }
 
     /**

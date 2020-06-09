@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Product extends Model
 {
     protected $fillable = [
-        'product_type_id', 'name', 'price', 'spiciness', 'description_nl', 'description_en', 'minimum_amount',
+        'product_type_id', 'name', 'price', 'spiciness', 'description_nl', 'description_en', 'minimum_amount', 'code',
     ];
 
     public static function productWithSales(): \Illuminate\Support\Collection

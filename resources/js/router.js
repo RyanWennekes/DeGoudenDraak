@@ -12,8 +12,11 @@ import Page404 from './pages/Page404.vue';
 import Home from './pages/Home.vue';
 import Login from './pages/Login.vue';
 import Test from './pages/Test.vue';
-import OrderResource from './pages/admin/OrderResource.vue';
 import AdminLayout from './layouts/admin.vue';
+
+/* Admin Pages */
+import OrderResource from './pages/admin/OrderResource.vue';
+import ProductResource from './pages/admin/ProductResource.vue';
 
 import store from './store';
 
@@ -46,6 +49,11 @@ const router = new VueRouter({
                     path: 'test',
                     name: 'admin.test',
                     component: Test,
+                },
+                {
+                    path: 'producten',
+                    name: 'admin.products',
+                    component: ProductResource,
                 },
                 {
                     path: 'bestelling-aanmaken',
