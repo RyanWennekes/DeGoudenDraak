@@ -1,5 +1,5 @@
 <template>
-    <v-overlay :value="overlay">
+    <v-overlay :value="true">
         <v-progress-circular
             :size="150"
             color="white"
@@ -21,7 +21,6 @@ export default {
             loading: false,
             timeoutEnded: false,
             timeout: null,
-            overlay: true,
         };
     },
     created() {

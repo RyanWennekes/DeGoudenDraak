@@ -26,10 +26,13 @@ export default {
             return state.isAdmin;
         },
         isCashier: state => {
-            return state.isAdmin;
+            return state.isCashier;
         },
         isWaitress: state => {
-            return state.isAdmin;
+            return state.isWaitress;
+        },
+        hasRole: state => {
+            return state.isAdmin || state.isCashier || state.isWaitress;
         },
     },
     actions: {
