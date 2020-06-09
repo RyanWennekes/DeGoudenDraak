@@ -1,6 +1,8 @@
 <template>
     <div>
         <h2 class="text-center">Bestelling</h2>
+        <v-divider class="my-3"/>
+
         <v-select
             v-model="selectedTableId"
             label="Tafelnummer"
@@ -13,7 +15,6 @@
             <template #selection="{item}">{{item.table_number}}</template>
             <template #item="{item}">{{item.table_number}}</template>
         </v-select>
-        <v-divider class="my-3"/>
 
         <v-simple-table :height="$vuetify.breakpoint.smAndDown ? '200px' : '550px'">
             <template #default>
