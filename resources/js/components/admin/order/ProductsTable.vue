@@ -6,7 +6,7 @@
         <v-text-field
             v-model="search"
             label="Zoeken"
-            class="searchbar mb-2"
+            class="searchbar"
             hide-details
             filled>
             <template #prepend-inner>
@@ -20,7 +20,7 @@
                                                                                v-if="category.has_rice">(met rijst)</span>
                 </v-subheader>
 
-                <template v-for="(product, index) in products" v-if="product.product_type_id === category.id">
+                <template v-for="(product, index) in filteredProducts" v-if="product.product_type_id === category.id">
                     <v-list-item :key="`product-${index}`" class="product">
                         <v-list-item-content class="id-label">
                             {{product.id}}.
@@ -74,6 +74,11 @@ export default {
     created() {
         this.getCategories();
         this.getProducts();
+    },
+    computed: {
+        filteredProducts() {
+            return this.products.filter((product) => product.name.includes(this.search) || product.name.includes(this.search) || this.search.length === 0);
+        },
     },
     methods: {
         addProduct(product) {
