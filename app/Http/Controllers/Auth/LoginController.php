@@ -23,7 +23,8 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return redirect('login');
+
+        return view('default');
     }
 
     /**

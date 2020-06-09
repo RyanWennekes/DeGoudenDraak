@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Ramsey\Collection\Collection;
+use Illuminate\Support\Collection;
 
 class Table extends Model
 {
@@ -26,5 +26,10 @@ class Table extends Model
     public function waitress(): BelongsTo
     {
         return $this->belongsTo(User::class, 'waitress_id');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

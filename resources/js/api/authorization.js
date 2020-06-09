@@ -1,8 +1,12 @@
 import axios from 'axios';
 
+var axiosInstance = axios.create({
+    baseURL: window.location.origin,
+});
+
 // These're WEB-requests
 function login(email, password) {
-    return axios.post('login', {
+    return axiosInstance.post('login', {
         'email': email,
         'password': password,
         'remember': true,
@@ -10,17 +14,22 @@ function login(email, password) {
 }
 
 function logout() {
-    return axios.post('logout');
+    return axiosInstance.post('logout');
+}
+
+function fetchApiToken() {
+    return axiosInstance.get('oath/token');
 }
 
 function passwordForgotten(email) {
-    return axios.post('password/forgotten', {
+    return axiosInstance.post('password/forgotten', {
         email: email,
     });
 }
 
 export {
     passwordForgotten,
+    fetchApiToken,
     login,
     logout,
 };

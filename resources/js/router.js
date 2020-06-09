@@ -12,6 +12,7 @@ import Page404 from './pages/Page404.vue';
 import Home from './pages/Home.vue';
 import Login from './pages/Login.vue';
 import Test from './pages/Test.vue';
+import OrderResource from './pages/admin/OrderResource.vue';
 import AdminLayout from './layouts/admin.vue';
 
 import store from './store';
@@ -45,6 +46,15 @@ const router = new VueRouter({
                     path: 'test',
                     name: 'admin.test',
                     component: Test,
+                },
+                {
+                    path: 'bestelling-aanmaken',
+                    name: 'admin.create.order',
+                    component: OrderResource,
+                },
+                {
+                    path: '',
+                    redirect: {name: 'admin.create.order'},
                 },
             ],
         },

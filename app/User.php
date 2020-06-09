@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'role_id',
+        'password', 'remember_token', 'role',
     ];
 
     /**
@@ -47,6 +47,6 @@ class User extends Authenticatable
 
     public function waitresses()
     {
-        return User::query()->where('role_id', UserRoles::Employer);
+        return User::query()->where('role_id', UserRoles::Waitress);
     }
 }

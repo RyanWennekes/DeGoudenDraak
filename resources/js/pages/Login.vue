@@ -35,46 +35,48 @@
 </template>
 
 <script>
-    import {login} from '../api/authorization.js';
-    import {createNamespacedHelpers} from 'vuex';
-    import MapRequestErrors from '../mixins/mapRequestErrors.js';
+import {login, fetchApiToken} from '../api/authorization.js';
+import {createNamespacedHelpers} from 'vuex';
+import MapRequestErrors from '../mixins/mapRequestErrors.js';
 
-    const {mapActions, mapGetters} = createNamespacedHelpers('Authorization/');
+const {mapActions, mapGetters} = createNamespacedHelpers('Authorization/');
 
-    export default {
-        name: 'Login',
-        mixins: [MapRequestErrors],
-        data() {
-            return {
-                valid: false,
-                email: '',
-                password: '',
-            };
+export default {
+    name: 'Login',
+    mixins: [MapRequestErrors],
+    data() {
+        return {
+            valid: false,
+            email: '',
+            password: '',
+        };
+    },
+    computed: {
+        ...mapGetters(['isLoggedIn']),
+    },
+    methods: {
+        beforeLogin() {
+            this.$refs.form.validate();
+
+            if (this.valid) {
+                this.onLogin();
+            }
         },
-        computed: {
-            ...mapGetters(['isLoggedIn']),
-        },
-        methods: {
-            beforeLogin() {
-                this.$refs.form.validate();
+        onLogin() {
+            this.loading = true;
 
-                if (this.valid) {
-                    this.onLogin();
-                }
-            },
-            onLogin() {
-                this.loading = true;
-
-                login(this.email, this.password).then(() => {
-                    this.setAccessToken('token');
-                    this.$router.push({name: 'admin.test'});
-                }).catch(e => this.failedRequestResult = e).finally(() => {
-                    this.loading = false;
-                });
-            },
-            ...mapActions(['setAccessToken']),
+            login(this.email, this.password).then(async () => {
+                // Set access token
+                const tokenRequest = await fetchApiToken();
+                this.setAccessToken(tokenRequest.data);
+                await this.$router.push({name: 'admin.test'});
+            }).catch(e => this.failedRequestResult = e).finally(() => {
+                this.loading = false;
+            });
         },
-    };
+        ...mapActions(['setAccessToken']),
+    },
+};
 </script>
 
 <style scoped>

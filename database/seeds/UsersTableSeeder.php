@@ -3,6 +3,7 @@
 use App\Enums\UserRoles;
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -44,9 +45,10 @@ class UsersTableSeeder extends Seeder
         if (User::where('email', '=', $email)->first() === null) {
             // Using the factory for creating a user with name
             factory(App\User::class, 1)->create([
-                'role'     => $role,
-                'email'    => $email,
-                'password' => bcrypt('password'),
+                'role'      => $role,
+                'email'     => $email,
+                'password'  => bcrypt('password'),
+                'api_token' => Str::random(60),
             ]);
         }
     }

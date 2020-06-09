@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('table_id');
-            $table->boolean('needs_help')->nullable();
+            $table->boolean('needs_help')->nullable()->default(false);
             $table->timestamps();
 
             $table->foreign('table_id')->references('id')->on('tables');

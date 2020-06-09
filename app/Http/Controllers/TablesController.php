@@ -10,11 +10,11 @@ class TablesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Support\Collection
      */
     public function index()
     {
-        //
+        return Table::allTables();
     }
 
     /**
@@ -30,7 +30,7 @@ class TablesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class TablesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Table  $table
+     * @param  \App\Table $table
      * @return \Illuminate\Http\Response
      */
     public function show(Table $table)
@@ -52,7 +52,7 @@ class TablesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Table  $table
+     * @param  \App\Table $table
      * @return \Illuminate\Http\Response
      */
     public function edit(Table $table)
@@ -63,8 +63,8 @@ class TablesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Table  $table
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Table               $table
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Table $table)
@@ -75,7 +75,7 @@ class TablesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Table  $table
+     * @param  \App\Table $table
      * @return \Illuminate\Http\Response
      */
     public function destroy(Table $table)

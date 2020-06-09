@@ -10,11 +10,11 @@ class ProductTypesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\ProductType[]|\Illuminate\Database\Eloquent\Collection
      */
     public function index()
     {
-        //
+        return ProductType::all();
     }
 
     /**
@@ -30,7 +30,7 @@ class ProductTypesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class ProductTypesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductType  $productType
+     * @param  \App\ProductType $productType
      * @return \Illuminate\Http\Response
      */
     public function show(ProductType $productType)
@@ -52,7 +52,7 @@ class ProductTypesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductType  $productType
+     * @param  \App\ProductType $productType
      * @return \Illuminate\Http\Response
      */
     public function edit(ProductType $productType)
@@ -63,8 +63,8 @@ class ProductTypesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductType  $productType
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\ProductType         $productType
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ProductType $productType)
@@ -75,7 +75,7 @@ class ProductTypesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProductType  $productType
+     * @param  \App\ProductType $productType
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProductType $productType)

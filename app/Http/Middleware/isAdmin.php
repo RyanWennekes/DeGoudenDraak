@@ -2,13 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserRoles;
 use App\User;
 use Closure;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use Throwable;
 
-class Authorized
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -20,9 +19,12 @@ class Authorized
     public function handle($request, Closure $next)
     {
         try {
-            if ($request->headers->get('api_token') && User::where('api_token', decrypt($request->headers->get('api_token')))
-                    ->firstOrFail()->exists) {
-                return $next($request);
+            if ($request->headers->get('api_token')) {
+                $user = User::where('api_token', decrypt($request->headers->get('api_token')))->firstOrFail();
+
+                if ($user && $user->role == UserRoles::Admin) {
+                    return $next($request);
+                }
             }
         } catch (Throwable $e) {
         }
