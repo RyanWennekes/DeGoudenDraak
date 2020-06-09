@@ -7,6 +7,7 @@ export default {
         isAdmin: false,
         isCashier: false,
         isWaitress: false,
+        hasRole: false,
     },
     mutations: {
         accessToken: (state, token) => {
@@ -17,6 +18,9 @@ export default {
             state.isCashier = !!roles.isCashier;
             state.isWaitress = !!roles.isWaitress;
         },
+        hasRole: (state) => {
+            state.hasRole = true;
+        }
     },
     getters: {
         isLoggedIn: state => {
@@ -32,7 +36,7 @@ export default {
             return state.isWaitress;
         },
         hasRole: state => {
-            return state.isAdmin || state.isCashier || state.isWaitress;
+            return state.isAdmin || state.isCashier || state.isWaitress || state.hasRole;
         },
     },
     actions: {
@@ -42,6 +46,7 @@ export default {
         },
         setUserRoles: (state, roles) => {
             state.commit('userRoles', roles);
+            state.commit('hasRole');
         },
         logout: async state => {
             await logout();
