@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function (Router $router) {
     $router->get('/oath/token', 'ApiTokenController@show')->name('oath.token');
+    $router->get('/oath/roles', 'UserController@roles')->name('oath.roles');
 });
 
 // We only have to load one blade
