@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import OrderForm from '../../components/admin/order/OrderForm.vue';
+import OrderForm from '../../components/admin/forms/OrderForm.vue';
 import ProductsTable from '../../components/admin/order/ProductsTable.vue';
 import {createOrder} from '../../api/orders.js';
 
