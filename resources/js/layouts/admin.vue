@@ -3,8 +3,8 @@
         <v-col cols="12" md="10" class="full-height">
             <v-card height="100%">
                 <v-card-title>
-                    <!-- TODO: Showing navigation based on role -->
-                    <v-tabs grow show-arrows>
+                    <!-- TODO: Showing navigation based on role (when application is almost finished) -->
+                    <v-tabs grow show-arrows v-show="hasRole">
                         <v-tab :to="{name: 'admin.create.order'}">
                             Bestelling aanmaken
                         </v-tab>
