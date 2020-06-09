@@ -13,6 +13,9 @@
                         <v-tab :to="{name: 'admin.test'}">
                             Another Selection
                         </v-tab>
+                        <v-tab :to="{name: 'admin.offers'}">
+                            Aanbiedingen
+                        </v-tab>
                     </v-tabs>
                 </v-card-title>
 

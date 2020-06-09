@@ -16,6 +16,7 @@ import AdminLayout from './layouts/admin.vue';
 
 /* Admin Pages */
 import OrderResource from './pages/admin/OrderResource.vue';
+import OfferResource from './pages/admin/OfferResource.vue';
 import ProductResource from './pages/admin/ProductResource.vue';
 
 import store from './store';
@@ -59,6 +60,11 @@ const router = new VueRouter({
                     path: 'bestelling-aanmaken',
                     name: 'admin.create.order',
                     component: OrderResource,
+                },
+                {
+                    path: 'acties',
+                    name: 'admin.offers',
+                    component: OfferResource,
                 },
                 {
                     path: '',

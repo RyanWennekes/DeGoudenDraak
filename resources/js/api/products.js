@@ -4,6 +4,10 @@ function fetchAllProducts() {
     return get('products');
 }
 
+function fetchAllProductsMinimized() {
+    return get('products/minimized');
+}
+
 function fetchProduct(productId) {
     return get(`products/${productId}`);
 }
@@ -18,6 +22,7 @@ function createProduct(product) {
 
 export {
     fetchAllProducts,
+    fetchAllProductsMinimized,
     fetchProduct,
     updateProduct,
     createProduct,

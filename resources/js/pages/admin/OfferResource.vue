@@ -2,20 +2,18 @@
     <div>
         <v-data-table
             :headers="headers"
-            :items="products"
+            :items="offers"
             :itemsPerPage="itemsPerPage"
             :footer-props="pagination"
             v-show="!loading">
             <template #item="props">
                 <tr>
-                    <td>{{props.item.id}}.</td>
                     <td>
                         <v-edit-dialog
                             :return-value.sync="props.item.name"
                             @save="save(props.item)"
                             @cancel="cancel"
-                        > {{ props.item.name }} <span class="red--text font-weight-bold ml-1"
-                                                      v-if="props.item.price !== props.item.discountPrice">Korting</span>
+                        > {{ props.item.name }}
                             <template #input>
                                 <v-text-field
                                     v-model="props.item.name"
@@ -26,23 +24,18 @@
                             </template>
                         </v-edit-dialog>
                     </td>
-                    <td class="text-center">{{props.item.code}}</td>
-                    <td class="text-center" v-if="props.item.price !== props.item.discountPrice">
-                        <span class="old-price">{{props.item.price | currency}}</span>
-                        <span class="red--text font-weight-bold ml-1">{{props.item.discountPrice | currency}}</span>
-                    </td>
-                    <td v-else class="text-center">{{props.item.price | currency}}</td>
-                    <td class="text-center">
-                        <ChipSpiciness :spiciness="props.item.spiciness"/>
-                    </td>
-                    <td class="text-center">{{props.item.minimum_amount || 'geen'}}</td>
+                    <td class="text-center">{{props.item.discount}}%</td>
+                    <td>?verlopen</td>
+                    <td class="text-center">{{props.item.date_start}}</td>
+                    <td class="text-center">{{props.item.date_end}}</td>
+                    <td>delete</td>
                 </tr>
             </template>
         </v-data-table>
         <v-skeleton-loader v-show="loading"
                            type="table-heading,table-thead,table-tbody@2,table-tfoot"></v-skeleton-loader>
 
-        <ProductForm @error="snackbarMessage" @successfulCreated="afterProductCreated"/>
+        <OfferForm @error="snackbarMessage" @successfulCreated="afterOfferCreated"/>
 
         <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
             {{ snackText }}
@@ -52,27 +45,26 @@
 </template>
 
 <script>
-import {fetchAllProducts, updateProduct} from '../../api/products.js';
-import ChipSpiciness from '../../components/admin/ChipSpiciness.vue';
-import ProductForm from '../../components/admin/forms/ProductForm.vue';
+import {fetchAllOffers, updateOffer} from '../../api/offers.js';
+import OfferForm from '../../components/admin/forms/OfferForm.vue';
+import dayjs from '../../plugin/dayJs.js';
 
 export default {
-    name: 'ProductResource',
-    components: {ProductForm, ChipSpiciness},
+    name: 'OfferResource',
+    components: {OfferForm},
     data() {
         return {
             snack: false,
             snackColor: '',
             snackText: '',
             headers: [
-                {text: 'Nummer', align: 'start', sortable: true, value: 'id'},
-                {text: 'Naam', align: 'start', sortable: true, value: 'name'},
-                {text: 'Code', value: 'code', align: 'center'},
-                {text: 'Prijs', value: 'priceDiscount', align: 'center'},
-                {text: 'Pittigheid', value: 'spiciness', sortable: true, align: 'center'},
-                {text: 'Mininum aantal', value: 'minimum_amount', align: 'center'},
+                {text: 'Gerecht', align: 'start', sortable: true, value: 'name'},
+                {text: 'Korting', value: 'discount', align: 'center'},
+                {text: 'Begint op', value: 'date_start', align: 'center'},
+                {text: 'Eindigt op', value: 'date_end', align: 'center'},
+                {text: '', value: '', align: ''},
             ],
-            products: [],
+            offers: [],
             loading: false,
         };
     },
@@ -87,39 +79,45 @@ export default {
         },
     },
     created() {
-        this.getProducts();
+        this.getOffers();
     },
     methods: {
-        async getProducts() {
+        async getOffers() {
             this.loading = true;
-            this.products = await fetchAllProducts();
+            this.offers = await fetchAllOffers();
+            this.offers = this.offers.map((offer) => {
+                return {
+                    'name': offer.name,
+                    'discount': offer.discount,
+                    'date_start': dayjs(offer.date_start).format('YYYY-MM-DD hh:mm'),
+                    'date_end': dayjs(offer.date_end).format('YYYY-MM-DD hh:mm'),
+                };
+            });
             this.loading = false;
         },
-        save(product) {
-            this.updateProduct(product);
+        save(offer) {
+            this.updateOffer(offer);
             this.snackbarMessage('Veld is succesvol aangepast', 'success');
         },
         cancel() {
             this.snackbarMessage('Veld afgesloten zonder te opslaan', 'warning');
         },
-        async updateProduct(product) {
-            await updateProduct(product);
+        async updateOffer(offer) {
+            await updateOffer(offer);
         },
         snackbarMessage(text, color) {
             this.snack = true;
             this.snackColor = text.color ? text.color : color;
             this.snackText = text.text ? text.text : text;
         },
-        afterProductCreated(text, color) {
+        afterOfferCreated(text, color) {
             this.snackbarMessage(text, color);
-            this.getProducts();
+            this.getOffers();
         },
     },
 };
 </script>
 
-<style lang="scss" scoped>
-.old-price {
-    text-decoration: line-through;
-}
+<style scoped>
+
 </style>
