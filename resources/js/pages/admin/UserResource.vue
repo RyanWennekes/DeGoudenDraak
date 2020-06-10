@@ -15,7 +15,7 @@
                     <td>{{props.item.name}}</td>
                     <td>{{props.item.email}}</td>
                     <td>
-                        <v-tooltip bottom :disabled="!deleteDisabled(props.item.role)">
+                        <v-tooltip left :disabled="!deleteDisabled(props.item.role)">
                             <template #activator="{ on }">
                                 <div v-on="on">
                                     <v-btn @click="handleDelete(props.item)"
@@ -47,7 +47,7 @@
 
 <script>
 import UserForm from '../../components/admin/forms/UserForm.vue';
-import {fetchAllUsers} from '../../api/users.js';
+import {fetchAllUsers, deleteUser} from '../../api/users.js';
 import ChipUserRole from '../../components/admin/ChipUserRole.vue';
 import {UserRoles} from '../../enums/User.js';
 
@@ -98,8 +98,15 @@ export default {
             this.snackbarMessage(text, color);
             this.getUsers();
         },
-        handleDelete() {
-            console.log('handling delete');
+        handleDelete(user) {
+            deleteUser(user)
+                .then(() => {
+                    this.snackbarMessage('Gebruiker is succesvol verwijderd', 'success');
+                    this.getUsers();
+                })
+                .catch(() => {
+                    this.snackbarMessage('Er is iets misgegaan', 'error');
+                });
         },
         deleteDisabled(role) {
             return role === UserRoles.ADMIN;

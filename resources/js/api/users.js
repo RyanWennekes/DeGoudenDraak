@@ -1,4 +1,4 @@
-import {get, put, post} from '../api/index.js';
+import {get, put, post, destroy} from '../api/index.js';
 
 function fetchAllUsers() {
     return get('users');
@@ -12,8 +12,13 @@ function createUser(user) {
     return post('users', user);
 }
 
+function deleteUser(user) {
+    return destroy(`users/${user.id}`, {user: user.id});
+}
+
 export {
     fetchAllUsers,
     updateUser,
     createUser,
+    deleteUser,
 };

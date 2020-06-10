@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRoles;
+use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
+use http\Client\Request;
+use PHPUnit\Exception;
 
 /**
  * Class UserController
@@ -55,12 +58,19 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User $user
-     * @return void
+     * @param  \App\Http\Requests\DeleteUserRequest $user
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(DeleteUserRequest $user)
     {
-        //
+        try {
+            $user = User::query()->where('id', $user->get('user'));
+            $result = $user->delete();
+        } catch (Exception $exception) {
+            $result = false;
+        }
+
+        return $result ? response('', 200) : response('', 500);;
     }
 
     /**

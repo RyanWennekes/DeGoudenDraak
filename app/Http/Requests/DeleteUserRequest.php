@@ -24,7 +24,7 @@ class DeleteUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user' => 'required|exists:App\User,id|unique:tables,waitress_id',
         ];
     }
 }
