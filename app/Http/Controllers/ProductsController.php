@@ -89,7 +89,9 @@ class ProductsController extends Controller
     public function destroy(Product $product)
     {
         try {
-            $product->delete();
+            if(!$product->trashed()) {
+                $product->delete();
+            }
 
             return response('', 200);
         } catch (Exception $exception) {
