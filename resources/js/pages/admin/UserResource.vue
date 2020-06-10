@@ -36,6 +36,7 @@
         <v-skeleton-loader v-show="loading"
                            type="table-heading,table-thead,table-tbody@2,table-tfoot"></v-skeleton-loader>
 
+        <!-- TODO: Update Name, email and role with the same form -->
         <UserForm @error="snackbarMessage" @successfulCreated="afterUserCreated"/>
 
         <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
