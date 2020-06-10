@@ -6,6 +6,7 @@ use App\Http\Requests\StoreOfferRequest;
 use App\Http\Requests\UpdateOfferRequest;
 use App\Offer;
 use Illuminate\Http\Request;
+use PHPUnit\Exception;
 
 class OffersController extends Controller
 {
@@ -39,6 +40,7 @@ class OffersController extends Controller
     {
         $offer = Offer::create($request->all(), ['timestamp' => false]);
         $offer->timestamps = false;
+
         return dd($offer);
 
         return $offer->save() ? response('', 200) : response('Something went wrong', 500);
@@ -90,6 +92,12 @@ class OffersController extends Controller
      */
     public function destroy(Offer $offer)
     {
-        //
+        try {
+            $offer->delete();
+
+            return response('', 200);
+        } catch (Exception $exception) {
+            return response('', 500);
+        }
     }
 }

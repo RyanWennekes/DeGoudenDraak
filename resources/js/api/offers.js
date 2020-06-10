@@ -1,4 +1,4 @@
-import {get, put, post} from '../api/index.js';
+import {get, put, post, destroy} from '../api/index.js';
 
 function fetchAllOffers() {
     return get('offers');
@@ -6,6 +6,10 @@ function fetchAllOffers() {
 
 function updateOffer(offer) {
     return put(`offers/${offer.id}`, offer);
+}
+
+function deleteOffer(offer) {
+    return destroy(`offers/${offer.id}`);
 }
 
 function createOffer(offer) {
@@ -21,4 +25,5 @@ export {
     fetchAllOffers,
     updateOffer,
     createOffer,
+    deleteOffer,
 };

@@ -17,7 +17,11 @@
                     </td>
                     <td class="text-center">{{props.item.date_start}}</td>
                     <td class="text-center">{{props.item.date_end}}</td>
-                    <td>delete</td>
+                    <td>
+                        <v-btn small @click="handleDelete(props.item)" fab color="error">
+                            <v-icon small>fa-trash</v-icon>
+                        </v-btn>
+                    </td>
                 </tr>
             </template>
         </v-data-table>
@@ -34,7 +38,7 @@
 </template>
 
 <script>
-import {fetchAllOffers} from '../../api/offers.js';
+import {fetchAllOffers, deleteOffer} from '../../api/offers.js';
 import OfferForm from '../../components/admin/forms/OfferForm.vue';
 import dayjs from '../../plugin/dayJs.js';
 import PeriodExpired from '../../components/admin/PeriodExpired.vue';
@@ -78,10 +82,11 @@ export default {
             this.offers = await fetchAllOffers();
             this.offers = this.offers.map((offer) => {
                 return {
+                    'id': offer.id,
                     'name': offer.product.name,
                     'discount': offer.discount,
-                    'date_start': dayjs(offer.date_start).format('YYYY-MM-DD hh:mm'),
-                    'date_end': dayjs(offer.date_end).format('YYYY-MM-DD hh:mm'),
+                    'date_start': dayjs(offer.date_start).format('YYYY-MM-DD'),
+                    'date_end': dayjs(offer.date_end).format('YYYY-MM-DD'),
                 };
             });
             this.loading = false;
@@ -94,6 +99,16 @@ export default {
         afterOfferCreated(text, color) {
             this.snackbarMessage(text, color);
             this.getOffers();
+        },
+        handleDelete(offer) {
+            deleteOffer(offer)
+                .then(() => {
+                    this.snackbarMessage('Aanbieding is succesvol verwijderd', 'success');
+                    this.getOffers();
+                })
+                .catch(() => {
+                    this.snackbarMessage('Er is iets misgegaan', 'error');
+                });
         },
     },
 };
