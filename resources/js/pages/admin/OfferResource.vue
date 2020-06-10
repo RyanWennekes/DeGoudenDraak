@@ -8,9 +8,13 @@
             v-show="!loading">
             <template #item="props">
                 <tr>
-                    <td><template>{{ props.item.name }}</template></td>
+                    <td>
+                        <template>{{ props.item.name }}</template>
+                    </td>
                     <td class="text-center">{{props.item.discount}}%</td>
-                    <td>?verlopen</td>
+                    <td class="text-center">
+                        <PeriodExpired :date_start="props.item.date_start" :date_end="props.item.date_end"/>
+                    </td>
                     <td class="text-center">{{props.item.date_start}}</td>
                     <td class="text-center">{{props.item.date_end}}</td>
                     <td>delete</td>
@@ -33,10 +37,11 @@
 import {fetchAllOffers} from '../../api/offers.js';
 import OfferForm from '../../components/admin/forms/OfferForm.vue';
 import dayjs from '../../plugin/dayJs.js';
+import PeriodExpired from '../../components/admin/PeriodExpired.vue';
 
 export default {
     name: 'OfferResource',
-    components: {OfferForm},
+    components: {PeriodExpired, OfferForm},
     data() {
         return {
             snack: false,
