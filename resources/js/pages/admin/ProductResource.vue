@@ -12,7 +12,7 @@
                     <td>
                         <v-edit-dialog
                             :return-value.sync="props.item.name"
-                            @save="save(props.item)"
+                            @save="saveName(props.item)"
                             @cancel="cancel"
                             @open="open"
                             @close="close"
@@ -28,7 +28,24 @@
                             </template>
                         </v-edit-dialog>
                     </td>
-                    <td class="text-center">{{props.item.code}}</td>
+                    <td>
+                        <v-edit-dialog
+                            :return-value.sync="props.item.code"
+                            @save="saveCode(props.item)"
+                            @cancel="cancel"
+                            @open="open"
+                            @close="close"
+                        > {{ props.item.code }}
+                            <template #input>
+                                <v-text-field
+                                    v-model="props.item.code"
+                                    label="Edit"
+                                    single-line
+                                    counter
+                                ></v-text-field>
+                            </template>
+                        </v-edit-dialog>
+                    </td>
                     <td class="text-center" v-if="props.item.price !== props.item.discountPrice">
                         <span class="old-price">{{props.item.price | currency}}</span>
                         <span class="red--text font-weight-bold ml-1">{{props.item.discountPrice | currency}}</span>
@@ -59,7 +76,7 @@
 </template>
 
 <script>
-import {fetchAllProducts, updateProduct, deleteProduct} from '../../api/products.js';
+import {fetchAllProducts, updateProductName, deleteProduct, updateProductCode} from '../../api/products.js';
 import ChipSpiciness from '../../components/admin/ChipSpiciness.vue';
 import ProductForm from '../../components/admin/forms/ProductForm.vue';
 
@@ -103,9 +120,15 @@ export default {
             this.products = await fetchAllProducts();
             this.loading = false;
         },
-        save(product) {
-            this.updateProduct(product);
-            this.snackbarMessage('Veld is succesvol aangepast', 'success');
+        async saveName(product) {
+            updateProductName(product)
+                .then(() => this.snackbarMessage('De naam is succesvol aangepast', 'success'))
+                .catch(() => this.snackbarMessage('De naam moet uniek blijven', 'error'));
+        },
+        async saveCode(product) {
+            updateProductCode(product)
+                .then(() => this.snackbarMessage('De code succesvol aangepast', 'success'))
+                .catch(() => this.snackbarMessage('De code moet uniek blijven', 'error'));
         },
         cancel() {
             this.snackbarMessage('Gestopt', 'error');

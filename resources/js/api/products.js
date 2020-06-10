@@ -8,8 +8,16 @@ function fetchProduct(productId) {
     return get(`products/${productId}`);
 }
 
-function updateProduct(product) {
-    return put(`products/${product.id}`, product);
+function updateProductName(product) {
+    return put(`products/${product.id}`, {
+        name: product.name,
+    });
+}
+
+function updateProductCode(product) {
+    return put(`products/${product.id}`, {
+        code: product.code,
+    });
 }
 
 function deleteProduct(product) {
@@ -23,7 +31,8 @@ function createProduct(product) {
 export {
     fetchAllProducts,
     fetchProduct,
-    updateProduct,
+    updateProductName,
+    updateProductCode,
     createProduct,
     deleteProduct,
 };

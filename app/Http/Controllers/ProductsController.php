@@ -74,9 +74,13 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        return $product->update([
-            'name' => $request->get('name'),
-        ]) ? response('', 200) : response("Couldn't update product", 500);
+        if ($request->has('code')) {
+            $response = $product->update(['code' => $request->get('code')]);
+        } else {
+            $response = $product->update(['name' => $request->get('name')]);
+        }
+
+        return $response ? response('', 200) : response("Couldn't update product", 500);
     }
 
     /**
@@ -89,7 +93,7 @@ class ProductsController extends Controller
     public function destroy(Product $product)
     {
         try {
-            if(!$product->trashed()) {
+            if (! $product->trashed()) {
                 $product->delete();
             }
 
