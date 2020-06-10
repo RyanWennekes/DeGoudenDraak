@@ -17,7 +17,8 @@
                     <v-select
                         v-model="user.role"
                         label="Toegangsrechten"
-                        :items="userRoles">
+                        :items="userRoles"
+                        :rules="[(v) => !!v || 'Toegangsrecht is verplicht']">
                         <template #item="{item}">
                             <div class="mr-1 role-icon">
                                 <v-icon color="primary">{{item.icon}}</v-icon>
@@ -114,8 +115,9 @@ export default {
 </script>
 
 <style scoped>
-.role-icon {
-    width: 42px;
+.role-icon
+{
+    width:      42px;
     text-align: center;
 }
 </style>

@@ -6,10 +6,10 @@ const UserRoles = {
 };
 
 const UserRolesText = {
-    [UserRoles.ADMIN]: 'Geen',
-    [UserRoles.CASHIER]: 'Warm',
-    [UserRoles.WAITRESS]: 'Heet',
-    [UserRoles.CUSTOMER]: 'Extra heet',
+    [UserRoles.ADMIN]: 'Admin',
+    [UserRoles.CASHIER]: 'Kassamedewerking',
+    [UserRoles.WAITRESS]: 'Bediening',
+    [UserRoles.CUSTOMER]: 'Klant',
 };
 
 const UserRolesIcon = {

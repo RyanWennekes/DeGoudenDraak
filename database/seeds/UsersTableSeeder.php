@@ -16,18 +16,22 @@ class UsersTableSeeder extends Seeder
     {
         // Create dummy-data
         $accounts = [
-            0 => [
+            [
                 'email' => 'admin@degoudendraak.nl',
                 'role'  => UserRoles::Admin,
             ],
-            1 => [
+            [
                 'email' => 'cashier@degoudendraak.nl',
                 'role'  => UserRoles::Cashier,
             ],
-            2 => [
+            [
                 'email' => 'waitress@degoudendraak.nl',
-                'role' => UserRoles::Waitress,
-            ]
+                'role'  => UserRoles::Waitress,
+            ],
+            [
+                'email' => 'customer@degoudendraak.nl',
+                'role'  => UserRoles::Customer,
+            ],
         ];
 
         // Loop through all the accounts
