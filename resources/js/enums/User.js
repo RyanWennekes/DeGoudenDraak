@@ -13,10 +13,10 @@ const UserRolesText = {
 };
 
 const UserRolesIcon = {
-    [UserRoles.ADMIN]: 'fa-circle',
-    [UserRoles.CASHIER]: 'fa-tint-slash',
-    [UserRoles.WAITRESS]: 'fa-fire',
-    [UserRoles.CUSTOMER]: 'fa-pepper-hot',
+    [UserRoles.ADMIN]: 'fa-user-ninja',
+    [UserRoles.CASHIER]: 'fa-user-tie',
+    [UserRoles.WAITRESS]: 'fa-user-tie',
+    [UserRoles.CUSTOMER]: 'fa-user-alt',
 };
 
 export {UserRoles, UserRolesText, UserRolesIcon};

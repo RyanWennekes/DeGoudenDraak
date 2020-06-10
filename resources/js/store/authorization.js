@@ -7,6 +7,7 @@ export default {
         isAdmin: false,
         isCashier: false,
         isWaitress: false,
+        isCustomer: false,
         hasRole: false,
     },
     mutations: {
@@ -17,6 +18,7 @@ export default {
             state.isAdmin = !!roles.isAdmin;
             state.isCashier = !!roles.isCashier;
             state.isWaitress = !!roles.isWaitress;
+            state.isCustomer = !!roles.isCustomer;
         },
         hasRole: (state) => {
             state.hasRole = true;
@@ -35,8 +37,11 @@ export default {
         isWaitress: state => {
             return state.isWaitress;
         },
+        isCustomer: state => {
+            return state.isCustomer;
+        },
         hasRole: state => {
-            return state.isAdmin || state.isCashier || state.isWaitress || state.hasRole;
+            return state.isAdmin || state.isCashier || state.isWaitress || state.isCustomer || state.hasRole;
         },
     },
     actions: {

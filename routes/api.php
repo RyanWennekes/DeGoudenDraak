@@ -35,6 +35,7 @@ Route::group(['middleware' => ['api']], function (Router $router) {
 
         // TODO: Requests with admin authentication
         $router->middleware('isAdmin')->group(function (Router $router) {
+            $router->resource('users', 'UserController')->only(['index', 'store', 'update', 'destroy']);
         });
     });
 });

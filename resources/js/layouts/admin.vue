@@ -8,9 +8,14 @@
                         <v-tab :to="{name: 'admin.create.order'}">
                             Bestelling aanmaken
                         </v-tab>
-                        <v-tab :to="{name: 'admin.products'}">
-                            Producten
-                        </v-tab>
+                        <template v-if="isAdmin">
+                            <v-tab :to="{name: 'admin.products'}">
+                                Producten
+                            </v-tab>
+                            <v-tab :to="{name: 'admin.users'}">
+                                Gebruikers
+                            </v-tab>
+                        </template>
                         <v-tab :to="{name: 'admin.test'}">
                             Another Selection
                         </v-tab>
@@ -36,11 +41,11 @@ export default {
     name: 'AdminLayout',
     components: {LogoutButton},
     computed: {
-        ...mapGetters(['isAdmin','isCashier', 'isWaitress', 'hasRole']),
+        ...mapGetters(['isAdmin', 'isCashier', 'isWaitress', 'isCustomer', 'hasRole']),
     },
     created() {
         // This should only happen when the roles are not loaded
-        if(!this.hasRole && this.$route.name !== 'admin.loading') this.$router.push({name: 'admin.loading'})
+        if (!this.hasRole && this.$route.name !== 'admin.loading') this.$router.push({name: 'admin.loading'});
     },
 };
 </script>

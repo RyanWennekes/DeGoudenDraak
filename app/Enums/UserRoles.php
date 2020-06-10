@@ -17,4 +17,5 @@ final class UserRoles extends Enum
     const Admin = 1;
     const Cashier = 2;
     const Waitress = 3;
+    const Customer = 4;
 }
