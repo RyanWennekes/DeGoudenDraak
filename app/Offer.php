@@ -14,11 +14,13 @@ class Offer extends Model
 
     public static function offers(): Collection
     {
-        return Offer::all();
+        return Offer::query()
+            ->with('product')
+            ->get();
     }
 
-    function offer(): BelongsTo
+    function product(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id')->select('id', 'name');
     }
 }

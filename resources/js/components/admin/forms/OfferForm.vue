@@ -1,65 +1,63 @@
 <template>
     <v-dialog v-model="dialog" width="600">
         <template #activator="{ on }">
-            <v-btn color="primary" dark v-on="on">Product aanmaken</v-btn>
+            <v-btn color="primary" dark v-on="on">Aanbieding plaatsen</v-btn>
         </template>
         <v-card>
-            <v-card-title>Product aanmaken</v-card-title>
+            <v-card-title>Aanbieding plaatsen</v-card-title>
             <v-card-text>
                 <v-form v-model="valid" ref="form">
-                    <v-text-field
-                        v-model="product.code"
-                        label="Code*"
-                        counter="45"
-                        :rules="[(v) => !!v || 'Code is verplicht', (v) => !!v && v.length <= 45 || 'Code mag een maximale lengte hebben van 45 karakters']"/>
-                    <v-select
-                        v-model="product.product_type_id"
-                        label="Categorie*"
-                        :items="categories"
-                        item-text="type_nl"
+                    <v-autocomplete
+                        v-model="offer.product_id"
+                        label="Product*"
+                        :items="products"
+                        item-text="name"
                         item-value="id"
-                        :rules="[(v) => !!v || 'Categorie is verplicht']"/>
+                        :rules="[(v) => !!v || 'Product is verplicht']"
+                        dense
+                        filled />
 
                     <v-text-field
-                        v-model="product.name"
-                        label="Naam*"
-                        counter="100"
-                        :rules="[(v) => !!v || 'Naam is verplicht', (v) => !!v && v.length <= 100 || 'Naam mag een maximale lengte hebben van 100 karakters']"/>
-                    <v-text-field
-                        v-model="product.price"
-                        label="Prijs*"
-                        type="number"
-                        :rules="[(v) => !!v || 'Prijs is verplicht']"/>
+                        v-model="offer.discount"
+                        label="Korting*"
+                        :rules="[(v) => !!v || 'Korting is verplicht', (v) => !!v && v <= 100 && v >= 0 || 'Het moet een geldige korting zijn']">
+                        <template #append>%</template>
+                    </v-text-field>
 
-                    <v-select
-                        v-model="product.spiciness"
-                        label="Pittigheid"
-                        :items="spicinessOptions">
-                        <template #item="{item}">
-                            <div class="mr-1 spiciness-icon">
-                                <v-icon :color="item.color">{{item.icon}}</v-icon>
-                            </div>
-                            {{item.text}}
+                    <v-menu
+                        v-model="startDateMenu"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="290px">
+                        <template #activator="{ on }">
+                            <v-text-field
+                                v-model="offer.start_date"
+                                label="Begindatum"
+                                prepend-icon="fas fa-calendar"
+                                :rules="[(v) => !!v || 'Begindatum is verplicht', (v) => !!v && startDateValidation || 'Begindatum moet minimaal één dag van te voren worden aangegeven']"
+                                readonly
+                                v-on="on"
+                            ></v-text-field>
                         </template>
-                        <template #selection="{item}">
-                            <div class="mr-1 spiciness-icon">
-                                <v-icon :color="item.color">{{item.icon}}</v-icon>
-                            </div>
-                            {{item.text}}
+                        <v-date-picker v-model="offer.start_date" no-title scrollable/>
+                    </v-menu>
+                    <v-menu
+                        v-model="endDateMenu"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="290px">
+                        <template #activator="{ on }">
+                            <v-text-field
+                                v-model="offer.end_date"
+                                label="Einddatum"
+                                prepend-icon="fas fa-calendar"
+                                :rules="[(v) => !!v || 'Einddatum is verplicht', (v) => !!v && endDateValidation || 'Einddatum moet naar startdatum vallen']"
+                                readonly
+                                v-on="on"
+                            ></v-text-field>
                         </template>
-                    </v-select>
-
-                    <v-text-field
-                        v-model="product.minimum_amount"
-                        label="Minimale aantal personen"
-                        type="number"/>
-
-                    <v-textarea
-                        v-model="product.description_nl"
-                        label="Beschrijving in het Nederlands"/>
-                    <v-textarea
-                        v-model="product.description_en"
-                        label="Beschrijving in het Engels"/>
+                        <v-date-picker v-model="offer.end_date" no-title scrollable/>
+                    </v-menu>
                 </v-form>
             </v-card-text>
             <v-card-actions>
@@ -74,6 +72,7 @@
 <script>
 import {fetchAllProductsMinimized} from '../../../api/products.js';
 import {createOffer} from '../../../api/offers.js';
+import dayjs from '../../../plugin/dayJs.js';
 
 export default {
     name: 'OfferForm',
@@ -83,14 +82,24 @@ export default {
             offer: {},
             products: [],
             dialog: false,
+            startDateMenu: false,
+            endDateMenu: false,
         };
     },
     created() {
         this.getProducts();
     },
+    computed: {
+        endDateValidation() {
+            return !!dayjs(this.offer.start_date).isBefore(dayjs(this.offer.end_date));
+        },
+        startDateValidation() {
+            return !!dayjs().isBefore(dayjs(this.offer.start_date));
+        },
+    },
     methods: {
         async getProducts() {
-            this.product = await fetchAllProductsMinimized();
+            this.products = await fetchAllProductsMinimized();
         },
         handleClose() {
             this.dialog = false;
@@ -120,7 +129,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-
-</style>

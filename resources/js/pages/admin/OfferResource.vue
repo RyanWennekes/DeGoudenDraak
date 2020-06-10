@@ -8,7 +8,7 @@
             v-show="!loading">
             <template #item="props">
                 <tr>
-                    <td>{{ props.item.name }}</td>
+                    <td><template>{{ props.item.name }}</template></td>
                     <td class="text-center">{{props.item.discount}}%</td>
                     <td>?verlopen</td>
                     <td class="text-center">{{props.item.date_start}}</td>
@@ -45,6 +45,7 @@ export default {
             headers: [
                 {text: 'Gerecht', align: 'start', sortable: true, value: 'name'},
                 {text: 'Korting', value: 'discount', align: 'center'},
+                {text: 'Termijn', value: '', align: ''},
                 {text: 'Begint op', value: 'date_start', align: 'center'},
                 {text: 'Eindigt op', value: 'date_end', align: 'center'},
                 {text: '', value: '', align: ''},
@@ -72,7 +73,7 @@ export default {
             this.offers = await fetchAllOffers();
             this.offers = this.offers.map((offer) => {
                 return {
-                    'name': offer.name,
+                    'name': offer.product.name,
                     'discount': offer.discount,
                     'date_start': dayjs(offer.date_start).format('YYYY-MM-DD hh:mm'),
                     'date_end': dayjs(offer.date_end).format('YYYY-MM-DD hh:mm'),

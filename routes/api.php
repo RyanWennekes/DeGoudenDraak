@@ -28,8 +28,8 @@ Route::group(['middleware' => ['api']], function (Router $router) {
     // TODO: Requests with authentication
     $router->middleware('authorized')->group(function (Router $router) {
         $router->resource('categories', 'ProductTypesController');
-        $router->resource('products', 'ProductsController');
         $router->get('products/minimized', 'ProductsController@minimized')->name('products.index.minimized');
+        $router->resource('products', 'ProductsController');
         $router->resource('orders', 'OrdersController');
         $router->resource('tables', 'TablesController');
         $router->resource('offers', 'OffersController');
