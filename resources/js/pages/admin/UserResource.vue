@@ -9,12 +9,26 @@
             <template #item="props">
                 <tr>
                     <td>{{props.item.id}}.</td>
-                    <td>{{props.item.name}}</td>
-                    <td class="text-center">{{props.item.role}}</td>
                     <td>
-                        <v-btn @click="handleDelete(props.item)" color="error" small fab>
-                            <v-icon small>fa-trash</v-icon>
-                        </v-btn>
+                        <ChipUserRole :role="props.item.role"/>
+                    </td>
+                    <td>{{props.item.name}}</td>
+                    <td>{{props.item.email}}</td>
+                    <td>
+                        <v-tooltip bottom :disabled="!deleteDisabled(props.item.role)">
+                            <template #activator="{ on }">
+                                <div v-on="on">
+                                    <v-btn @click="handleDelete(props.item)"
+                                           color="error"
+                                           small
+                                           fab
+                                           :disabled="deleteDisabled(props.item.role)">
+                                        <v-icon small>fa-trash</v-icon>
+                                    </v-btn>
+                                </div>
+                            </template>
+                            <span>Een gebruiker met admin-rechten kan niet worden verwijderd</span>
+                        </v-tooltip>
                     </td>
                 </tr>
             </template>
@@ -34,10 +48,12 @@
 <script>
 import UserForm from '../../components/admin/forms/UserForm.vue';
 import {fetchAllUsers} from '../../api/users.js';
+import ChipUserRole from '../../components/admin/ChipUserRole.vue';
+import {UserRoles} from '../../enums/User.js';
 
 export default {
     name: 'UserResource',
-    components: {UserForm},
+    components: {ChipUserRole, UserForm},
     data() {
         return {
             snack: false,
@@ -45,8 +61,9 @@ export default {
             snackText: '',
             headers: [
                 {text: 'Nummer', align: 'start', sortable: true, value: 'id', width: '100'},
+                {text: 'Toegangsrechten', value: 'role', align: 'center', width: '170'},
                 {text: 'Naam', value: 'name', align: 'left'},
-                {text: 'Toegangsrechten', value: 'role', align: 'center'},
+                {text: 'Emailadres', value: 'email', align: 'left'},
                 {text: '', value: '', align: '', width: '60'},
             ],
             users: [],
@@ -83,6 +100,9 @@ export default {
         },
         handleDelete() {
             console.log('handling delete');
+        },
+        deleteDisabled(role) {
+            return role === UserRoles.ADMIN;
         },
     },
 };
