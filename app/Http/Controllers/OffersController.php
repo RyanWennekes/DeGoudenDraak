@@ -37,8 +37,9 @@ class OffersController extends Controller
      */
     public function store(StoreOfferRequest $request)
     {
-        $offer = Offer::create($request->all());
+        $offer = Offer::create($request->all(), ['timestamp' => false]);
         $offer->timestamps = false;
+        return dd($offer);
 
         return $offer->save() ? response('', 200) : response('Something went wrong', 500);
     }

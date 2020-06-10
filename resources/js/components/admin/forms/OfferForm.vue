@@ -31,7 +31,7 @@
                         min-width="290px">
                         <template #activator="{ on }">
                             <v-text-field
-                                v-model="offer.start_date"
+                                v-model="offer.date_start"
                                 label="Begindatum"
                                 prepend-icon="fas fa-calendar"
                                 :rules="[(v) => !!v || 'Begindatum is verplicht', (v) => !!v && startDateValidation || 'Begindatum moet minimaal één dag van te voren worden aangegeven']"
@@ -39,7 +39,7 @@
                                 v-on="on"
                             ></v-text-field>
                         </template>
-                        <v-date-picker v-model="offer.start_date" no-title scrollable/>
+                        <v-date-picker v-model="offer.date_start" no-title scrollable/>
                     </v-menu>
                     <v-menu
                         v-model="endDateMenu"
@@ -48,7 +48,7 @@
                         min-width="290px">
                         <template #activator="{ on }">
                             <v-text-field
-                                v-model="offer.end_date"
+                                v-model="offer.date_end"
                                 label="Einddatum"
                                 prepend-icon="fas fa-calendar"
                                 :rules="[(v) => !!v || 'Einddatum is verplicht', (v) => !!v && endDateValidation || 'Einddatum moet naar startdatum vallen']"
@@ -56,7 +56,7 @@
                                 v-on="on"
                             ></v-text-field>
                         </template>
-                        <v-date-picker v-model="offer.end_date" no-title scrollable/>
+                        <v-date-picker v-model="offer.date_end" no-title scrollable/>
                     </v-menu>
                 </v-form>
             </v-card-text>
@@ -91,10 +91,10 @@ export default {
     },
     computed: {
         endDateValidation() {
-            return !!dayjs(this.offer.start_date).isBefore(dayjs(this.offer.end_date));
+            return !!dayjs(this.offer.date_start).isBefore(dayjs(this.offer.date_end));
         },
         startDateValidation() {
-            return !!dayjs().isBefore(dayjs(this.offer.start_date));
+            return !!dayjs().isBefore(dayjs(this.offer.date_start));
         },
     },
     methods: {

@@ -26,8 +26,8 @@ class UpdateOfferRequest extends FormRequest
         return [
             'product_id' => 'required|exists:App\Product,id',
             'discount'   => 'required|min:1,max:100',
-            'date_start' => 'required|date_format:Y-m-d h:m:s',
-            'date_end'   => 'required|date_format:Y-m-d h:m:s',
+            'date_start' => 'required|date_format:Y-m-d H:i:s',
+            'date_end'   => 'required|date_format:Y-m-d H:i:s',
         ];
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Support\Collection;
 
 class Offer extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'product_id', 'discount', 'date_start', 'date_end',
     ];
