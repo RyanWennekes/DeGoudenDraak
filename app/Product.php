@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
+    public $timestamps = false;
+    protected $softDelete = true;
+
     protected $fillable = [
         'product_type_id', 'name', 'price', 'spiciness', 'description_nl', 'description_en', 'minimum_amount', 'code',
     ];
@@ -21,6 +24,7 @@ class Product extends Model
                     ->where('offers.date_start', '<=', NOW())
                     ->where('offers.date_end', '>=', NOW());
             })
+            ->whereNull('deleted_at')
             ->select('products.*',
                 DB::raw('(case when offers.discount then products.price * ((100 - offers.discount) / 100) else products.price end) as discountPrice'))
             ->get();
@@ -29,6 +33,7 @@ class Product extends Model
     function offers(): HasMany
     {
         return $this->hasMany(Offer::class)
+            ->whereNull('deleted_at')
             ->where('date_start', '>=', NOW())
             ->where('date_end', '<=', NOW());
     }

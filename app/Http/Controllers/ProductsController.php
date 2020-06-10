@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
 use Illuminate\Http\Request;
+use PHPUnit\Exception;
 
 class ProductsController extends Controller
 {
@@ -37,6 +39,7 @@ class ProductsController extends Controller
     public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
+
         return $product->save() ? response('', 200) : response('Something went wrong', 500);
     }
 
@@ -71,8 +74,6 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $product->timestamps = false;
-
         return $product->update([
             'name' => $request->get('name'),
         ]) ? response('', 200) : response("Couldn't update product", 500);
@@ -83,9 +84,16 @@ class ProductsController extends Controller
      *
      * @param  \App\Product $product
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Product $product)
     {
-        //
+        try {
+            $product->delete();
+
+            return response('', 200);
+        } catch (Exception $exception) {
+            return response($exception->getMessage(), 500);
+        }
     }
 }

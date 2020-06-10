@@ -64,7 +64,7 @@ export default {
                 .catch(() => {
                     this.message = {
                         show: true,
-                        text: 'Er is iets misgegaan',
+                        text: 'Er is iets verkeerd gegaan...',
                         color: 'error',
                     };
                 });

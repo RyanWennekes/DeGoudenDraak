@@ -38,6 +38,11 @@
                         <ChipSpiciness :spiciness="props.item.spiciness"/>
                     </td>
                     <td class="text-center">{{props.item.minimum_amount || 'geen'}}</td>
+                    <td>
+                        <v-btn @click="handleDelete(props.item)" color="error" small fab>
+                            <v-icon small>fa-trash</v-icon>
+                        </v-btn>
+                    </td>
                 </tr>
             </template>
         </v-data-table>
@@ -54,7 +59,7 @@
 </template>
 
 <script>
-import {fetchAllProducts, updateProduct} from '../../api/products.js';
+import {fetchAllProducts, updateProduct, deleteProduct} from '../../api/products.js';
 import ChipSpiciness from '../../components/admin/ChipSpiciness.vue';
 import ProductForm from '../../components/admin/forms/ProductForm.vue';
 
@@ -73,6 +78,7 @@ export default {
                 {text: 'Prijs', value: 'priceDiscount', align: 'center'},
                 {text: 'Pittigheid', value: 'spiciness', sortable: true, align: 'center'},
                 {text: 'Mininum aantal', value: 'minimum_amount', align: 'center'},
+                {text: '', value: '', align: ''},
             ],
             products: [],
             loading: false,
@@ -120,6 +126,16 @@ export default {
         afterProductCreated(text, color) {
             this.snackbarMessage(text, color);
             this.getProducts();
+        },
+        handleDelete(product) {
+            deleteProduct(product)
+                .then(() => {
+                    this.snackbarMessage('Product is succesvol verwijderd', 'success');
+                    this.getProducts();
+                })
+                .catch((e) => {
+                    this.snackbarMessage('Er is iets verkeerd gegaan...', 'error');
+                });
         },
     },
 };
