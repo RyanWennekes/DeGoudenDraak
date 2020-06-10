@@ -138,9 +138,6 @@ export default {
         },
         close() {
         },
-        async updateProduct(product) {
-            await updateProduct(product);
-        },
         snackbarMessage(text, color) {
             this.snack = true;
             this.snackColor = text.color ? text.color : color;
