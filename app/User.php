@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'role',
+        'password', 'remember_token', 'api_token', 'created_at', 'email_verified_at', 'updated_at',
     ];
 
     /**
@@ -39,6 +39,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function users()
+    {
+        return User::all();
+    }
 
     public function tables(): HasMany
     {

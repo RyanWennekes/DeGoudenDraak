@@ -89,7 +89,7 @@ export default {
             snackColor: '',
             snackText: '',
             headers: [
-                {text: 'Nummer', align: 'start', sortable: true, value: 'id'},
+                {text: 'Nummer', align: 'start', sortable: true, value: 'id', width: '100'},
                 {text: 'Naam', align: 'start', sortable: true, value: 'name'},
                 {text: 'Code', value: 'code', align: 'center'},
                 {text: 'Prijs', value: 'priceDiscount', align: 'center'},
