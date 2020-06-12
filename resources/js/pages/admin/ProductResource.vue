@@ -12,7 +12,7 @@
                     <td>
                         <v-edit-dialog
                             :return-value.sync="props.item.name"
-                            @save="save(props.item)"
+                            @save="saveName(props.item)"
                             @cancel="cancel"
                             @open="open"
                             @close="close"
@@ -28,7 +28,24 @@
                             </template>
                         </v-edit-dialog>
                     </td>
-                    <td class="text-center">{{props.item.code}}</td>
+                    <td>
+                        <v-edit-dialog
+                            :return-value.sync="props.item.code"
+                            @save="saveCode(props.item)"
+                            @cancel="cancel"
+                            @open="open"
+                            @close="close"
+                        > {{ props.item.code }}
+                            <template #input>
+                                <v-text-field
+                                    v-model="props.item.code"
+                                    label="Edit"
+                                    single-line
+                                    counter
+                                ></v-text-field>
+                            </template>
+                        </v-edit-dialog>
+                    </td>
                     <td class="text-center" v-if="props.item.price !== props.item.discountPrice">
                         <span class="old-price">{{props.item.price | currency}}</span>
                         <span class="red--text font-weight-bold ml-1">{{props.item.discountPrice | currency}}</span>
@@ -38,6 +55,11 @@
                         <ChipSpiciness :spiciness="props.item.spiciness"/>
                     </td>
                     <td class="text-center">{{props.item.minimum_amount || 'geen'}}</td>
+                    <td>
+                        <v-btn @click="handleDelete(props.item)" color="error" small fab>
+                            <v-icon small>fa-trash</v-icon>
+                        </v-btn>
+                    </td>
                 </tr>
             </template>
         </v-data-table>
@@ -54,7 +76,7 @@
 </template>
 
 <script>
-import {fetchAllProducts, updateProduct} from '../../api/products.js';
+import {fetchAllProducts, updateProductName, deleteProduct, updateProductCode} from '../../api/products.js';
 import ChipSpiciness from '../../components/admin/ChipSpiciness.vue';
 import ProductForm from '../../components/admin/forms/ProductForm.vue';
 
@@ -73,6 +95,7 @@ export default {
                 {text: 'Prijs', value: 'priceDiscount', align: 'center'},
                 {text: 'Pittigheid', value: 'spiciness', sortable: true, align: 'center'},
                 {text: 'Mininum aantal', value: 'minimum_amount', align: 'center'},
+                {text: '', value: '', align: ''},
             ],
             products: [],
             loading: false,
@@ -97,9 +120,15 @@ export default {
             this.products = await fetchAllProducts();
             this.loading = false;
         },
-        save(product) {
-            this.updateProduct(product);
-            this.snackbarMessage('Veld is succesvol aangepast', 'success');
+        async saveName(product) {
+            updateProductName(product)
+                .then(() => this.snackbarMessage('De naam is succesvol aangepast', 'success'))
+                .catch(() => this.snackbarMessage('De naam moet uniek blijven', 'error'));
+        },
+        async saveCode(product) {
+            updateProductCode(product)
+                .then(() => this.snackbarMessage('De code succesvol aangepast', 'success'))
+                .catch(() => this.snackbarMessage('De code moet uniek blijven', 'error'));
         },
         cancel() {
             this.snackbarMessage('Gestopt', 'error');
@@ -109,9 +138,6 @@ export default {
         },
         close() {
         },
-        async updateProduct(product) {
-            await updateProduct(product);
-        },
         snackbarMessage(text, color) {
             this.snack = true;
             this.snackColor = text.color ? text.color : color;
@@ -120,6 +146,16 @@ export default {
         afterProductCreated(text, color) {
             this.snackbarMessage(text, color);
             this.getProducts();
+        },
+        handleDelete(product) {
+            deleteProduct(product)
+                .then(() => {
+                    this.snackbarMessage('Product is succesvol verwijderd', 'success');
+                    this.getProducts();
+                })
+                .catch((e) => {
+                    this.snackbarMessage('Er is iets verkeerd gegaan...', 'error');
+                });
         },
     },
 };

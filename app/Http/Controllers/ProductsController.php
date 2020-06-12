@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Product;
 use Illuminate\Http\Request;
+use PHPUnit\Exception;
 
 class ProductsController extends Controller
 {
@@ -37,6 +39,7 @@ class ProductsController extends Controller
     public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
+
         return $product->save() ? response('', 200) : response('Something went wrong', 500);
     }
 
@@ -65,17 +68,19 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Product             $product
+     * @param  \App\Http\Requests\UpdateProductRequest $request
+     * @param  \App\Product                            $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->timestamps = false;
+        if ($request->has('code')) {
+            $response = $product->update(['code' => $request->get('code')]);
+        } else {
+            $response = $product->update(['name' => $request->get('name')]);
+        }
 
-        return $product->update([
-            'name' => $request->get('name'),
-        ]) ? response('', 200) : response("Couldn't update product", 500);
+        return $response ? response('', 200) : response("Couldn't update product", 500);
     }
 
     /**
@@ -83,9 +88,18 @@ class ProductsController extends Controller
      *
      * @param  \App\Product $product
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Product $product)
     {
-        //
+        try {
+            if (! $product->trashed()) {
+                $product->delete();
+            }
+
+            return response('', 200);
+        } catch (Exception $exception) {
+            return response($exception->getMessage(), 500);
+        }
     }
 }
