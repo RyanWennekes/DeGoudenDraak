@@ -21,6 +21,14 @@ class ProductsController extends Controller
     }
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function minimized()
+    {
+        return Product::products();
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

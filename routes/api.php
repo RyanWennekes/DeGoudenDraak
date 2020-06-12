@@ -25,13 +25,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['api']], function (Router $router) {
     // TODO: Requests without authentication
 
-
     // TODO: Requests with authentication
     $router->middleware('authorized')->group(function (Router $router) {
         $router->resource('categories', 'ProductTypesController');
+        $router->get('products/minimized', 'ProductsController@minimized')->name('products.index.minimized');
         $router->resource('products', 'ProductsController')->only(['index', 'show']);
         $router->resource('orders', 'OrdersController');
         $router->resource('tables', 'TablesController');
+        $router->resource('offers', 'OffersController');
 
         // TODO: Requests with admin authentication
         $router->middleware('isAdmin')->group(function (Router $router) {

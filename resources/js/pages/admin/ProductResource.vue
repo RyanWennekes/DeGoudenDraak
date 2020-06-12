@@ -14,8 +14,6 @@
                             :return-value.sync="props.item.name"
                             @save="saveName(props.item)"
                             @cancel="cancel"
-                            @open="open"
-                            @close="close"
                         > {{ props.item.name }} <span class="red--text font-weight-bold ml-1"
                                                       v-if="props.item.price !== props.item.discountPrice">Korting</span>
                             <template #input>
@@ -131,12 +129,7 @@ export default {
                 .catch(() => this.snackbarMessage('De code moet uniek blijven', 'error'));
         },
         cancel() {
-            this.snackbarMessage('Gestopt', 'error');
-        },
-        open() {
-            this.snackbarMessage('Veld is geopend', 'info');
-        },
-        close() {
+            this.snackbarMessage('Veld afgesloten zonder te opslaan', 'warning');
         },
         snackbarMessage(text, color) {
             this.snack = true;
