@@ -17,6 +17,7 @@ import AdminLayout from './layouts/admin.vue';
 /* Admin Pages */
 import OrderResource from './pages/admin/OrderResource.vue';
 import ProductResource from './pages/admin/ProductResource.vue';
+import LoadingScreen from './pages/admin/LoadingScreen.vue';
 
 import store from './store';
 
@@ -51,6 +52,11 @@ const router = new VueRouter({
                     component: Test,
                 },
                 {
+                    path: 'loading',
+                    name: 'admin.loading',
+                    component: LoadingScreen,
+                },
+                {
                     path: 'producten',
                     name: 'admin.products',
                     component: ProductResource,
@@ -59,6 +65,22 @@ const router = new VueRouter({
                     path: 'bestelling-aanmaken',
                     name: 'admin.create.order',
                     component: OrderResource,
+                },
+                {
+                    path: 'index',
+                    name: 'admin.index',
+                    redirect: () => {
+                        // When the user is admin
+                        if(store.state.Authorization.isAdmin)
+                            return {name: 'admin.products'};
+
+                        // When the user is cashier
+                        else if(store.state.Authorization.isCashier)
+                            return {name: 'admin.create.order'};
+
+                        // Default
+                        return {name: 'admin.test'};
+                    }
                 },
                 {
                     path: '',
