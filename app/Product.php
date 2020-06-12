@@ -6,10 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
+    use SoftDeletes;
+
+    public $timestamps = false;
+  
+    protected $hidden = ['deleted_at'];
+
     protected $fillable = [
         'product_type_id', 'name', 'price', 'spiciness', 'description_nl', 'description_en', 'minimum_amount', 'code',
     ];
@@ -22,7 +29,7 @@ class Product extends Model
         return Product::query()->select('id', 'name')->get();
     }
 
-    public static function productWithSales(): Collection
+    public static function productWithSales(): \Illuminate\Support\Collection
     {
         return Product::query()
             ->leftJoin('offers', function ($join) {
@@ -30,6 +37,7 @@ class Product extends Model
                     ->where('offers.date_start', '<=', NOW())
                     ->where('offers.date_end', '>=', NOW());
             })
+            ->whereNull('deleted_at')
             ->select('products.*',
                 DB::raw('(case when offers.discount then products.price * ((100 - offers.discount) / 100) else products.price end) as discountPrice'))
             ->get();
@@ -38,6 +46,7 @@ class Product extends Model
     function offers(): HasMany
     {
         return $this->hasMany(Offer::class)
+            ->whereNull('deleted_at')
             ->where('date_start', '>=', NOW())
             ->where('date_end', '<=', NOW());
     }

@@ -50,10 +50,11 @@ class OrdersController extends Controller
                     'order_id'   => $order->id,
                     'price'      => $product['discountPrice'],
                     'amount'     => $product['total'],
+                    'comment'    => isset($product['comment']) ? $product['comment'] : null,
                 ])->save();
             }
         } catch (\Exception $exception) {
-            return response($exception, 500);
+            return response('', 500);
         }
 
         return response('', 200);

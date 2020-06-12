@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="dialog" width="600">
+    <v-dialog v-model="dialog" width="600" persistent>
         <template #activator="{ on }">
             <v-btn color="primary" dark v-on="on">Product aanmaken</v-btn>
         </template>
