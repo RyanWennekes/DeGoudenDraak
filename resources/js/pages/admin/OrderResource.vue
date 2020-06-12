@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import OrderForm from '../../components/admin/order/OrderForm.vue';
+import OrderForm from '../../components/admin/forms/OrderForm.vue';
 import ProductsTable from '../../components/admin/order/ProductsTable.vue';
 import {createOrder} from '../../api/orders.js';
 
@@ -75,11 +75,11 @@ export default {
 
 <style lang="scss">
 .overflow {
-    max-height: 730px;
+    max-height: 650px;
     overflow-y: scroll;
 
     &.small {
-        max-height: 360px;
+        max-height: 350px;
     }
 }
 </style>
