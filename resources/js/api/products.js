@@ -1,4 +1,4 @@
-import {get, put, post} from '../api/index.js';
+import {get, put, post, destroy} from '../api/index.js';
 
 function fetchAllProducts() {
     return get('products');
@@ -8,8 +8,20 @@ function fetchProduct(productId) {
     return get(`products/${productId}`);
 }
 
-function updateProduct(product) {
-    return put(`products/${product.id}`, product);
+function updateProductName(product) {
+    return put(`products/${product.id}`, {
+        name: product.name,
+    });
+}
+
+function updateProductCode(product) {
+    return put(`products/${product.id}`, {
+        code: product.code,
+    });
+}
+
+function deleteProduct(product) {
+    return destroy(`products/${product.id}`);
 }
 
 function createProduct(product) {
@@ -19,6 +31,8 @@ function createProduct(product) {
 export {
     fetchAllProducts,
     fetchProduct,
-    updateProduct,
+    updateProductName,
+    updateProductCode,
     createProduct,
+    deleteProduct,
 };
