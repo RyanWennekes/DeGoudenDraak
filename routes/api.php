@@ -25,6 +25,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['api']], function (Router $router) {
     // TODO: Requests without authentication
 
+    $router->get('/productTypes', 'ProductTypesController@index');
+    $router->get('/pdf', 'ProductsController@generatePDF');
 
     // TODO: Requests with authentication
     $router->middleware('authorized')->group(function (Router $router) {

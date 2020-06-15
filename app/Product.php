@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
+    protected $with = ['offers'];
+
     protected $fillable = [
         'product_type_id', 'name', 'price', 'spiciness', 'description_nl', 'description_en', 'minimum_amount', 'code',
     ];
@@ -29,8 +31,8 @@ class Product extends Model
     function offers(): HasMany
     {
         return $this->hasMany(Offer::class)
-            ->where('date_start', '>=', NOW())
-            ->where('date_end', '<=', NOW());
+            ->where('date_start', '<=', NOW())
+            ->where('date_end', '>=', NOW());
     }
 
     function allergenes()

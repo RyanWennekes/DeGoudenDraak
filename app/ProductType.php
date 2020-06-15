@@ -11,6 +11,10 @@ class ProductType extends Model
         'type_nl', 'type_en',
     ];
 
+    protected $with = [
+        'products'
+    ];
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);

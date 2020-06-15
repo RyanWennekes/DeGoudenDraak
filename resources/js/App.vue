@@ -1,9 +1,9 @@
 <!-- we use vue-components and html inside the <template> tag -->
 <template>
-    <default-layout>
+    <v-app data-app>
         <!-- router-view allows you to open different components with the router -->
         <router-view></router-view>
-    </default-layout>
+    </v-app>
 </template>
 
 <!-- we user javascript inside the <script> tag -->

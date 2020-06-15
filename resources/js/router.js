@@ -9,10 +9,13 @@ Vue.component('vue-app', require('./App.vue').default);
 
 /* Here will all pages being placed */
 import Page404 from './pages/Page404.vue';
-import Home from './pages/Home.vue';
+import Menu from './pages/home/Menu';
+import News from './pages/home/News';
+import Contact from './pages/home/Contact';
 import Login from './pages/Login.vue';
 import Test from './pages/Test.vue';
 import AdminLayout from './layouts/admin.vue';
+import DefaultLayout from './layouts/default';
 
 /* Admin Pages */
 import OrderResource from './pages/admin/OrderResource.vue';
@@ -28,7 +31,24 @@ const router = new VueRouter({
         {
             path: '/',
             name: 'home',
-            component: Home,
+            component: DefaultLayout,
+            children: [
+                {
+                    path: 'menu',
+                    name: 'home.menu',
+                    component: Menu,
+                },
+                {
+                    path: 'news',
+                    name: 'home.news',
+                    component: News,
+                },
+                {
+                    path: 'contact',
+                    name: 'home.contact',
+                    component: Contact,
+                }
+            ]
         },
         {
             path: '/home',
