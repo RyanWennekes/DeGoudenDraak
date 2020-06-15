@@ -6,7 +6,6 @@
         <div class="menu">
         <h1 class="theme-heading">{{ $t('menu.title') }}</h1>
         <div v-for="category in categories" class="menu">
-<!--            <h2 class="theme-heading">{{ category.type_nl }}</h2>-->
             <h2 class="theme-heading">{{ lang(category.type_nl, category.type_en, $i18n) }}</h2>
             <table>
                 <tr v-for="product in category.products">
