@@ -55,7 +55,7 @@ const router = new VueRouter({
                     component: Test,
                 },
                 {
-                    path: 'loading',
+                    path: 'laden',
                     name: 'admin.loading',
                     component: LoadingScreen,
                 },
