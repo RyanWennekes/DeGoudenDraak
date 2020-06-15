@@ -5,7 +5,7 @@ function fetchAllProducts() {
 }
 
 function fetchAllProductsMinimized() {
-    return get('products/minimized');
+    return get('admin/products/minimized');
 }
 
 function fetchProduct(productId) {
@@ -13,23 +13,23 @@ function fetchProduct(productId) {
 }
 
 function updateProductName(product) {
-    return put(`products/${product.id}`, {
+    return put(`admin/products/${product.id}`, {
         name: product.name,
     });
 }
 
 function updateProductCode(product) {
-    return put(`products/${product.id}`, {
+    return put(`admin/products/${product.id}`, {
         code: product.code,
     });
 }
 
 function deleteProduct(product) {
-    return destroy(`products/${product.id}`);
+    return destroy(`admin/products/${product.id}`);
 }
 
 function createProduct(product) {
-    return post('products', product);
+    return post('admin/products', product);
 }
 
 export {

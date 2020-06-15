@@ -1,7 +1,7 @@
 import {get} from '../api/index.js';
 
 function fetchAllTables() {
-    return get('tables');
+    return get('admin/tables');
 }
 
 export {
