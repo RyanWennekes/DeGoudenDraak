@@ -14,8 +14,8 @@ function deleteOffer(offer) {
 
 function createOffer(offer) {
     return post('admin/offers', {
-        'date_end': `${offer.date_end} 00:00:00`,
-        'date_start': `${offer.date_start} 23:59:59`,
+        'date_end': `${offer.date_end} 23:59:59`,
+        'date_start': `${offer.date_start} 00:00:00`,
         'product_id': offer.product_id,
         'discount': offer.discount,
     });
