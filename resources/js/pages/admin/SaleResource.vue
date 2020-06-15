@@ -1,6 +1,6 @@
 <template>
     <v-row>
-        <v-col cols="12" sm="4" md="3">
+        <v-col cols="12" md="4" lg="3">
             <v-form v-model="valid" ref="form">
                 <v-menu
                     v-model="startDateMenu"
@@ -43,20 +43,24 @@
                 </v-btn>
             </v-form>
         </v-col>
-        <v-col cols="12" sm="8" md="9">
+        <v-col cols="12" md="8" lg="9">
             <v-data-table
+                v-show="!loading"
                 :headers="headers"
-                :items="sales"
+                :items="mappedSales"
                 :itemsPerPage="itemsPerPage"
                 :footer-props="pagination">
                 <template #item="props">
                     <tr>
                         <td>{{props.item.name}}</td>
+                        <td class="text-center">{{props.item.created_at}}</td>
                         <td class="text-center">{{props.item.amount}}x</td>
                         <td class="text-center">{{props.item.price | currency}}</td>
                     </tr>
                 </template>
             </v-data-table>
+            <v-skeleton-loader v-show="loading"
+                               type="table-heading,table-thead,table-tbody@2,table-tfoot"></v-skeleton-loader>
         </v-col>
     </v-row>
 </template>
@@ -76,9 +80,11 @@ export default {
             endDateMenu: false,
             sales: [],
             loading: false,
+            today: null,
         };
     },
     created() {
+        this.today = dayjs().format('YYYY-MM-DD');
         this.getSales();
     },
     computed: {
@@ -96,9 +102,20 @@ export default {
         headers() {
             return [
                 {text: 'Product', value: 'name'},
-                {text: 'Aantal', value: 'amount'},
-                {text: 'Totaal', value: 'price'},
+                {text: 'Besteld op', value: 'created_at', align: 'center'},
+                {text: 'Aantal', value: 'amount', align: 'center'},
+                {text: 'Totaal', value: 'price', align: 'center'},
             ];
+        },
+        mappedSales() {
+            return this.sales.map(sale => {
+                return {
+                    name: sale.name,
+                    amount: sale.amount,
+                    price: sale.price,
+                    created_at: dayjs(sale.created_at).format('YYYY-MM-DD'),
+                };
+            });
         },
     },
     methods: {
@@ -111,7 +128,7 @@ export default {
         },
         async getSales() {
             this.loading = true;
-            this.sales = await fetchSales(this.startDate || dayjs().format('YYYY-MM-DD'), this.endDate || dayjs().format('YYYY-MM-DD'));
+            this.sales = await fetchSales(this.startDate || this.today, this.endDate || this.today);
             this.loading = false;
         },
     },

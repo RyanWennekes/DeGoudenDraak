@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 
 class Sale extends Model
 {
@@ -16,8 +17,12 @@ class Sale extends Model
     public static function selectedSales(Carbon $start_date, Carbon $end_date): Collection
     {
         return Sale::query()
+            ->selectRaw('sum(sales.amount) as amount, sum(sales.price * sales.amount) as price, products.name, DATE(sales.created_at) as created_at')
+            ->join('products', 'products.id', '=', 'sales.product_id')
             ->whereDate('created_at', '>=', $start_date)
             ->whereDate('created_at', '<=', $end_date)
+            ->groupBy('products.id', DB::raw('DATE(sales.created_at)'))
+            ->orderBy('sales.product_id', 'asc')
             ->get();
     }
 
