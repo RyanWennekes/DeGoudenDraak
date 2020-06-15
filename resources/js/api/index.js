@@ -8,7 +8,6 @@ async function get(url, params = {}, responseType) {
 
     if (typeof result === 'string') throw result;
 
-    console.log(result);
 
     return result.data;
 }
