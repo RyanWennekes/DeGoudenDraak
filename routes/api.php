@@ -37,6 +37,7 @@ Route::group(['middleware' => ['api']], function (Router $router) {
             $router->resource('products', 'ProductsController')->only(['update', 'store', 'destroy']);
             $router->resource('orders', 'OrdersController')->only(['index', 'show']);
             $router->resource('tables', 'TablesController')->only(['store']);
+            $router->resource('sales', 'SalesController')->only(['index']);
         });
 
         // Requests with cashier authentication
