@@ -15,7 +15,7 @@ class Product extends Model
     use SoftDeletes;
 
     public $timestamps = false;
-  
+
     protected $hidden = ['deleted_at'];
 
     protected $fillable = [

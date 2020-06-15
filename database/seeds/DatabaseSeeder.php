@@ -20,7 +20,5 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             OfferSeeder::class,
         ]);
-        //         $this->call(SaleSeeder::class);
-        //         $this->call(ExtraOptionSeeder::class);
     }
 }
