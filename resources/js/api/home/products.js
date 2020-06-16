@@ -4,8 +4,8 @@ function retrieveByCategory() {
     return get('productTypes');
 }
 
-function generatePDF() {
-    return get('pdf', null, 'arraybuffer');
+function generatePDF(locale) {
+    return get('pdf', {locale: locale}, 'arraybuffer');
 }
 
 export {

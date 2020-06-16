@@ -5,12 +5,14 @@
         "navigation": {
             "menu": "Menu",
             "news": "News",
-            "contact": "Contact"
+            "contact": "Contact",
+            "order": "Order"
         },
         "menu": {
             "title": "Menu",
             "sale": "sale",
-            "pdf": "Download Menu"
+            "pdf": "Download Menu",
+            "order": "Order"
         },
         "contact": {
             "title": "Contact"
@@ -18,6 +20,9 @@
         "news": {
             "title": "News",
             "message": "Due to the outbreak of the COVID-19 virus, the restaurant is currently closed. Don't worry, you can still order your favourite takeout dishes! Sincerely, Golden Dragon staff."
+        },
+        "order": {
+            "title": "Order"
         }
     },
     "nl": {
@@ -26,12 +31,14 @@
         "navigation": {
             "menu": "Menu",
             "news": "Nieuws",
-            "contact": "Contact"
+            "contact": "Contact",
+            "order": "Bestellen"
         },
         "menu": {
             "title": "Menukaart",
             "sale": "actie",
-            "pdf": "Download Menukaart"
+            "pdf": "Download Menukaart",
+            "order": "Bestellen"
         },
         "contact": {
             "title": "Contact"
@@ -39,6 +46,9 @@
         "news": {
             "title": "Nieuws",
             "message": "Wegens de uitbraak van het COVID-19 virus is het restaurant momenteel gesloten. Niet getreurd, u kunt uw favoriete gerechten alsnog komen afhalen!"
+        },
+        "order": {
+            "title": "Bestellen"
         }
     }
 }

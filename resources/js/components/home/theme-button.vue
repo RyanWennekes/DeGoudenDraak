@@ -23,5 +23,8 @@
         padding: 10px 20px;
         border-radius: 20px;
         outline: none;
+        display: block;
+        width: 100%;
+        margin: 20px 0;
     }
 </style>

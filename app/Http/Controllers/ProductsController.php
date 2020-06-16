@@ -117,6 +117,7 @@ class ProductsController extends Controller
     public function generatePDF() {
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
+        $locale = $_GET["locale"];
 
         $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
         $fontData = $defaultFontConfig['fontdata'];
@@ -137,10 +138,10 @@ class ProductsController extends Controller
         } catch (MpdfException $e) {
         }
 
-        $data = "<link href='/css/pdf.css' rel='stylesheet' type='text/css'/><div class='outer'><div class='inner'><h1 class='menu-title'>Menukaart</h1>";
-        $data .= "<h3 class='menu-title'>Aanbiedingen</h3><table>";
+        $data = "<link href='/css/pdf.css' rel='stylesheet' type='text/css'/><div class='outer'><div class='inner'><h1 class='menu-title'>" . (($locale === 'en') ? 'Menu' : 'Menukaart') . "</h1>";
+        $data .= "<h3 class='menu-title'>" . (($locale === 'en') ? 'On Sale' : 'Aanbiedingen') . "</h3><table>";
         foreach(Offer::all() as $offer) {
-            $product = $offer->offer;
+            $product = $offer->product;
             $data .= "
                 <tr>
                     <td class='code'>$product->code</td>
@@ -153,7 +154,7 @@ class ProductsController extends Controller
         $data .= "</table>";
 
         foreach(ProductType::all() as $category) {
-            $data .= "<h3 class='menu-title'>$category->type_nl</h3><table>";
+            $data .= "<h3 class='menu-title'>" . (($locale === 'en') ? $category->type_en : $category->type_nl) . "</h3><table>";
 
             foreach($category->products as $product) {
                 $data .= "

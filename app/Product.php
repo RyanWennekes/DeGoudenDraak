@@ -47,7 +47,6 @@ class Product extends Model
     function offers(): HasMany
     {
         return $this->hasMany(Offer::class)
-            ->whereNull('deleted_at')
             ->where('date_start', '<=', NOW())
             ->where('date_end', '>=', NOW());
     }

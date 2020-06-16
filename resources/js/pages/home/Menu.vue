@@ -1,8 +1,13 @@
 <template>
     <div class="wrapper">
-        <theme-button id="printPDF" :action="downloadPDF">
-            {{ $t('menu.pdf') }}
-        </theme-button>
+        <div class="buttons">
+            <theme-button id="printPDF" :action="downloadPDF">
+                {{ $t('menu.pdf') }}
+            </theme-button>
+            <theme-button id="printPDF" :action="order">
+                {{ $t('menu.order') }}
+            </theme-button>
+        </div>
         <div class="menu">
         <h1 class="theme-heading">{{ $t('menu.title') }}</h1>
         <div v-for="category in categories" class="menu">
@@ -12,6 +17,12 @@
                     <td v-text="product.code" class="code"></td>
                     <td v-text="product.name" class="name"></td>
                     <td class="price"><span v-if="hasDiscount(product)">{{ $t('menu.sale') }}</span>{{ discount(product) | currency}}</td>
+                    <td class="counter"><counter :product="product"></counter></td>
+
+
+<!--                    <td class="small"><remove-dish :dish="product"></remove-dish></td>-->
+<!--                    <td class="small"><input type="number" v-model="product.count" @increment="increment" @decrement="decrement"></td>-->
+<!--                    <td class="small"><add-dish :dish="product"></add-dish></td>-->
                     <td class="remember"><saveddish :dish="product"></saveddish></td>
                 </tr>
             </table>
@@ -24,10 +35,12 @@
 <script>
     import {retrieveByCategory, generatePDF} from "../../api/home/products";
     import saveddish from "../../components/home/saveddish";
+    import counter from "../../components/home/counter";
 
     export default {
         components: {
-            saveddish
+            saveddish,
+            counter
         },
         name: "Menu",
         data() {
@@ -35,12 +48,24 @@
                 categories: []
             }
         },
+        mounted() {
+            let fa = document.createElement('script');
+            fa.setAttribute('src', 'https://kit.fontawesome.com/8c170b6078.js');
+            fa.setAttribute('crossorigin', 'anonymous');
+            document.head.appendChild(fa);
+        },
         created() {
             this.getProductsByCategory();
         },
         methods: {
             async getProductsByCategory() {
                 this.categories = await retrieveByCategory();
+
+                for(let i = 0; i < this.categories.length; i++) {
+                    for(let j = 0; j < this.categories[i].products.length; j++) {
+                        this.categories[i].products[j].count = 0;
+                    }
+                }
             },
             discount(product) {
                 if(product.offers.length) {
@@ -62,10 +87,9 @@
                 return (instance.locale === 'en') ? en : nl;
             },
             downloadPDF() {
-                generatePDF().then(r => this.showFile(r));
+                generatePDF(this.$i18n.locale).then(r => this.showFile(r));
             },
             showFile(data) {
-                console.log(data);
                 let newBlob = new Blob([data], {type: "application/pdf"})
 
                 if (window.navigator && window.navigator.msSaveOrOpenBlob) {
@@ -82,6 +106,9 @@
                 setTimeout(function(){
                     window.URL.revokeObjectURL(d);
                 }, 100);
+            },
+            order() {
+                
             }
         }
     }
@@ -93,7 +120,7 @@
         position: relative;
     }
 
-    #printPDF {
+    .buttons {
         position: absolute;
         right: 0;
     }
@@ -109,6 +136,11 @@
 
             td.code {
                 width: 30px;
+            }
+
+            td.counter {
+                width: 100px;
+                text-align: center;
             }
 
             td.name {
