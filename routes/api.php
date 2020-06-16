@@ -27,6 +27,7 @@ Route::group(['middleware' => ['api']], function (Router $router) {
 
     $router->get('/productTypes', 'ProductTypesController@index');
     $router->get('/pdf', 'ProductsController@generatePDF');
+    $router->post('/order', 'OrdersController@storeTakeout');
 
     // TODO: Requests with authentication
     $router->middleware('authorized')->group(function (Router $router) {

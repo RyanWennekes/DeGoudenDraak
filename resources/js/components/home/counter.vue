@@ -1,20 +1,23 @@
 <template>
     <div class="counter">
-        <i class="fas fa-minus" @click="dish.count--"></i>
-        <input type="number" :value="dish.count">
-        <i class="fas fa-plus" @click="dish.count++"></i>
+        <i class="fas fa-minus" @click="decrement"></i>
+        <input type="number" v-model="count" min="0" max="100">
+        <i class="fas fa-plus" @click="increment"></i>
     </div>
 </template>
 
 <script>
     export default {
         name: "counter",
-        props: ['product'],
-        data() {
-            return {
-                dish: this.product
+        props: ['count'],
+        methods: {
+            decrement() {
+                this.$emit('decr');
+            },
+            increment() {
+                this.$emit('incr');
             }
-        },
+        }
     }
 </script>
 

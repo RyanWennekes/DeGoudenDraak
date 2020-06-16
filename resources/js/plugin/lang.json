@@ -2,17 +2,13 @@
     "en": {
         "subtitle": "Chinese Indian Specialties",
         "title": "The Golden Dragon",
-        "navigation": {
-            "menu": "Menu",
-            "news": "News",
-            "contact": "Contact",
-            "order": "Order"
-        },
         "menu": {
             "title": "Menu",
             "sale": "sale",
             "pdf": "Download Menu",
-            "order": "Order"
+            "order": "Order",
+            "total": "Total",
+            "thankyou": "Thank you for your order with order number {order}, your order will be ready by {date}!<br>Scan the QR code above to show details of your order! <br><br> Sincerely, <br> The Golden Dragon"
         },
         "contact": {
             "title": "Contact"
@@ -20,25 +16,18 @@
         "news": {
             "title": "News",
             "message": "Due to the outbreak of the COVID-19 virus, the restaurant is currently closed. Don't worry, you can still order your favourite takeout dishes! Sincerely, Golden Dragon staff."
-        },
-        "order": {
-            "title": "Order"
         }
     },
     "nl": {
         "subtitle": "Chinees Indische Specialiteiten",
         "title": "De Gouden Draak",
-        "navigation": {
-            "menu": "Menu",
-            "news": "Nieuws",
-            "contact": "Contact",
-            "order": "Bestellen"
-        },
         "menu": {
             "title": "Menukaart",
             "sale": "actie",
             "pdf": "Download Menukaart",
-            "order": "Bestellen"
+            "order": "Bestellen",
+            "total": "Totaalprijs",
+            "thankyou": "Bedankt voor uw bestelling met ordernummer {order}, uw bestelling staat klaar om {date} uur.<br>Scan de QR code om details over uw bestelling in te zien! <br><br> Met vriendelijke groet, <br> De Gouden Draak"
         },
         "contact": {
             "title": "Contact"
@@ -46,9 +35,6 @@
         "news": {
             "title": "Nieuws",
             "message": "Wegens de uitbraak van het COVID-19 virus is het restaurant momenteel gesloten. Niet getreurd, u kunt uw favoriete gerechten alsnog komen afhalen!"
-        },
-        "order": {
-            "title": "Bestellen"
         }
     }
 }

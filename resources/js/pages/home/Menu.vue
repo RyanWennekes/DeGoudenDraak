@@ -1,11 +1,19 @@
 <template>
     <div class="wrapper">
+        <div class="qr" v-if="showQR">
+            <i class="fa fa-times" @click="showQR = false"></i>
+            <div class="image-wrapper">
+                <img :src="QRLink">
+            </div>
+            <p v-html="$t('menu.thankyou', {order: this.order, date: this.estimatePreparation()})"></p>
+        </div>
         <div class="buttons">
             <theme-button id="printPDF" :action="downloadPDF">
                 {{ $t('menu.pdf') }}
             </theme-button>
-            <theme-button id="printPDF" :action="order">
-                {{ $t('menu.order') }}
+            <p>{{ $t('menu.total') + ": " + (this.total) }}</p>
+            <theme-button id="printPDF" :action="orderBasket">
+                {{ $t('menu.order') }} <i class="fas fa-shopping-basket"></i>
             </theme-button>
         </div>
         <div class="menu">
@@ -17,12 +25,7 @@
                     <td v-text="product.code" class="code"></td>
                     <td v-text="product.name" class="name"></td>
                     <td class="price"><span v-if="hasDiscount(product)">{{ $t('menu.sale') }}</span>{{ discount(product) | currency}}</td>
-                    <td class="counter"><counter :product="product"></counter></td>
-
-
-<!--                    <td class="small"><remove-dish :dish="product"></remove-dish></td>-->
-<!--                    <td class="small"><input type="number" v-model="product.count" @increment="increment" @decrement="decrement"></td>-->
-<!--                    <td class="small"><add-dish :dish="product"></add-dish></td>-->
+                    <td class="counter"><counter :count="product.count" @incr="increment(product)" @decr="decrement(product)"></counter></td>
                     <td class="remember"><saveddish :dish="product"></saveddish></td>
                 </tr>
             </table>
@@ -33,7 +36,7 @@
 </template>
 
 <script>
-    import {retrieveByCategory, generatePDF} from "../../api/home/products";
+    import {retrieveByCategory, generatePDF, order} from "../../api/home/products";
     import saveddish from "../../components/home/saveddish";
     import counter from "../../components/home/counter";
 
@@ -45,7 +48,10 @@
         name: "Menu",
         data() {
             return {
-                categories: []
+                categories: [],
+                showQR: false,
+                QRLink: '',
+                order: 0
             }
         },
         mounted() {
@@ -56,6 +62,28 @@
         },
         created() {
             this.getProductsByCategory();
+        },
+        computed: {
+            total: function() {
+                let price = 0;
+
+                this.categories.forEach(function(element) {
+                    element.products.forEach(function(element) {
+                        if(element.count) {
+                            let productPrice = element.price;
+                            if(element.offers) {
+                                element.offers.forEach(function(element) {
+                                   productPrice *= ((100 - element.discount) / 100);
+                                });
+                            }
+
+                            price += (productPrice * element.count);
+                        }
+                    });
+                });
+
+                return price;
+            }
         },
         methods: {
             async getProductsByCategory() {
@@ -107,14 +135,94 @@
                     window.URL.revokeObjectURL(d);
                 }, 100);
             },
-            order() {
-                
+            orderBasket() {
+                let basket = [];
+                this.categories.forEach(function(element) {
+                    element.products.forEach(function(element) {
+                        if(element.count) {
+                            basket.push(element);
+                        }
+                    });
+                });
+
+                basket.length && order(basket).then(r => {
+                    this.QRLink = "data:image/png;base64, " + r.data.code;
+                    this.showQR = true;
+                    this.order = r.data.order;
+                }).catch(e => function(e) {
+                    console.log(e);
+                });
+            },
+            hideModal() {
+                console.log('close')
+                this.showQR = false;
+            },
+            increment: function(product) {
+                product.count++;
+                this.$forceUpdate();
+            },
+            decrement: function(product) {
+                product.count--;
+                this.$forceUpdate();
+            },
+            estimatePreparation() {
+                let date = new Date();
+                date.setTime(date.getTime() + (30*60*1000));
+
+                return date.getHours() + ":" + ((date.getMinutes() < 10) ? '0' : '') + date.getMinutes();
             }
-        }
+        },
     }
 </script>
 
+<style lang="scss">
+
+</style>
+
+
 <style lang="scss" scoped>
+
+    div.qr {
+        position: fixed;
+        display: flex;
+        flex-wrap: wrap;
+        background: rgba(0, 0, 0, 0.8);
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+
+        .image-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-wrapper, p {
+            flex: 0 1 100%;
+        }
+
+        i {
+            color: white;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 50px;
+        }
+
+        i:hover {
+            cursor: pointer;
+        }
+
+        p {
+            color: white;
+            font-size: 30px;
+            text-align: center;
+        }
+    }
 
     div.wrapper {
         position: relative;

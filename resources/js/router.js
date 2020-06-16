@@ -11,7 +11,6 @@ Vue.component('vue-app', require('./App.vue').default);
 import Page404 from './pages/Page404.vue';
 import Menu from './pages/home/Menu';
 import News from './pages/home/News';
-import Order from './pages/home/Order';
 import Contact from './pages/home/Contact';
 import Login from './pages/Login.vue';
 import Test from './pages/Test.vue';
@@ -51,11 +50,6 @@ const router = new VueRouter({
                     path: 'contact',
                     name: 'home.contact',
                     component: Contact,
-                },
-                {
-                    path: 'order',
-                    name: 'home.order',
-                    component: Order,
                 }
             ]
         },
