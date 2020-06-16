@@ -65,7 +65,6 @@
                 generatePDF().then(r => this.showFile(r));
             },
             showFile(data) {
-                console.log(data);
                 let newBlob = new Blob([data], {type: "application/pdf"})
 
                 if (window.navigator && window.navigator.msSaveOrOpenBlob) {
