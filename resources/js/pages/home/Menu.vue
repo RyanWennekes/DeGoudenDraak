@@ -125,14 +125,14 @@
                     return;
                 }
 
-                const d = window.URL.createObjectURL(newBlob);
+                const download = window.URL.createObjectURL(newBlob);
 
                 let link = document.createElement('a');
-                link.href = d;
+                link.href = download;
                 link.download="menu.pdf";
                 link.click();
                 setTimeout(function(){
-                    window.URL.revokeObjectURL(d);
+                    window.URL.revokeObjectURL(download);
                 }, 100);
             },
             orderBasket() {
