@@ -18,12 +18,13 @@ import AdminLayout from './layouts/admin.vue';
 import DefaultLayout from './layouts/default';
 
 /* Admin Pages */
-import OrderResource from './pages/admin/OrderResource.vue';
+import OrderManagement from './pages/admin/OrderManagement.vue';
 import OfferResource from './pages/admin/OfferResource.vue';
 import ProductResource from './pages/admin/ProductResource.vue';
 import UserResource from './pages/admin/UserResource.vue';
 import LoadingScreen from './pages/admin/LoadingScreen.vue';
 import SaleResource from './pages/admin/SaleResource.vue';
+import OrderResource from './pages/admin/OrderResource.vue';
 
 import store from './store';
 
@@ -92,6 +93,11 @@ const router = new VueRouter({
                 {
                     path: 'bestelling-aanmaken',
                     name: 'admin.create.order',
+                    component: OrderManagement,
+                },
+                {
+                    path: 'bestelling-overzicht',
+                    name: 'admin.order.resource',
                     component: OrderResource,
                 },
                 {
