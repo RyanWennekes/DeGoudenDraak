@@ -8,7 +8,11 @@
             :footer-props="pagination">
             <template #item="props">
                 <tr>
-                    <td>{{props.item.table_id}}.</td>
+                    <td>
+                        <v-badge :value="props.item.needs_help" color="red" content="Vraagt om bediening">
+                            {{props.item.table_id}}.
+                        </v-badge>
+                    </td>
                     <td class="text-center">
                         <ul>
                             <li v-for="sale in props.item.sales">{{sale.amount}}x {{sale.product.name}} <br/>
