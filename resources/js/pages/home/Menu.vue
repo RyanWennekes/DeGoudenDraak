@@ -63,28 +63,6 @@
         created() {
             this.getProductsByCategory();
         },
-        computed: {
-            total: function() {
-                let price = 0;
-
-                this.categories.forEach(function(element) {
-                    element.products.forEach(function(element) {
-                        if(element.count) {
-                            let productPrice = element.price;
-                            if(element.offers) {
-                                element.offers.forEach(function(element) {
-                                   productPrice *= ((100 - element.discount) / 100);
-                                });
-                            }
-
-                            price += (productPrice * element.count);
-                        }
-                    });
-                });
-
-                return price;
-            }
-        },
         methods: {
             async getProductsByCategory() {
                 this.categories = await retrieveByCategory();
@@ -92,7 +70,7 @@
                     product.count = 0;
                 });
             },
-            total: function() {
+            total() {
                 let price = 0;
 
                 this.forEachProduct(product => {
