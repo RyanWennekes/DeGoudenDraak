@@ -38,16 +38,16 @@ export default {
     methods: {
         addProduct(product) {
             if (this.order && !this.order[product.id]) {
-                Vue.set(this.order, product.id, product);
+                this.$set(this.order, product.id, product);
             }
 
-            Vue.set(this.order[product.id], 'total', this.order[product.id].total ? this.order[product.id].total + 1 : 1);
+            this.$set(this.order[product.id], 'total', this.order[product.id].total ? this.order[product.id].total + 1 : 1);
         },
         removeProduct(product) {
             if (this.order[product.id].total <= 1) {
-                Vue.delete(this.order, product.id);
+                this.$delete(this.order, product.id);
             } else {
-                Vue.set(this.order[product.id], 'total', this.order[product.id].total - 1);
+                this.$set(this.order[product.id], 'total', this.order[product.id].total - 1);
             }
         },
         payOrder(tableNumber) {
@@ -59,7 +59,7 @@ export default {
                         color: 'success',
                     };
 
-                    Vue.set(this, 'order', {});
+                    this.$set(this, 'order', {});
                 })
                 .catch(() => {
                     this.message = {
@@ -75,7 +75,7 @@ export default {
 
 <style lang="scss">
 .overflow {
-    max-height: 650px;
+    max-height: 660px;
     overflow-y: scroll;
 
     &.small {
