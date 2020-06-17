@@ -92,7 +92,6 @@ class OrdersController extends Controller
                 ]);
 
                 array_push($data, $sale);
-//                $info .= '['.$product['code'].' - '.$product['name'].' x'.$product['count'].'], ';
                 $info .= $product['code'].": ".$product['name']." x".$product['count']."\n";
             }
 
