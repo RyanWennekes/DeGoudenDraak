@@ -82,6 +82,19 @@
                     });
                 });
 
+                this.forEachProduct(product => function(product) {
+                    if(product.count) {
+                        let productPrice = product.price;
+                        if(product.offers) {
+                            product.offers.forEach(function(element) {
+                                productPrice *= ((100 - element.discount) / 100);
+                            });
+                        }
+
+                        price += (productPrice * product.count);
+                    }
+                });
+
                 return price;
             }
         },
@@ -89,11 +102,9 @@
             async getProductsByCategory() {
                 this.categories = await retrieveByCategory();
 
-                for(let i = 0; i < this.categories.length; i++) {
-                    for(let j = 0; j < this.categories[i].products.length; j++) {
-                        this.categories[i].products[j].count = 0;
-                    }
-                }
+                this.forEachProduct(product => function(product) {
+                    product.count = 0;
+                });
             },
             discount(product) {
                 if(product.offers.length) {
@@ -137,12 +148,10 @@
             },
             orderBasket() {
                 let basket = [];
-                this.categories.forEach(function(element) {
-                    element.products.forEach(function(element) {
-                        if(element.count) {
-                            basket.push(element);
-                        }
-                    });
+                this.forEachProduct(product => function(product) {
+                    if(product.count) {
+                        basket.push(product);
+                    }
                 });
 
                 basket.length && order(basket).then(r => {
@@ -154,7 +163,6 @@
                 });
             },
             hideModal() {
-                console.log('close')
                 this.showQR = false;
             },
             increment: function(product) {
@@ -170,6 +178,13 @@
                 date.setTime(date.getTime() + (30*60*1000));
 
                 return date.getHours() + ":" + ((date.getMinutes() < 10) ? '0' : '') + date.getMinutes();
+            },
+            forEachProduct(callback) {
+                this.categories.forEach(function(category) {
+                    category.products.forEach(function(product) {
+                        callback(product);
+                    });
+                });
             }
         },
     }
