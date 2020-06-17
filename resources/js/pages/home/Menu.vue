@@ -11,7 +11,7 @@
             <theme-button id="printPDF" :action="downloadPDF">
                 {{ $t('menu.pdf') }}
             </theme-button>
-            <p>{{ $t('menu.total') + ": " + (this.total) }}</p>
+            <p>{{ $t('menu.total') + ": &euro;" + this.total() }}</p>
             <theme-button id="printPDF" :action="orderBasket">
                 {{ $t('menu.order') }} <i class="fas fa-shopping-basket"></i>
             </theme-button>
@@ -63,48 +63,30 @@
         created() {
             this.getProductsByCategory();
         },
-        computed: {
+        methods: {
+            async getProductsByCategory() {
+                this.categories = await retrieveByCategory();
+
+                this.forEachProduct(product =>  {
+                    product.count = 0;
+                });
+            },
             total: function() {
                 let price = 0;
 
-                this.categories.forEach(function(element) {
-                    element.products.forEach(function(element) {
-                        if(element.count) {
-                            let productPrice = element.price;
-                            if(element.offers) {
-                                element.offers.forEach(function(element) {
-                                   productPrice *= ((100 - element.discount) / 100);
-                                });
-                            }
-
-                            price += (productPrice * element.count);
-                        }
-                    });
-                });
-
-                this.forEachProduct(product => function(product) {
+                this.forEachProduct(product => {
                     if(product.count) {
                         let productPrice = product.price;
-                        if(product.offers) {
-                            product.offers.forEach(function(element) {
-                                productPrice *= ((100 - element.discount) / 100);
-                            });
-                        }
+
+                        product.offers.forEach(function(offer) {
+                            productPrice *= (100 - offer.discount) / 100;
+                        });
 
                         price += (productPrice * product.count);
                     }
                 });
 
-                return price;
-            }
-        },
-        methods: {
-            async getProductsByCategory() {
-                this.categories = await retrieveByCategory();
-
-                this.forEachProduct(product => function(product) {
-                    product.count = 0;
-                });
+                return price.toFixed(2);
             },
             discount(product) {
                 if(product.offers.length) {
@@ -148,7 +130,7 @@
             },
             orderBasket() {
                 let basket = [];
-                this.forEachProduct(product => function(product) {
+                this.forEachProduct(product => {
                     if(product.count) {
                         basket.push(product);
                     }
@@ -158,6 +140,9 @@
                     this.QRLink = "data:image/png;base64, " + r.data.code;
                     this.showQR = true;
                     this.order = r.data.order;
+                    this.forEachProduct(product => {
+                        product.count = 0;
+                    })
                 }).catch(e => function(e) {
                     console.log(e);
                 });
@@ -170,7 +155,7 @@
                 this.$forceUpdate();
             },
             decrement: function(product) {
-                product.count--;
+                product.count > 0 && product.count--;
                 this.$forceUpdate();
             },
             estimatePreparation() {

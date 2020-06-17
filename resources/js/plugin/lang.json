@@ -16,6 +16,22 @@
         "news": {
             "title": "News",
             "message": "Due to the outbreak of the COVID-19 virus, the restaurant is currently closed. Don't worry, you can still order your favourite takeout dishes! Sincerely, Golden Dragon staff."
+        },
+        "table": {
+            "title": "Order",
+            "help": "A waitress is currently on her way to table {table}. She will arive shortly.",
+            "closeDialog": "Close",
+            "product": {
+                "name": "Name",
+                "spiciness": "Spiciness",
+                "allergenes": "Allergenes",
+                "amount": "Amount"
+            },
+            "basket": {
+                "tableNumber": "Table Number",
+                "total": "Total"
+            },
+            "contains": "Contains"
         }
     },
     "nl": {
@@ -35,6 +51,22 @@
         "news": {
             "title": "Nieuws",
             "message": "Wegens de uitbraak van het COVID-19 virus is het restaurant momenteel gesloten. Niet getreurd, u kunt uw favoriete gerechten alsnog komen afhalen!"
+        },
+        "table": {
+            "title": "Bestellen",
+            "help": "Een serveerster is onderweg naar tafel {table}, een moment geduld alstublieft!",
+            "closeDialog": "Sluiten",
+            "product": {
+                "name": "Naam",
+                "spiciness": "Pittigheid",
+                "allergenes": "Allergenen",
+                "amount": "Hoeveelheid"
+            },
+            "basket": {
+                "tableNumber": "Tafelnummer",
+                "total": "Totaal"
+            },
+            "contains": "Bevat"
         }
     }
 }
