@@ -1,4 +1,3 @@
-window.Vue = require('vue');
 import Vue from 'vue';
 
 import '@babel/polyfill';
@@ -7,6 +6,7 @@ import {router} from './router.js';
 import {vuetify} from './plugin';
 
 import api from './plugin/api';
+import i18n from './plugin/i18n';
 import Lodash from 'lodash';
 
 Vue.use(Lodash);
@@ -17,9 +17,11 @@ Vue.prototype.$http = api;
 const files = require.context('./', true, /\.vue$/i);
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
+
 new Vue({
     router,
     vuetify,
     store,
     el: '#app',
+    i18n,
 });

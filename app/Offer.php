@@ -23,6 +23,6 @@ class Offer extends Model
 
     function product(): BelongsTo
     {
-        return $this->belongsTo(Product::class, 'product_id')->select('id', 'name');
+        return $this->belongsTo(Product::class, "product_id");
     }
 }

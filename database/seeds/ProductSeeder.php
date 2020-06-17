@@ -25,7 +25,7 @@ class ProductSeeder extends Seeder
                 'spiciness' => self::SPICINESS_RANGE[random_int(0, 3)],
                 'description_nl' => $product->beschrijving,
                 'description_en' => '',
-                'minimum_amount' => null
+                'minimum_amount' => null,
             ]);
         }
     }

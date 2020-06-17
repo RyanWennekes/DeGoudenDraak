@@ -15,10 +15,12 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->string('product_id', 45);
+            $table->unsignedBigInteger('product_id');
             $table->tinyInteger('discount');
             $table->dateTime('date_start');
             $table->dateTime('date_end')->nullable();
+
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

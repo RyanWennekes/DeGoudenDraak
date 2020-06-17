@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
+    protected $with = ['offers'];
     use SoftDeletes;
 
     public $timestamps = false;
-  
+
     protected $hidden = ['deleted_at'];
 
     protected $fillable = [
@@ -47,8 +48,8 @@ class Product extends Model
     {
         return $this->hasMany(Offer::class)
             ->whereNull('deleted_at')
-            ->where('date_start', '>=', NOW())
-            ->where('date_end', '<=', NOW());
+            ->where('date_start', '<=', NOW())
+            ->where('date_end', '>=', NOW());
     }
 
     function allergenes()
