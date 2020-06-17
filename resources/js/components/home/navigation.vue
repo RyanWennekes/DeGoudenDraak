@@ -7,9 +7,9 @@
             {{ $t('title') }}
         </h1>
         <ul class="navigation">
-            <li><router-link :to="{name: 'home.menu'}">{{ $t('navigation.menu') }}</router-link></li>
-            <li><router-link :to="{name: 'home.news'}">{{ $t('navigation.news') }}</router-link></li>
-            <li><router-link :to="{name: 'home.contact'}">{{ $t('navigation.contact') }}</router-link></li>
+            <li><router-link :to="{name: 'home.menu'}">{{ $t('menu.title') }}</router-link></li>
+            <li><router-link :to="{name: 'home.news'}">{{ $t('news.title') }}</router-link></li>
+            <li><router-link :to="{name: 'home.contact'}">{{ $t('contact.title') }}</router-link></li>
         </ul>
     </div>
 </template>

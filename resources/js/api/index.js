@@ -14,7 +14,7 @@ async function get(url, params = {}, responseType) {
 
 async function post(url, data = {}, params = {}) {
     const result = await api.post(url, data, {
-        params: params,
+        params: params
     });
 
     if (result.data.data) return result.data;

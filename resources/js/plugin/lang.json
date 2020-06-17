@@ -2,15 +2,13 @@
     "en": {
         "subtitle": "Chinese Indian Specialties",
         "title": "The Golden Dragon",
-        "navigation": {
-            "menu": "Menu",
-            "news": "News",
-            "contact": "Contact"
-        },
         "menu": {
             "title": "Menu",
             "sale": "sale",
-            "pdf": "Download Menu"
+            "pdf": "Download Menu",
+            "order": "Order",
+            "total": "Total",
+            "thankyou": "Thank you for your order with order number {order}, your order will be ready by {date}!<br>Scan the QR code above to show details of your order! <br><br> Sincerely, <br> The Golden Dragon"
         },
         "contact": {
             "title": "Contact"
@@ -23,15 +21,13 @@
     "nl": {
         "subtitle": "Chinees Indische Specialiteiten",
         "title": "De Gouden Draak",
-        "navigation": {
-            "menu": "Menu",
-            "news": "Nieuws",
-            "contact": "Contact"
-        },
         "menu": {
             "title": "Menukaart",
             "sale": "actie",
-            "pdf": "Download Menukaart"
+            "pdf": "Download Menukaart",
+            "order": "Bestellen",
+            "total": "Totaalprijs",
+            "thankyou": "Bedankt voor uw bestelling met ordernummer {order}, uw bestelling staat klaar om {date} uur.<br>Scan de QR code om details over uw bestelling in te zien! <br><br> Met vriendelijke groet, <br> De Gouden Draak"
         },
         "contact": {
             "title": "Contact"
