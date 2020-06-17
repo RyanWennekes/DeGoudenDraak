@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IndexSalesRequest;
 use App\Sale;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SalesController extends Controller
@@ -10,11 +12,13 @@ class SalesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\IndexSalesRequest $request
+     * @return \Illuminate\Database\Eloquent\Collection
+     * @throws \Exception
      */
-    public function index()
+    public function index(IndexSalesRequest $request)
     {
-        //
+        return Sale::selectedSales(new Carbon($request->get('start_date')), new Carbon($request->get('end_date')));
     }
 
     /**
@@ -30,7 +34,7 @@ class SalesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +45,7 @@ class SalesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Sale  $sale
+     * @param  \App\Sale $sale
      * @return \Illuminate\Http\Response
      */
     public function show(Sale $sale)
@@ -52,7 +56,7 @@ class SalesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Sale  $sale
+     * @param  \App\Sale $sale
      * @return \Illuminate\Http\Response
      */
     public function edit(Sale $sale)
@@ -63,8 +67,8 @@ class SalesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Sale  $sale
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Sale                $sale
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Sale $sale)
@@ -75,7 +79,7 @@ class SalesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Sale  $sale
+     * @param  \App\Sale $sale
      * @return \Illuminate\Http\Response
      */
     public function destroy(Sale $sale)

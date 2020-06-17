@@ -17,6 +17,9 @@
                             <v-tab :to="{name: 'admin.products'}">
                                 Producten
                             </v-tab>
+                            <v-tab :to="{name: 'admin.sales'}">
+                                Verkoopoverzicht
+                            </v-tab>
                             <v-tab :to="{name: 'admin.users'}">
                                 Gebruikers
                             </v-tab>
