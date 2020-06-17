@@ -43,7 +43,7 @@
                         label="Wachtwoord*"
                         type="password"
                         counter="80"
-                        :rules="[() => (!!v || isUpdateForm)  || 'Wachtwoord is verplicht', (v) => isUpdateForm || !!v && v.length <= 80 || 'Wachtwoord mag een maximale lengte hebben van 80 karakters']"/>
+                        :rules="[(v) => (!!v || isUpdateForm)  || 'Wachtwoord is verplicht', (v) => isUpdateForm || !!v && v.length <= 80 || 'Wachtwoord mag een maximale lengte hebben van 80 karakters']"/>
                 </v-form>
             </v-card-text>
             <v-card-actions>
