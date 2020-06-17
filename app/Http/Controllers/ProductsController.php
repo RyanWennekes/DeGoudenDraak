@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Mpdf\MpdfException;
 use PHPUnit\Exception;
 
@@ -140,7 +141,7 @@ class ProductsController extends Controller
         $data = "<link href='/css/pdf.css' rel='stylesheet' type='text/css'/><div class='outer'><div class='inner'><h1 class='menu-title'>Menukaart</h1>";
         $data .= "<h3 class='menu-title'>Aanbiedingen</h3><table>";
         foreach(Offer::all() as $offer) {
-            $product = $offer->offer;
+            $product = $offer->product;
             $data .= "
                 <tr>
                     <td class='code'>$product->code</td>
