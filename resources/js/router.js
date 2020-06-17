@@ -120,7 +120,7 @@ const router = new VueRouter({
 
                         // When the user is cashier
                         else if (store.state.Authorization.isCashier)
-                            return {name: 'admin.create.order'};
+                            return {name: 'admin.order.resource'};
 
                         // Default
                         return {name: 'admin.test'};

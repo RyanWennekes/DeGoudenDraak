@@ -40,14 +40,14 @@ Route::group(['middleware' => ['api']], function (Router $router) {
         $router->middleware('isAdmin')->group(function (Router $router) {
             $router->resource('users', 'UserController')->only(['index', 'store', 'update', 'destroy']);
             $router->resource('products', 'ProductsController')->only(['update', 'store', 'destroy']);
-            $router->resource('orders', 'OrdersController')->only(['index', 'show']);
+            $router->resource('orders', 'OrdersController')->only(['show']);
             $router->resource('tables', 'TablesController')->only(['store']);
             $router->resource('sales', 'SalesController')->only(['index']);
         });
 
         // Requests with cashier authentication
         $router->middleware('isCashier')->group(function (Router $router) {
-            $router->resource('orders', 'OrdersController')->only(['store']);
+            $router->resource('orders', 'OrdersController')->only(['index', 'store']);
             $router->resource('tables', 'TablesController')->only(['update']);
             $router->resource('offers', 'OffersController');
             $router->get('products/minimized', 'ProductsController@minimized')->name('products.index.minimized');

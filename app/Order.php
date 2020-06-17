@@ -2,15 +2,26 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 class Order extends Model
 {
     protected $fillable = [
         'table_id', 'needs_help',
     ];
+
+    public static function orders(Carbon $date): Collection
+    {
+        return Order::query()
+            ->whereDate('created_at', '=', $date)
+            ->with('sales.product')
+            ->orderBy('created_at')
+            ->get();
+    }
 
     public function table(): BelongsTo
     {
