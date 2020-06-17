@@ -1,4 +1,10 @@
-import {post} from '../api/index.js';
+import {get, post} from '../api/index.js';
+
+function fetchAllOrders(orderDate) {
+    return get('admin/orders', {
+        date: orderDate,
+    })
+}
 
 function createOrder(order) {
     return post('admin/orders', order);
@@ -9,6 +15,7 @@ function createGuestOrder(order) {
 }
 
 export {
+    fetchAllOrders,
     createOrder,
     createGuestOrder
 };

@@ -45,7 +45,7 @@
                 <template v-for="(product, index) in filteredProducts" v-if="product.product_type_id === category.id">
                     <v-list-item :key="`product-${index}`" class="product">
                         <v-list-item-content class="id-label">
-                            {{product.id}}.
+                            {{product.code}}.
                         </v-list-item-content>
 
                         <v-list-item-content>
@@ -102,7 +102,7 @@ export default {
         filteredProducts() {
             return this.products != null ? this.products.filter((product) => {
                 if (!this.selectedCategory || this.selectedCategory && this.selectedCategory === product.product_type_id)
-                    return product.name.toLowerCase().includes(this.search.toLowerCase()) || String(product.id).includes(this.search);
+                    return product.name.toLowerCase().includes(this.search.toLowerCase()) || String(product.code).includes(this.search);
 
                 return false;
             }) : null;

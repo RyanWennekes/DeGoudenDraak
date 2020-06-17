@@ -9,6 +9,9 @@
                             <v-tab :to="{name: 'admin.create.order'}">
                                 Bestelling aanmaken
                             </v-tab>
+                            <v-tab :to="{name: 'admin.order.resource'}">
+                                Bestellingoverzicht
+                            </v-tab>
                             <v-tab :to="{name: 'admin.offers'}">
                                 Aanbiedingen
                             </v-tab>
