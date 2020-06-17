@@ -28,7 +28,8 @@ Route::group(['middleware' => ['api']], function (Router $router) {
     $router->get('/productTypes', 'ProductTypesController@index');
     $router->get('/pdf', 'ProductsController@generatePDF');
     $router->post('/order', 'OrdersController@storeTakeout');
-
+    $router->post('/storeTableOrder', 'OrdersController@store');
+    $router->put('/updateTableOrder', 'TablesController@update');
     $router->resource('products', 'ProductsController')->only(['index', 'show']);
     $router->resource('categories', 'ProductTypesController')->only(['index']);
 

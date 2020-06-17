@@ -11,7 +11,7 @@
             <theme-button id="printPDF" :action="downloadPDF">
                 {{ $t('menu.pdf') }}
             </theme-button>
-            <p>{{ $t('menu.total') + ": " + (this.total) }}</p>
+            <p>{{ $t('menu.total') + ": &euro;" + this.total() }}</p>
             <theme-button id="printPDF" :action="orderBasket">
                 {{ $t('menu.order') }} <i class="fas fa-shopping-basket"></i>
             </theme-button>
@@ -63,37 +63,29 @@
         created() {
             this.getProductsByCategory();
         },
-        computed: {
-            total: function() {
-                let price = 0;
-
-                this.categories.forEach(function(element) {
-                    element.products.forEach(function(element) {
-                        if(element.count) {
-                            let productPrice = element.price;
-                            if(element.offers) {
-                                element.offers.forEach(function(element) {
-                                   productPrice *= ((100 - element.discount) / 100);
-                                });
-                            }
-
-                            price += (productPrice * element.count);
-                        }
-                    });
-                });
-
-                return price;
-            }
-        },
         methods: {
             async getProductsByCategory() {
                 this.categories = await retrieveByCategory();
+                this.forEachProduct(product =>  {
+                    product.count = 0;
+                });
+            },
+            total() {
+                let price = 0;
 
-                for(let i = 0; i < this.categories.length; i++) {
-                    for(let j = 0; j < this.categories[i].products.length; j++) {
-                        this.categories[i].products[j].count = 0;
+                this.forEachProduct(product => {
+                    if(product.count) {
+                        let productPrice = product.price;
+
+                        product.offers.forEach(function(offer) {
+                            productPrice *= (100 - offer.discount) / 100;
+                        });
+
+                        price += (productPrice * product.count);
                     }
-                }
+                });
+
+                return price.toFixed(2);
             },
             discount(product) {
                 if(product.offers.length) {
@@ -137,24 +129,24 @@
             },
             orderBasket() {
                 let basket = [];
-                this.categories.forEach(function(element) {
-                    element.products.forEach(function(element) {
-                        if(element.count) {
-                            basket.push(element);
-                        }
-                    });
+                this.forEachProduct(product => {
+                    if(product.count) {
+                        basket.push(product);
+                    }
                 });
 
                 basket.length && order(basket).then(r => {
                     this.QRLink = "data:image/png;base64, " + r.data.code;
                     this.showQR = true;
                     this.order = r.data.order;
+                    this.forEachProduct(product => {
+                        product.count = 0;
+                    })
                 }).catch(e => function(e) {
                     console.log(e);
                 });
             },
             hideModal() {
-                console.log('close')
                 this.showQR = false;
             },
             increment: function(product) {
@@ -162,7 +154,7 @@
                 this.$forceUpdate();
             },
             decrement: function(product) {
-                product.count--;
+                product.count > 0 && product.count--;
                 this.$forceUpdate();
             },
             estimatePreparation() {
@@ -170,6 +162,13 @@
                 date.setTime(date.getTime() + (30*60*1000));
 
                 return date.getHours() + ":" + ((date.getMinutes() < 10) ? '0' : '') + date.getMinutes();
+            },
+            forEachProduct(callback) {
+                this.categories.forEach(function(category) {
+                    category.products.forEach(function(product) {
+                        callback(product);
+                    });
+                });
             }
         },
     }

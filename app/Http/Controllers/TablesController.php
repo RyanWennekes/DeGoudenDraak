@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Table;
 use Illuminate\Http\Request;
 
@@ -67,9 +68,16 @@ class TablesController extends Controller
      * @param  \App\Table               $table
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Table $table)
+    public function update(Request $request)
     {
-        //
+        try {
+            $order = Order::where('table_id', $request->get('tableNo'))->orderBy('created_at', 'desc')->first();
+            $order->needs_help = 1;
+            $order->save();
+        } catch(\Exception $exception) {
+            return response('Tafelnummer of order niet gevonden', 500);
+        }
+        return response($order, 200);
     }
 
     /**

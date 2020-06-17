@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    protected $with = ['offers'];
+    protected $with = ['offers', 'allergenes'];
     use SoftDeletes;
 
     public $timestamps = false;

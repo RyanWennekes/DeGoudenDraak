@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             ProductTypeSeeder::class,
             ProductSeeder::class,
             OfferSeeder::class,
+            AllergenesSeeder::class,
+            ProductAllergenesSeeder::class
         ]);
     }
 }

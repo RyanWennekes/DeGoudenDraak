@@ -8,6 +8,7 @@ use App\Sale;
 use Carbon\Carbon;
 use Endroid\QrCode\QrCode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrdersController extends Controller
 {
@@ -41,7 +42,7 @@ class OrdersController extends Controller
     {
         try {
             $order = Order::create([
-                'table_id' => $request->get('table_id'),
+                'table_id' => (int) $request->get('table_id')
             ]);
 
             $order->save();
@@ -50,8 +51,8 @@ class OrdersController extends Controller
                 Sale::create([
                     'product_id' => $product['id'],
                     'order_id'   => $order->id,
-                    'price'      => $product['discountPrice'],
-                    'amount'     => $product['total'],
+                    'price'      => $product['discountPrice'] ?? $product['price'],
+                    'amount'     => $product['total'] ?? $product['count'],
                     'comment'    => isset($product['comment']) ? $product['comment'] : null,
                 ])->save();
             }

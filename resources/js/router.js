@@ -12,6 +12,7 @@ import Page404 from './pages/Page404.vue';
 import Menu from './pages/home/Menu';
 import News from './pages/home/News';
 import Contact from './pages/home/Contact';
+import Table from './pages/guest/Table';
 import Login from './pages/Login.vue';
 import Test from './pages/Test.vue';
 import AdminLayout from './layouts/admin.vue';
@@ -57,6 +58,11 @@ const router = new VueRouter({
         {
             path: '/home',
             redirect: {name: 'home'},
+        },
+        {
+            path: '/table',
+            name: 'table.index',
+            component: Table
         },
         {
             path: '/login',
