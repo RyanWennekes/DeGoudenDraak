@@ -38,7 +38,7 @@ class Product extends Model
                     ->where('offers.date_start', '<=', NOW())
                     ->where('offers.date_end', '>=', NOW());
             })
-            ->whereNull('deleted_at')
+            ->whereNull('products.deleted_at')
             ->select('products.*',
                 DB::raw('(case when offers.discount then products.price * ((100 - offers.discount) / 100) else products.price end) as discountPrice'))
             ->get();
@@ -47,7 +47,6 @@ class Product extends Model
     function offers(): HasMany
     {
         return $this->hasMany(Offer::class)
-            ->whereNull('deleted_at')
             ->where('date_start', '<=', NOW())
             ->where('date_end', '>=', NOW());
     }
