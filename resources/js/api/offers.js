@@ -1,19 +1,19 @@
 import {get, put, post, destroy} from '../api/index.js';
 
 function fetchAllOffers() {
-    return get('offers');
+    return get('admin/offers');
 }
 
 function updateOffer(offer) {
-    return put(`offers/${offer.id}`, offer);
+    return put(`admin/offers/${offer.id}`, offer);
 }
 
 function deleteOffer(offer) {
-    return destroy(`offers/${offer.id}`);
+    return destroy(`admin/offers/${offer.id}`);
 }
 
 function createOffer(offer) {
-    return post('offers', {
+    return post('admin/offers', {
         'date_end': `${offer.date_end} 00:00:00`,
         'date_start': `${offer.date_start} 23:59:59`,
         'product_id': offer.product_id,

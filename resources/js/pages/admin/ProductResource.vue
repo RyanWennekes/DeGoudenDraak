@@ -13,7 +13,6 @@
                         <v-edit-dialog
                             :return-value.sync="props.item.name"
                             @save="saveName(props.item)"
-                            @cancel="cancel"
                         > {{ props.item.name }} <span class="red--text font-weight-bold ml-1"
                                                       v-if="props.item.price !== props.item.discountPrice">Korting</span>
                             <template #input>
@@ -30,9 +29,6 @@
                         <v-edit-dialog
                             :return-value.sync="props.item.code"
                             @save="saveCode(props.item)"
-                            @cancel="cancel"
-                            @open="open"
-                            @close="close"
                         > {{ props.item.code }}
                             <template #input>
                                 <v-text-field
@@ -127,9 +123,6 @@ export default {
             updateProductCode(product)
                 .then(() => this.snackbarMessage('De code succesvol aangepast', 'success'))
                 .catch(() => this.snackbarMessage('De code moet uniek blijven', 'error'));
-        },
-        cancel() {
-            this.snackbarMessage('Veld afgesloten zonder te opslaan', 'warning');
         },
         snackbarMessage(text, color) {
             this.snack = true;

@@ -110,9 +110,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.loginRequired) && !store.getters['Authorization/isLoggedIn']) {
         next({
-            name: 'login', params: {
-                afterLoggedIn: to.name,
-            },
+            name: 'login'
         });
     } else {
         next();
