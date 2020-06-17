@@ -23,6 +23,7 @@ import OfferResource from './pages/admin/OfferResource.vue';
 import ProductResource from './pages/admin/ProductResource.vue';
 import UserResource from './pages/admin/UserResource.vue';
 import LoadingScreen from './pages/admin/LoadingScreen.vue';
+import SaleResource from './pages/admin/SaleResource.vue';
 
 import store from './store';
 
@@ -74,7 +75,7 @@ const router = new VueRouter({
                     component: Test,
                 },
                 {
-                    path: 'loading',
+                    path: 'laden',
                     name: 'admin.loading',
                     component: LoadingScreen,
                 },
@@ -97,6 +98,11 @@ const router = new VueRouter({
                     path: 'acties',
                     name: 'admin.offers',
                     component: OfferResource,
+                },
+                {
+                    path: 'verkoop-overzicht',
+                    name: 'admin.sales',
+                    component: SaleResource,
                 },
                 {
                     path: 'index',
@@ -130,9 +136,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.loginRequired) && !store.getters['Authorization/isLoggedIn']) {
         next({
-            name: 'login', params: {
-                afterLoggedIn: to.name,
-            },
+            name: 'login'
         });
     } else {
         next();
