@@ -15,20 +15,29 @@
                     <td>{{props.item.name}}</td>
                     <td>{{props.item.email}}</td>
                     <td>
-                        <v-tooltip left :disabled="!deleteDisabled(props.item.role)">
-                            <template #activator="{ on }">
-                                <div v-on="on">
-                                    <v-btn @click="handleDelete(props.item)"
-                                           color="error"
-                                           small
-                                           fab
-                                           :disabled="deleteDisabled(props.item.role)">
-                                        <v-icon small>fa-trash</v-icon>
-                                    </v-btn>
-                                </div>
-                            </template>
-                            <span>Een gebruiker met admin-rechten kan niet worden verwijderd</span>
-                        </v-tooltip>
+                        <v-row justify="space-between" class="pa-1">
+                            <v-tooltip left :disabled="!deleteDisabled(props.item.role)">
+                                <template #activator="{ on }">
+                                    <div v-on="on">
+                                        <v-btn @click="handleDelete(props.item)"
+                                               color="error"
+                                               small
+                                               fab
+                                               :disabled="deleteDisabled(props.item.role)">
+                                            <v-icon small>fa-trash</v-icon>
+                                        </v-btn>
+                                    </div>
+                                </template>
+                                <span>Een gebruiker met admin-rechten kan niet worden verwijderd</span>
+                            </v-tooltip>
+
+                            <v-btn @click="handleUpdate(props.item)"
+                                   color="success"
+                                   small
+                                   fab>
+                                <v-icon small>fa-pen</v-icon>
+                            </v-btn>
+                        </v-row>
                     </td>
                 </tr>
             </template>
@@ -36,8 +45,7 @@
         <v-skeleton-loader v-show="loading"
                            type="table-heading,table-thead,table-tbody@2,table-tfoot"></v-skeleton-loader>
 
-        <!-- TODO: Update Name, email and role with the same form -->
-        <UserForm @error="snackbarMessage" @successfulCreated="afterUserCreated"/>
+        <UserForm @error="snackbarMessage" @successfulCreated="afterUserCreated" ref="UserForm"/>
 
         <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
             {{ snackText }}
@@ -65,7 +73,7 @@ export default {
                 {text: 'Toegangsrechten', value: 'role', align: 'center', width: '170'},
                 {text: 'Naam', value: 'name', align: 'left'},
                 {text: 'Emailadres', value: 'email', align: 'left'},
-                {text: '', value: '', align: '', width: '60'},
+                {text: '', value: '', align: '', width: '105'},
             ],
             users: [],
             loading: false,
@@ -109,13 +117,12 @@ export default {
                     this.snackbarMessage('Er is iets misgegaan', 'error');
                 });
         },
+        handleUpdate(user) {
+            this.$refs.UserForm.openUpdateForm(user);
+        },
         deleteDisabled(role) {
             return role === UserRoles.ADMIN;
         },
     },
 };
 </script>
-
-<style scoped>
-
-</style>

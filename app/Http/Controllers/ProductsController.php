@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Mpdf\MpdfException;
 use PHPUnit\Exception;
 

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Enums\UserRoles;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -26,9 +27,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name'     => 'required|max:254',
-            'role'     => 'required|min:' . UserRoles::Admin . '|max:' . UserRoles::Customer . '',
-            'email'    => 'required|max:254|email',
-            'password' => 'required|max:80',
+            'email'    => Rule::unique('users')->ignore($this->route()->user->id),
+            'password' => 'max:80',
         ];
     }
 }

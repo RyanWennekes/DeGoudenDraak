@@ -21,7 +21,7 @@ class Sale extends Model
             ->join('products', 'products.id', '=', 'sales.product_id')
             ->whereDate('created_at', '>=', $start_date)
             ->whereDate('created_at', '<=', $end_date)
-            ->groupBy('products.id', DB::raw('DATE(sales.created_at)'))
+            ->groupBy('products.id', 'products.name', DB::raw('DATE(sales.created_at)'))
             ->orderBy('sales.product_id', 'asc')
             ->get();
     }
