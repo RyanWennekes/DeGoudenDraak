@@ -17,7 +17,6 @@ async function post(url, data = {}, params = {}) {
         params: params
     });
 
-    console.log(data);
 
     if (result.data.data) return result.data;
 
