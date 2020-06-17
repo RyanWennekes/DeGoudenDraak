@@ -180,7 +180,7 @@ export default {
             this.$refs.form.validate();
 
             if (this.valid) {
-                Vue.set(this.selectedProduct, 'comment', this.comment);
+                this.$set(this.selectedProduct, 'comment', this.comment);
                 this.onClose();
             }
         },

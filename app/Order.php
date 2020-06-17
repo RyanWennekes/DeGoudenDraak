@@ -19,7 +19,8 @@ class Order extends Model
         return Order::query()
             ->whereDate('created_at', '=', $date)
             ->with('sales.product')
-            ->orderBy('created_at')
+            ->groupBy('orders.id')
+            ->orderBy('orders.created_at', 'desc')
             ->get();
     }
 

@@ -1,5 +1,5 @@
 <template>
-    <v-row>
+    <div>
         <v-data-table
             v-show="!loading"
             :headers="headers"
@@ -8,15 +8,23 @@
             :footer-props="pagination">
             <template #item="props">
                 <tr>
-                    <td>{{props.item.name}}</td>
+                    <td>{{props.item.table_id}}.</td>
+                    <td class="text-center">
+                        <ul>
+                            <li v-for="sale in props.item.sales">{{sale.amount}}x {{sale.product.name}} <br/>
+                                <v-subheader v-show="sale.comment" class="red--text font-weight-bold">
+                                    {{sale.comment}}
+                                </v-subheader>
+                            </li>
+                        </ul>
+                    </td>
                     <td class="text-center">{{props.item.created_at}}</td>
-                    <td class="text-center">{{props.item.amount}}x</td>
                 </tr>
             </template>
         </v-data-table>
         <v-skeleton-loader v-show="loading"
                            type="table-heading,table-thead,table-tbody@2,table-tfoot"></v-skeleton-loader>
-    </v-row>
+    </div>
 </template>
 
 <script>
@@ -46,18 +54,18 @@ export default {
         },
         headers() {
             return [
-                {text: 'Product', value: 'name'},
+                {text: 'Tafelnummer', value: 'table_id'},
+                {text: 'Producten', value: 'sales', align: 'center'},
                 {text: 'Besteld op', value: 'created_at', align: 'center'},
-                {text: 'Aantal', value: 'amount', align: 'center'},
             ];
         },
         mappedOrders() {
             return this.orders.map(order => {
                 return {
-                    name: order.name,
-                    amount: order.amount,
-                    price: order.price,
-                    created_at: dayjs(order.created_at).format('YYYY-MM-DD'),
+                    table_id: order.table_id,
+                    needs_help: order.needs_help,
+                    sales: order.sales,
+                    created_at: dayjs(order.created_at).format('YYYY-MM-DD hh:mm:ss'),
                 };
             });
         },
@@ -65,7 +73,7 @@ export default {
     methods: {
         async getOrders() {
             this.loading = true;
-            this.sales = await fetchAllOrders(dayjs().format('YYYY-MM-DD'));
+            this.orders = await fetchAllOrders(dayjs().format('YYYY-MM-DD'));
             this.loading = false;
         },
     },
