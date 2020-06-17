@@ -23,25 +23,33 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['api']], function (Router $router) {
-    // TODO: Requests without authentication
-
+  
+    // Requests without authentication
     $router->get('/productTypes', 'ProductTypesController@index');
     $router->get('/pdf', 'ProductsController@generatePDF');
     $router->post('/order', 'OrdersController@storeTakeout');
+    $router->resource('products', 'ProductsController')->only(['index', 'show']);
+    $router->resource('categories', 'ProductTypesController')->only(['index']);
 
-    // TODO: Requests with authentication
-    $router->middleware('authorized')->group(function (Router $router) {
-        $router->resource('categories', 'ProductTypesController');
-        $router->get('products/minimized', 'ProductsController@minimized')->name('products.index.minimized');
-        $router->resource('products', 'ProductsController')->only(['index', 'show']);
-        $router->resource('orders', 'OrdersController');
-        $router->resource('tables', 'TablesController');
-        $router->resource('offers', 'OffersController');
+    // Requests with authentication
+    $router->middleware('authorized')->prefix('admin')->group(function (Router $router) {
+        $router->resource('tables', 'TablesController')->only(['index', 'show']);
 
-        // TODO: Requests with admin authentication
+        // Requests with admin authentication
         $router->middleware('isAdmin')->group(function (Router $router) {
             $router->resource('users', 'UserController')->only(['index', 'store', 'update', 'destroy']);
             $router->resource('products', 'ProductsController')->only(['update', 'store', 'destroy']);
+            $router->resource('orders', 'OrdersController')->only(['index', 'show']);
+            $router->resource('tables', 'TablesController')->only(['store']);
+            $router->resource('sales', 'SalesController')->only(['index']);
+        });
+
+        // Requests with cashier authentication
+        $router->middleware('isCashier')->group(function (Router $router) {
+            $router->resource('orders', 'OrdersController')->only(['store']);
+            $router->resource('tables', 'TablesController')->only(['update']);
+            $router->resource('offers', 'OffersController');
+            $router->get('products/minimized', 'ProductsController@minimized')->name('products.index.minimized');
         });
     });
 });

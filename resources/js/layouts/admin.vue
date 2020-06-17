@@ -5,23 +5,25 @@
                 <v-card-title>
                     <!-- TODO: Showing navigation based on role (when application is almost finished) -->
                     <v-tabs grow show-arrows v-show="hasRole">
-                        <v-tab :to="{name: 'admin.create.order'}">
-                            Bestelling aanmaken
-                        </v-tab>
+                        <template v-if="isCashier">
+                            <v-tab :to="{name: 'admin.create.order'}">
+                                Bestelling aanmaken
+                            </v-tab>
+                            <v-tab :to="{name: 'admin.offers'}">
+                                Aanbiedingen
+                            </v-tab>
+                        </template>
                         <template v-if="isAdmin">
                             <v-tab :to="{name: 'admin.products'}">
                                 Producten
+                            </v-tab>
+                            <v-tab :to="{name: 'admin.sales'}">
+                                Verkoopoverzicht
                             </v-tab>
                             <v-tab :to="{name: 'admin.users'}">
                                 Gebruikers
                             </v-tab>
                         </template>
-                        <v-tab :to="{name: 'admin.test'}">
-                            Another Selection
-                        </v-tab>
-                        <v-tab :to="{name: 'admin.offers'}">
-                            Aanbiedingen
-                        </v-tab>
                     </v-tabs>
                 </v-card-title>
 
