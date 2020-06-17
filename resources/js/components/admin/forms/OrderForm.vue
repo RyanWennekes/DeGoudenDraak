@@ -22,7 +22,7 @@
         </v-select>
 
         <!-- Table that displays the order -->
-        <v-simple-table :height="$vuetify.breakpoint.smAndDown ? '200px' : '550px'">
+        <v-simple-table :height="$vuetify.breakpoint.smAndDown ? '200px' : '500px'">
             <template #default>
                 <thead>
                     <tr>
@@ -80,15 +80,19 @@
 
         <!-- Actiosn buttons of form -->
         <v-row justify="center" class="ma-0" v-show="hasProducts">
-            <!-- Remove order -->
-            <v-btn color="error" text @click="deniedOrder" width="150">
-                Verwijderen
-            </v-btn>
+            <v-col cols="auto">
+                <!-- Remove order -->
+                <v-btn color="error" text @click="deniedOrder" width="150">
+                    Verwijderen
+                </v-btn>
 
-            <!-- Pay order -->
-            <v-btn color="success" @click="payOrder" width="150" :disabled="this.selectedTableId === null">
-                Betalen
-            </v-btn>
+                <!-- Pay order -->
+                <v-btn color="success" @click="payOrder" width="150" :disabled="this.selectedTableId === null">
+                    Betalen
+                </v-btn>
+            </v-col>
+
+            <v-subheader class="text-center">Er kan geen bestelling worden gemaakt zonder een tafelnummer te selecteren.</v-subheader>
         </v-row>
 
         <!-- Small dialog for adding a comment -->

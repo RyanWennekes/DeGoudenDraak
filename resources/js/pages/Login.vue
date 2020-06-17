@@ -9,7 +9,7 @@
                     <v-text-field
                         label="Gebruikersnaam"
                         append-icon="fa-user"
-                        :rules="[(v) => !!v || 'Gebruikersnaam is verplicht', rules('email')]"
+                        :rules="[(v) => !!v || 'Gebruikersnaam is verplicht']"
                         outlined
                         v-model="email"
                     ></v-text-field>
@@ -17,7 +17,7 @@
                         label="Wachtwoord"
                         append-icon="fa-key"
                         type="password"
-                        :rules="[(v) => !!v || 'Wachtwoord is verplicht', rules('password')]"
+                        :rules="[(v) => !!v || 'Wachtwoord is verplicht']"
                         outlined
                         v-model="password"
                     ></v-text-field>
@@ -37,18 +37,17 @@
 <script>
 import {login, fetchApiToken} from '../api/authorization.js';
 import {createNamespacedHelpers} from 'vuex';
-import MapRequestErrors from '../mixins/mapRequestErrors.js';
 
 const {mapActions, mapGetters} = createNamespacedHelpers('Authorization/');
 
 export default {
     name: 'Login',
-    mixins: [MapRequestErrors],
     data() {
         return {
             valid: false,
             email: '',
             password: '',
+            loading: false,
         };
     },
     computed: {
