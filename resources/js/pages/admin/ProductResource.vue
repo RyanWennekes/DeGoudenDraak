@@ -14,7 +14,7 @@
                             :return-value.sync="props.item.name"
                             @save="saveName(props.item)"
                         > {{ props.item.name }} <span class="red--text font-weight-bold ml-1"
-                                                      v-if="props.item.price !== props.item.discountPrice">Korting</span>
+                                                      v-if="props.item.price > props.item.discountPrice">Korting</span>
                             <template #input>
                                 <v-text-field
                                     v-model="props.item.name"
@@ -40,7 +40,7 @@
                             </template>
                         </v-edit-dialog>
                     </td>
-                    <td class="text-center" v-if="props.item.price !== props.item.discountPrice">
+                    <td class="text-center" v-if="props.item.price > props.item.discountPrice">
                         <span class="old-price">{{props.item.price | currency}}</span>
                         <span class="red--text font-weight-bold ml-1">{{props.item.discountPrice | currency}}</span>
                     </td>
