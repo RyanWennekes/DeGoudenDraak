@@ -52,7 +52,16 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        return dd($user);
+        $update = [
+            'name'  => $request->get('name'),
+            'email' => $request->get('email'),
+        ];
+
+        if ($request->has('password')) {
+            $update['password'] = bcrypt($request->get('password'));
+        }
+
+        return $user->update($update) ? response('', 200) : response('', 500);
     }
 
     /**
