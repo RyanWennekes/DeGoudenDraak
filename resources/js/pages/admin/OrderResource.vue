@@ -69,7 +69,7 @@ export default {
                     table_id: order.table_id,
                     needs_help: order.needs_help,
                     sales: order.sales,
-                    created_at: dayjs(order.created_at).format('YYYY-MM-DD hh:mm:ss'),
+                    created_at: dayjs(order.created_at).format('YYYY-MM-DD HH:mm:ss'),
                 };
             });
         },
